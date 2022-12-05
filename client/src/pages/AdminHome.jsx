@@ -1,8 +1,13 @@
-import React from 'react'
+
 
 const AdminHome = () => {
   return (
-    <div>AdminHome</div>
+    <>
+      <div>Admin Account</div>
+      <div>Update Particulars</div>
+      <div>Listed products</div>
+
+    </>
   )
 }
 

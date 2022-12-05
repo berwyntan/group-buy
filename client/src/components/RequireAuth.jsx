@@ -1,13 +1,18 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, Navigate } from "react-router-dom"
 import Navbar from "./Navbar"
-
+import useGroupBuyStore from "../store/store"
 
 const RequireAuth = () => {
+
+  const authDetails = useGroupBuyStore((state) => state.authDetails)
+  const name = authDetails?.name
+
   return (
     <>
         <Navbar />
         <div>RequireAuth</div>
-        <Outlet />
+        {name ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace={true} />}
+        
     </>
     
   )

@@ -1,8 +1,13 @@
-import React from 'react'
+
 
 const Account = () => {
   return (
-    <div>Account</div>
+    <>
+      <div>User Account</div>
+      <div>Update Particulars</div>
+      <div>Ordered products</div>
+
+    </>
   )
 }
 

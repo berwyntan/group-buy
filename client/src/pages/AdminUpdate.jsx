@@ -1,8 +1,14 @@
-import React from 'react'
+
 
 const AdminUpdate = () => {
   return (
-    <div>AdminUpdate</div>
+    
+    <>
+      <div>AdminUpdate</div>
+      <div>Form</div>
+      
+
+    </>
   )
 }
 

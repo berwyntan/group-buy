@@ -1,8 +1,14 @@
-import React from 'react'
+
 
 const AdminNewListing = () => {
   return (
-    <div>AdminNewListing</div>
+    
+    <>
+      <div>AdminNewListing</div>
+      <div>Form</div>
+      
+
+    </>
   )
 }
 

@@ -1,8 +1,13 @@
-import React from 'react'
+
 
 const Update = () => {
   return (
-    <div>Update</div>
+    <>
+      <div>UserUpdate</div>
+      <div>Form</div>
+      
+
+    </>
   )
 }
 
