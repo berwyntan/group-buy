@@ -7,7 +7,7 @@ const Navbar = () => {
   const name = authDetails.name
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-slate-200">
       <div className="flex justify-around">
         <Link to="/">
         <div className="btn btn-ghost normal-case text-xl">Group Buy</div>

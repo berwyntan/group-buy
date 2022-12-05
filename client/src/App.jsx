@@ -21,14 +21,14 @@ function App() {
   
 
   return (
-    <div className="App">
+    <div className="bg-slate-100">
     <BrowserRouter>
       <Routes>
         <Route element={<PersistLogin />}> 
           <Route path='/' element={<Categories />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/signup' element={<Signup />}/>
-          <Route path='/cat/:cat' element={<Category />}/>
+          <Route path='/cat/:id' element={<Category />}/>
           <Route path='/prod/:id' element={<Product />}/>
         </Route>
         <Route element={<RequireAuth />}> 

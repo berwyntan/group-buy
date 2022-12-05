@@ -46,19 +46,31 @@ const useGroupBuyStore = create(
         },
 
         categories: [],        
-        fetchCategories: async () => {
+        getAllCategories: async () => {
             try {
-                const { data } = await axios.get("/api/product/category")
-                console.log(data)
-                if (data.success === true) {
-                    set({ categories: data.result })
-                }
-                
+                const { data } = await axios.get("/api/category")
+                // console.log(data)
+                if (data.length > 0) {
+                    set({ categories: data })
+                }                
             } catch (error) {
                 console.log(error)
             }
         },        
-        setCategories: (data) => set({ category: data}),
+        // addNewCategory,
+
+        products: [],
+        getProductsByCategory: async (id) => {
+            try {
+                const { data } = await axios.get(`/api/product/${id}`)
+                console.log(data)
+                if (data.length > 0) {
+                    set({ products: data })
+                }                
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
 
     }))
@@ -66,31 +78,5 @@ const useGroupBuyStore = create(
 
 export default useGroupBuyStore
 
-// export const CategoryComponentHomepage = () => {
-    
-//     const fetch = useGroupBuyStore((state) => state.fetchGp)
-//     const data = useGroupBuyStore((state) => state.categoryGp)
-//     useEffect(() => {fetch()}, [])
-//     const categoryCards = data.map(d => {
-//         return(
-//             <CategoryCardUser
-//                 imgUrl={d.imgUrl}
-//                 name={d.name}
-//                 id={d.id}
-//                 key={d.id}
-//             />
-//         )
-//     })
-//     console.log(data)
 
-//     return (
-//         <>
-//             <div className="container">
-//                 <div className="grid grid-cols-2 gap-4">
-//                 {categoryCards}
-//                 </div>  
-//             </div>
-//         </>
-//     )
-// }
 

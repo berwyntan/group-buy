@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const db = require("./config/database");
 
 // routers
-// const productRouter = require("./routes/productRouter");
+const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 // const orderRouter = require("./routes/orderRouter");
@@ -41,8 +41,7 @@ app.use(express.json());
 // app.use("/api/order", orderRouter);
 app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
-
-// app.use("/api/product", productRouter);
+app.use("/api/product", productRouter);
 
 
 app.get("/", (req, res) => {res.json({msg: "hello world"})});
