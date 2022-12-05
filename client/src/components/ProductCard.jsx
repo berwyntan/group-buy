@@ -4,10 +4,17 @@ const ProductCard = ({ imgUrl, name, id, desc, price, listed }) => {
   return (
     <>
         <Link to={`/prod/${id}`}>
-        <div className="card card-compact max-w-sm bg-base-100 shadow-xl max-h-60">
-            <figure><img className="object-cover h-40" src={imgUrl} alt={name} /></figure>
+        <div className="card card-compact max-w-sm bg-base-100 shadow-xl min-h-72">
+            <figure><img className="object-contain p-2 h-40" src={imgUrl} alt={name} /></figure>
             <div className="card-body">
-                <h2 className="card-title">{name}</h2>
+                <div className="text-lg font-semibold text-left line-clamp-2">{name}</div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="text-xl">$</div>
+                    <div className="ml-1 text-2xl font-medium">{price}</div>
+                  </div>                  
+                  <div className="badge badge-primary">available</div>
+                </div>               
                 
                 <div className="card-actions justify-end">
                 

@@ -60,6 +60,24 @@ const getProductByCategory = async (req, res) => {
     }
 
 }
+
+const getProductById = async (req, res) => {
+    const { id } = req.params;
+    // check id
+    // try {
+    //     const checkCategory = await Category.findByPk(id);
+    // } catch (error) {
+    //     return res.status(404).json({ 'message': 'Invalid category id.'})
+    // }
+
+    try {        
+        const result = await Product.findByPk(id);
+        res.status(201).json(result);
+    } catch (err) {
+        res.status(500).json({ 'message': err.message });
+    }
+
+}
 const updateProduct = async (req, res) => {}
 
-module.exports = { addNewProduct, getProductByCategory }
+module.exports = { addNewProduct, getProductByCategory, getProductById }

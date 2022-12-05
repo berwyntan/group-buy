@@ -17,7 +17,7 @@ const Login = () => {
     if (result.statusText !== "OK") {
       return setError(result.data.message)
     } 
-    navigate("/")    
+    navigate(-1)    
   }
 
   // console.log(errors.mobile)

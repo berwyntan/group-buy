@@ -62,17 +62,30 @@ const useGroupBuyStore = create(
         products: [],
         getProductsByCategory: async (id) => {
             try {
-                const { data } = await axios.get(`/api/product/${id}`)
-                console.log(data)
+                const { data } = await axios.get(`/api/product/cat/${id}`)
+                // console.log(data)
                 if (data.length > 0) {
                     set({ products: data })
                 }                
             } catch (error) {
                 console.log(error)
             }
-        }
-
-
+        },
+        productSingle: [],
+        getProductById: async (id) => {
+            try {
+                const { data } = await axios.get(`/api/product/${id}`)
+                // console.log(data)
+                if (data) {
+                    set({ productSingle: data })
+                }                
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        
+        orders: [],
+        getOrdersByUser: async (id) => {}
     }))
 )
 
