@@ -76,12 +76,12 @@ const User = db.define('User', {
     },    
     listed: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: false
     },  
   }, );
 
   Category.hasMany(Product);
-  Product.sync();
+  Product.sync({ alter: true });
 
   const Order = db.define('Order', {
   
@@ -90,11 +90,24 @@ const User = db.define('User', {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+    fulfil: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },  
+    cancel: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },  
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     
   }, );
   
   Product.hasMany(Order);  
+  Order.belongsTo(Product);
   User.hasMany(Order);
-  Order.sync();
+  Order.sync({ alter: true });
 
   module.exports = { User, Category, Product, Order }

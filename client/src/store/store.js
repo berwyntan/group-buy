@@ -1,11 +1,13 @@
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 import axios from 'axios';
-// import CategoryCardUser from '../components/CategoryCardUser';
-// import { useEffect } from 'react';
 
 const useGroupBuyStore = create(
     devtools((set) => ({
+
+        errorStatus: 400,
+        errorStatusText: "",
+        setError: (data) => set({ errorStatus: data.status, errorStatusText: data.statusText}),
 
         authDetails: {},
         login: async (data) => {
@@ -85,7 +87,25 @@ const useGroupBuyStore = create(
         },
         
         orders: [],
-        getOrdersByUser: async (id) => {}
+        getOrdersByUser: async (id) => {},
+        createOrder: async(data) => {
+            try {
+                const response = await axios.post("/api/order", data,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+                )
+                set({ orders: [response.data]})
+                return response
+                
+            } catch (error) {
+                console.log(error)
+                return error.response
+            }
+        },
+
+        
     }))
 )
 

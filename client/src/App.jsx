@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import './App.css'
+
 import PersistLogin from './components/PersistLogin'
 import Categories from './pages/Categories'
 import Login from './pages/Login'
@@ -14,8 +16,10 @@ import AdminHome from './pages/AdminHome'
 import AdminUpdate from './pages/AdminUpdate'
 import AdminNewListing from './pages/AdminNewListing'
 import AdminProduct from './pages/AdminProduct'
+import Confirmation from './pages/Confirmation'
+import ErrorPage from './pages/ErrorPage'
+import NotFound from './pages/NotFound'
 
-import './App.css'
 
 function App() {
   
@@ -30,10 +34,13 @@ function App() {
           <Route path='/signup' element={<Signup />}/>
           <Route path='/cat/:id' element={<Category />}/>
           <Route path='/prod/:id' element={<Product />}/>
+          <Route path='/error' element={<ErrorPage />}/>
+          <Route path='/*' element={<NotFound />}/>
         </Route>
         <Route element={<RequireAuth />}> 
           <Route path='/account' element={<Account />}/>
           <Route path='/update' element={<Update />}/>
+          <Route path='/confirmation' element={<Confirmation />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>

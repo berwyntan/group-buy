@@ -10,7 +10,7 @@ const db = require("./config/database");
 const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
-// const orderRouter = require("./routes/orderRouter");
+const orderRouter = require("./routes/orderRouter");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -38,7 +38,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // routes
-// app.use("/api/order", orderRouter);
+app.use("/api/order", orderRouter);
 app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
