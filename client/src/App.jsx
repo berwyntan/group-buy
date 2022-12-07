@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './App.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 import PersistLogin from './components/PersistLogin'
 import Categories from './pages/Categories'
@@ -10,7 +12,8 @@ import Category from './pages/Category'
 import Product from './pages/Product'
 import RequireAuth from './components/RequireAuth'
 import Account from './pages/Account'
-import Update from './pages/Update'
+import UpdateDetails from './pages/UpdateDetails'
+import UpdatePassword from './pages/UpdatePassword'
 import RequireAdmin from './components/RequireAdmin'
 import AdminHome from './pages/AdminHome'
 import AdminUpdate from './pages/AdminUpdate'
@@ -26,6 +29,7 @@ function App() {
 
   return (
     <div className="bg-slate-100">
+    <ToastContainer />
     <BrowserRouter>
       <Routes>
         <Route element={<PersistLogin />}> 
@@ -39,7 +43,8 @@ function App() {
         </Route>
         <Route element={<RequireAuth />}> 
           <Route path='/account' element={<Account />}/>
-          <Route path='/update' element={<Update />}/>
+          <Route path='/updatedetails' element={<UpdateDetails />}/>
+          <Route path='/updatepassword' element={<UpdatePassword />}/>
           <Route path='/confirmation' element={<Confirmation />}/>
         </Route>
         <Route element={<RequireAdmin />}> 

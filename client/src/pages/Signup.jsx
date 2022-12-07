@@ -34,7 +34,7 @@ const Signup = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* register your input into the hook by invoking the "register" function */}
-      <input placeholder="Name" {...register("name", { required: true })} 
+      <input placeholder="Name" {...register("name", { required: true, maxLength: 30 })} 
         className="input input-bordered w-full max-w-xs"/>
       </label>
 

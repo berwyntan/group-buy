@@ -2,7 +2,7 @@ require("dotenv").config();
 // const path = require("path");
 const express = require("express");
 const cors = require("cors");
-// const corsOptions = require("./config/corsOptions");
+const corsOptions = require("./config/corsOptions");
 const morgan = require("morgan");
 const db = require("./config/database");
 
@@ -27,8 +27,8 @@ try {
 // app.set('trust proxy', 1); // trust first proxy
 // app.use(express.static("../client/dist"));
 
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 
 // app.use(
 //   session(sessionOptions)
