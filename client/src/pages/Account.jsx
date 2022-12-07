@@ -10,8 +10,9 @@ const Account = () => {
     <>
       <div className="text-lg">Hello, {authDetails.name}</div>
       
-      <div>Ordered products</div>
-      
+      <Link to="/orders">
+        <button className="btn btn-wide my-2">My Orders</button>
+      </Link>      
       <Link to="/updatedetails">
         <button className="btn btn-wide my-2">Update Account Details</button>
       </Link>

@@ -98,6 +98,11 @@ const User = db.define('User', {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },  
+    paid: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },  
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false

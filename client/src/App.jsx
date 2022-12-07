@@ -22,6 +22,7 @@ import AdminProduct from './pages/AdminProduct'
 import Confirmation from './pages/Confirmation'
 import ErrorPage from './pages/ErrorPage'
 import NotFound from './pages/NotFound'
+import Orders from './pages/Orders';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path='/updatedetails' element={<UpdateDetails />}/>
           <Route path='/updatepassword' element={<UpdatePassword />}/>
           <Route path='/confirmation' element={<Confirmation />}/>
+          <Route path='/orders' element={<Orders />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>
