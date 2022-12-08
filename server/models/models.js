@@ -103,6 +103,11 @@ const User = db.define('User', {
       defaultValue: false,
       allowNull: false
     },  
+    collect: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },  
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false

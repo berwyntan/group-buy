@@ -2,15 +2,23 @@ import useGroupBuyStore from "../store/store";
 import { useEffect } from "react";
 import CategoryCard from "../components/CategoryCard";
 
+
 const Categories = () => {
 
   const getAllCategories = useGroupBuyStore((state) => state.getAllCategories)
   const categories = useGroupBuyStore((state) => state.categories)
+  // const isLoading = useGroupBuyStore((state) => state.isLoading)
+  // const setIsLoading = useGroupBuyStore((state) => state.setIsLoading)
 
+  // setIsLoading(true)
+  
   useEffect(() => {
+
     getAllCategories()      
+    
   }, [])
 
+  
   const categoryCards = categories.map(cat => {
     return(
       <CategoryCard 

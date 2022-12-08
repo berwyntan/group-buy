@@ -19,13 +19,15 @@ const Orders = () => {
         <OrderCard
           imgUrl={order.Product.imgUrl}
           name={order.Product.name}
-          id={order.Product.id}
+          id={order.id}
           price={order.Product.price}
           date={order.createdAt}
           quantity={order.quantity}
           cancel={order.cancel}
           fulfil={order.fulfil}
           paid={order.paid}
+          collect={order.collect}
+          key={order.id}
         />
       )
     })
@@ -33,6 +35,7 @@ const Orders = () => {
   return (
     <>
       <div className="">
+        <div className="text-2xl mb-2">Orders</div>
         {orderCards}
       </div>
     </>

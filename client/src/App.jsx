@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from "react-query"
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,17 +24,21 @@ import AdminProduct from './pages/AdminProduct'
 import Confirmation from './pages/Confirmation'
 import ErrorPage from './pages/ErrorPage'
 import NotFound from './pages/NotFound'
-import Orders from './pages/Orders';
+import Orders from './pages/Orders'
+import Order from './pages/Order'
+import Layout from './pages/Layout'
 
+const queryClient = new QueryClient();
 
-function App() {
-  
+function App() {  
 
   return (
     <div className="bg-slate-100">
     <ToastContainer />
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
+        <Route element={<Layout />}>
         <Route element={<PersistLogin />}> 
           <Route path='/' element={<Categories />}/>
           <Route path='/login' element={<Login />}/>
@@ -48,6 +54,7 @@ function App() {
           <Route path='/updatepassword' element={<UpdatePassword />}/>
           <Route path='/confirmation' element={<Confirmation />}/>
           <Route path='/orders' element={<Orders />}/>
+          <Route path='/order/:id' element={<Order />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>
@@ -55,8 +62,11 @@ function App() {
           <Route path='/adminnewlisting' element={<AdminNewListing />}/>
           <Route path='/admin/:id' element={<AdminProduct />}/>
         </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
+    <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
     </div>
   )
 }

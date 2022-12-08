@@ -54,7 +54,7 @@ const getProductByCategory = async (req, res) => {
 
     try {        
         const result = await Product.findAll({where: {CategoryId: id}});
-        res.status(201).json(result);
+        res.status(200).json(result);
     } catch (err) {
         res.status(500).json({ 'message': err.message });
     }
@@ -72,7 +72,7 @@ const getProductById = async (req, res) => {
 
     try {        
         const result = await Product.findByPk(id);
-        res.status(201).json(result);
+        res.status(200).json(result);
     } catch (err) {
         res.status(500).json({ 'message': err.message });
     }

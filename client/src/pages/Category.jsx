@@ -9,7 +9,9 @@ const Category = () => {
   const getProductsByCategory = useGroupBuyStore((state) => state.getProductsByCategory)
 
   useEffect(() => {
-    getProductsByCategory(id)      
+    
+    getProductsByCategory(id)    
+    
   }, [])
 
   const products = useGroupBuyStore((state) => state.products)

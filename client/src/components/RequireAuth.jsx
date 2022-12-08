@@ -9,7 +9,7 @@ const RequireAuth = () => {
 
   return (
     <>
-        <Navbar />
+        
         <div>RequireAuth</div>
         {name ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace={true} />}
         

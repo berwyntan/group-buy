@@ -12,7 +12,7 @@ const PersistLogin = () => {
 
   return (
     <>
-        <Navbar />
+        
         <div>PersistLogin</div>
         <Outlet />
     </>

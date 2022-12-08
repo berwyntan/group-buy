@@ -5,6 +5,7 @@ import axios from 'axios';
 const useGroupBuyStore = create(
     devtools((set) => ({
 
+        
         errorStatus: 400,
         errorStatusText: "",
         setError: (data) => set({ errorStatus: data.status, errorStatusText: data.statusText}),
@@ -12,6 +13,7 @@ const useGroupBuyStore = create(
         authDetails: {},
         login: async (data) => {
             try {
+                
                 const response = await axios.post("/api/user/login", data,
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -104,13 +106,18 @@ const useGroupBuyStore = create(
         categories: [],        
         getAllCategories: async () => {
             try {
-                const { data } = await axios.get("/api/category")
-                // console.log(data)
-                if (data.length > 0) {
-                    set({ categories: data })
-                }                
+                
+                const response = await axios.get("/api/category")
+                
+                if (response.data.length > 0 && response.statusText === "OK") {
+                    set({ categories: response.data })
+                    
+                }
+                            
             } catch (error) {
                 console.log(error)
+            } finally {
+
             }
         },        
         // addNewCategory,
@@ -118,22 +125,25 @@ const useGroupBuyStore = create(
         products: [],
         getProductsByCategory: async (id) => {
             try {
-                const { data } = await axios.get(`/api/product/cat/${id}`)
-                // console.log(data)
-                if (data.length > 0) {
-                    set({ products: data })
-                }                
+                
+                const response = await axios.get(`/api/product/cat/${id}`)
+                
+                if (response.data.length > 0 && response.statusText === "OK") {
+                    set({ products: response.data })
+                    return
+                }  
+                             
             } catch (error) {
                 console.log(error)
-            }
+            } 
         },
         productSingle: [],
         getProductById: async (id) => {
             try {
-                const { data } = await axios.get(`/api/product/${id}`)
-                // console.log(data)
-                if (data) {
-                    set({ productSingle: data })
+                const response = await axios.get(`/api/product/${id}`)
+                
+                if (response.data && response.statusText === "OK") {
+                    set({ productSingle: response.data })
                 }                
             } catch (error) {
                 console.log(error)
@@ -141,7 +151,6 @@ const useGroupBuyStore = create(
         },
         
         orders: [],
-        getOrdersByUser: async (id) => {},
         createOrder: async(data) => {
             try {
                 const response = await axios.post("/api/order", data,
@@ -150,7 +159,10 @@ const useGroupBuyStore = create(
                     withCredentials: true
                 }
                 )
-                set({ orders: [response.data]})
+                if (response.data && response.statusText === "Created") {
+                    set({ orders: [response.data]})
+                }
+                
                 return response
                 
             } catch (error) {
@@ -160,16 +172,30 @@ const useGroupBuyStore = create(
         },
         getOrdersByUserId: async (id) => {
             try {
-                const { data } = await axios.get(`/api/order/user/${id}`)
-                console.log(data)
-                if (data) {
-                    set({ orders: data })
+                const response = await axios.get(`/api/order/user/${id}`)
+                
+                if (response.data && response.statusText === "OK") {
+                    set({ orders: response.data })
                 }                
             } catch (error) {
                 console.log(error)
             }
         },
-
+        orderSingle: {},
+        getOrderById: async (id) => {
+            try {
+                console.log("test")
+                const response = await axios.get(`/api/order/${id}`)
+                // console.log(response)
+                if (response.data && response.statusText === "OK") {
+                    set({ orderSingle: response.data })
+                    return response.data
+                }                
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        setOrderSingle: (data) => set({ orderSingle: data}),
         
     }))
 )

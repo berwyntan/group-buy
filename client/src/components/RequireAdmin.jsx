@@ -5,7 +5,7 @@ import Navbar from "./Navbar"
 const RequireAdmin = () => {
   return (
     <>
-        <Navbar />
+        
         <div>RequireAdmin</div>
         <Outlet />
     </>
