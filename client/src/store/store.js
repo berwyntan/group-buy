@@ -162,9 +162,9 @@ const useGroupBuyStore = create(
             try {
                 const { data } = await axios.get(`/api/order/user/${id}`)
                 console.log(data)
-                // if (data) {
-                //     set({ orders: data })
-                // }                
+                if (data) {
+                    set({ orders: data })
+                }                
             } catch (error) {
                 console.log(error)
             }

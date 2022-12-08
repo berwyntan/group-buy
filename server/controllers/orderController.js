@@ -57,7 +57,8 @@ const getOrdersByUserId = async (req, res) => {
     }
 
     try {        
-        const result = await Order.findAll({where: {UserId: id}, include: Product});
+        const result = await Order.findAll({where: {UserId: id}, include: Product,
+            order: [['createdAt', 'DESC']]});
         res.status(201).json(result);
     } catch (err) {
         res.status(500).json({ 'message': err.message });
