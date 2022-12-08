@@ -5,10 +5,10 @@ import { useEffect } from "react"
 
 const PersistLogin = () => {
 
-  const refresh = useGroupBuyStore((state) => state.refresh)
-  useEffect(() => {
-    refresh()
-  }, [])
+  // const refresh = useGroupBuyStore((state) => state.refresh)
+  // useEffect(() => {
+  //   refresh()
+  // }, [])
 
   return (
     <>

@@ -9,13 +9,64 @@ export const login = async (data) => {
             withCredentials: true
         }
         )
-        if (response.statusText === "OK") {
-            
-            return response.data
-        }                
+        return response
+                       
+    } catch (error) {
+        console.log(error)
+        return error.response
+    }
+}
+
+export const signup = async (data) => {
+    try {
+        const response = await axios.post("/api/user/signup", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+        )
+        
+        return response
+                       
+    } catch (error) {
+        console.log(error)
+        return error.response
+    }
+}
+
+export const updateUser = async (data) => {
+    try {
+        const response = await axios.post("/api/user/update", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+        )
+        // console.log(response)
+        
+        return response               
     
     } catch (error) {
         console.log(error)
-        return error.response.data.message
+        return error.response
+    }
+}
+
+export const updatePassword = async (data) => {
+    try {
+        const response = await axios.post("/api/user/updatepw", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+        )
+        // console.log(response)
+        
+        return response
+                     
+    
+    } catch (error) {
+        console.log(error)
+        return error.response
     }
 }

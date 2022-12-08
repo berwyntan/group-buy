@@ -1,19 +1,51 @@
 import { useForm } from "react-hook-form";
 import useGroupBuyStore from "../store/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useMutation } from "react-query";
+import { updateUser } from "../api/user";
+import { useNavigate } from "react-router-dom";
 
 const UpdateDetails = () => {
 
   const authDetails = useGroupBuyStore((state) => state.authDetails)
-  const updateUser = useGroupBuyStore((state) => state.updateUser)
-  const oldMobile = authDetails.mobile.toString()
-  const oldName = authDetails.name
+  const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
+  const [ oldMobile ] = useState(authDetails.mobile.toString())
+  const [ oldName ] = useState(authDetails.name)
+  const [ accessToken ] = useState(authDetails.accessToken)
   const [ name, setName ] = useState(authDetails.name)
   const [ mobile, setMobile ] = useState(authDetails.mobile)
   const [ error, setError ] = useState("") 
   const [ password, setPassword ] = useState("")
+
+  const navigate = useNavigate()
+
+  const mutation = useMutation(formData => updateUser(formData), 
+    {
+      onError: (response) => {
+        console.log(response)
+      },
+      onSuccess: (response) => {
+        // console.log(response)
+        if (response.status === 200) {
+          toast.success('User details updated', {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            }); 
+            setPassword("")
+            setAuthDetails({...response.data, accessToken})
+            navigate("/account")
+        } else {
+          setError(response.data.message)
+        }
+      },
+    })
 
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = async (formData) => {
@@ -33,26 +65,8 @@ const UpdateDetails = () => {
         return
     }
     const data = {...formData, oldMobile: oldMobile}
-    // const result = await signup(formData);
-    // console.log(result)
-    console.log(data)
-    const result = await updateUser(data)
-    console.log(result.data)
-    if (result.statusText !== "OK") {
-      return setError(result.data.message)
-    } 
-    toast.success('User details updated', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      }); 
-    
-    setPassword("")
+
+    mutation.mutate(data)
     
   }
  
@@ -60,7 +74,7 @@ const UpdateDetails = () => {
     setError("")
   }, [name, mobile, password])
   
-
+  console.log(authDetails)
   return (
     <>
             
@@ -107,6 +121,7 @@ const UpdateDetails = () => {
       </div>
 
       <div className="my-1">{error}</div>
+      {mutation.isLoading && <div>Updating...</div>} 
       
       <button className="btn btn-primary btn-wide" type="submit">Update</button>
       </div>

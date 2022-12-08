@@ -1,42 +1,57 @@
 import { useForm } from "react-hook-form";
 import useGroupBuyStore from "../store/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { updatePassword } from "../api/user";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePassword = () => {
 
   const authDetails = useGroupBuyStore((state) => state.authDetails)
-  const updatePassword = useGroupBuyStore((state) => state.updatePassword)
-  const mobile = authDetails.mobile.toString()
+  const [ mobile ] = useState(authDetails.mobile.toString())
       
   const [ error, setError ] = useState("") 
   const [ currentPassword, setCurrentPassword ] = useState("")
   const [ newPassword, setNewPassword ] = useState("")
 
+  const navigate = useNavigate()
+
+  const mutation = useMutation(formData => updatePassword(formData), 
+    {
+      onError: (response) => {
+        console.log(response)
+      },
+      onSuccess: (response) => {
+
+        if (response.status === 200) {
+        toast.success('Password updated', {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          }); 
+        
+        setCurrentPassword("")
+        setNewPassword("")
+        navigate("/account")
+        } else {
+          setError(response.data.message)
+        }
+      }
+    }
+  )
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = async (formData) => {
     
     const data = {...formData, mobile: mobile}
-    console.log(data)
-    const result = await updatePassword(data)
-    console.log(result.data)
-    if (result.statusText !== "OK") {
-      return setError(result.data.message)
-    } 
-    toast.success('Password updated', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      }); 
+    // console.log(data)
+    mutation.mutate(data)
     
-    setCurrentPassword("")
-    setNewPassword("")
   }
  
   useEffect(() => {
@@ -78,7 +93,8 @@ const UpdatePassword = () => {
       </div>
 
       <div className="my-1">{error}</div>
-      
+      {mutation.isLoading && <div>Updating...</div>} 
+
       <button className="btn btn-primary btn-wide" type="submit">Update</button>
       </div>
     </form>

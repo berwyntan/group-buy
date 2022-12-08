@@ -189,7 +189,14 @@ const handleUpdateUser = async (req, res) => {
     
             const result = await User.findByPk(id);
             
-            res.status(200).json(result);
+            res.status(200).json(
+                {
+                    name: result.name,
+                    id: result.id,
+                    mobile: result.mobile,
+                    role: result.role,
+                }
+            );
         } catch (err) {
             res.status(500).json({ 'message': err.message });
         }
@@ -213,11 +220,6 @@ const handleUpdatePassword = async (req, res) => {
     if (!validator.isLength(password, {min: 5})) 
         return res.status(400).json({ 'message': 'Password must be at least 5 characters.'});
 
-    // check for duplicate mobile in the db
-    // if (mobile !== oldMobile) {
-    //     const duplicate = await User.findOne({where: { mobile: mobile }});
-    //     if (duplicate) return res.status(409).json({ 'message': 'Mobile number already taken.'}); //Conflict 
-    // }
     
 
     // evaluate password 

@@ -12,43 +12,7 @@ const useGroupBuyStore = create(
 
         authDetails: {},
         setAuthDetails: (data) => set({ authDetails: data}),
-        login: async (data) => {
-            try {
-                
-                const response = await axios.post("/api/user/login", data,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-                )
-                if (response.statusText === "OK") {
-                    set({ authDetails: response.data })
-                    return response
-                }                
-            
-            } catch (error) {
-                console.log(error)
-                return error.response
-            }
-        },
-        signup: async (data) => {
-            try {
-                const response = await axios.post("/api/user/signup", data,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-                )
-                // console.log(response)
-                if (response.statusText === "Created") {
-                    return response
-                }                
-            
-            } catch (error) {
-                console.log(error)
-                return error.response
-            }
-        },
+
         refresh: async () => {
             try {
                 const response = await axios.get("/api/user/refresh",
@@ -66,43 +30,7 @@ const useGroupBuyStore = create(
                 return error.response
             }
         },
-        updateUser: async (data) => {
-            try {
-                const response = await axios.post("/api/user/update", data,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-                )
-                console.log(response)
-                if (response.statusText === "OK") {
-                    set((state) => ({ authDetails: {...state.authDetails, name: response.data.name, mobile: response.data.mobile}}))
-                    return response
-                }                
-            
-            } catch (error) {
-                console.log(error)
-                return error.response
-            }
-        },
-        updatePassword: async (data) => {
-            try {
-                const response = await axios.post("/api/user/updatepw", data,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-                )
-                console.log(response)
-                if (response.statusText === "OK") {
-                    return response
-                }                
-            
-            } catch (error) {
-                console.log(error)
-                return error.response
-            }
-        },
+        
 
         categories: [],        
         getAllCategories: async () => {

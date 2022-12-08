@@ -1,28 +1,49 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import useGroupBuyStore from "../store/store";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { signup } from "../api/user";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [error, setError] = useState("") 
+  const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
-  const signup = useGroupBuyStore((state) => state.signup)
+  const mutation = useMutation(formData => signup(formData), 
+    {
+      onError: (response) => {
+        console.log(response)
+      },
+      onSuccess: (response) => {
+        // console.log(response)
+        if (response.status === 201) {
+          toast.success('Account successfully created', {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            }); 
+          navigate("/login")
+        } else {
+          setError(response.data.message)
+        }
+      },
+    })
+
+  // const signup = useGroupBuyStore((state) => state.signup)
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const onSubmit = async (formData) => {
-    // console.log(formData);
-    const result = await signup(formData);
-    // console.log(result)
-    if (result.statusText !== "Created") {
-      return setError(result.data.message)
-    } 
-    navigate("/login") 
+  const onSubmit = (formData) => {
+    
+    mutation.mutate(formData)
   }
   // console.log(errors.mobile)
   // console.log(Boolean(errors.password))
-  const [password, setPassword] = useState("")
-
-
+ 
   return (
 
     <>
@@ -34,14 +55,15 @@ const Signup = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* register your input into the hook by invoking the "register" function */}
-      <input placeholder="Name" {...register("name", { required: true, maxLength: 30 })} 
+      <input placeholder="Name" {...register("name", { 
+        required: true, maxLength: 30, onChange: () => setError("") })} 
         className="input input-bordered w-full max-w-xs"/>
       </label>
 
       <label className="input-group flex flex-col items-center my-3">
       {/* register your input into the hook by invoking the "register" function */}
       <input placeholder="Mobile" {...register("mobile", { 
-        required: true, pattern: /^[0-9]*$/i, minLength: 8, maxLength: 8 
+        required: true, pattern: /^[0-9]*$/i, minLength: 8, maxLength: 8, onChange: () => setError("") 
       })} 
         className="input input-bordered w-full max-w-xs"/>
       </label>
@@ -49,7 +71,8 @@ const Signup = () => {
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
       <input placeholder="Password" {...register("password", { 
-        required: true, minLength: 5, pattern: /^[a-z0-9]+$/i, onChange: (e) => setPassword(e.target.value)
+        required: true, minLength: 5, pattern: /^[a-z0-9]+$/i, 
+        onChange: (e) => {setPassword(e.target.value); setError("")}
       })} 
         className="input input-bordered w-full max-w-xs"/>
       {/* errors will return when field validation fails  */}      
@@ -58,7 +81,7 @@ const Signup = () => {
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
       <input  placeholder="Confirm Password" {...register("confirmPassword", { 
-        validate: value => value === password
+        validate: value => value === password, onChange: () => setError("")
       })} 
         className="input input-bordered w-full max-w-xs"/>
       {/* errors will return when field validation fails  */}      
@@ -80,7 +103,7 @@ const Signup = () => {
       </div>
 
       <div className="my-1">{error}</div>
-      
+      {mutation.isLoading && <div>Signing Up...</div>} 
       <button className="btn btn-primary btn-wide" type="submit">Sign Up</button>
       </div>
     </form>
