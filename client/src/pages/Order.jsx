@@ -9,7 +9,7 @@ const Order = () => {
     const { id } = useParams()
     const setOrderSingle = useGroupBuyStore((state) => state.setOrderSingle)
              
-    const { isLoading, isError, data, error, isSuccess } = useQuery(
+    const { isLoading, isError, data, error } = useQuery(
       ['order', id], () => getOrderById(id), { onSuccess: (data) => setOrderSingle(data)})
 
     if (isLoading) {
@@ -20,11 +20,6 @@ const Order = () => {
       return <span>Error: {error.message}</span>
     }
          
-    // if (isSuccess) {
-    //   setOrderSingle(data)
-    //   console.log(data)
-    //   console.log("hello")
-    // }
     
     return (
       <>

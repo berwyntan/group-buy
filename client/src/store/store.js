@@ -11,6 +11,7 @@ const useGroupBuyStore = create(
         setError: (data) => set({ errorStatus: data.status, errorStatusText: data.statusText}),
 
         authDetails: {},
+        setAuthDetails: (data) => set({ authDetails: data}),
         login: async (data) => {
             try {
                 

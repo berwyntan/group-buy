@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import useGroupBuyStore from "../store/store";
 import { useState } from "react";
+import { login } from "../api/user";
+import { useQuery } from 'react-query'
 
 const Login = () => {
 
@@ -9,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const login = useGroupBuyStore((state) => state.login)
+  // const login = useGroupBuyStore((state) => state.login)
   const onSubmit = async (formData) => {
     // console.log(formData);   
     const result = await login(formData);
