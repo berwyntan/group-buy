@@ -28,6 +28,9 @@ import Orders from './pages/Orders'
 import Order from './pages/Order'
 import Layout from './pages/Layout'
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import UpdateCart from './pages/UpdateCart';
+import UpdateOrder from './pages/UpdateOrder';
 
 const queryClient = new QueryClient();
 
@@ -57,6 +60,9 @@ function App() {
           <Route path='/orders' element={<Orders />}/>
           <Route path='/cart' element={<Cart />}/>
           <Route path='/order/:id' element={<Order />}/>
+          <Route path='/checkout' element={<Checkout />}/>
+          <Route path='/updatecart' element={<UpdateCart />}/>
+          <Route path='/updateorder' element={<UpdateOrder />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>

@@ -12,8 +12,13 @@ const ProductCard = ({ imgUrl, name, id, desc, price, listed }) => {
                   <div className="flex items-center">
                     <div className="text-xl">$</div>
                     <div className="ml-1 text-2xl font-medium">{price}</div>
-                  </div>                  
-                  <div className="badge badge-primary">available</div>
+                  </div>    
+                                
+                  {listed ? 
+                  <div className="badge badge-primary">available</div> : 
+                  <div className="badge">closed</div>
+                  }
+                  
                 </div>               
                 
                 <div className="card-actions justify-end">

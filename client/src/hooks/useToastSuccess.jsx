@@ -4,7 +4,7 @@ const useToastSuccess = (message) => {
     return (
         toast.success(message, {
             position: "bottom-right",
-            autoClose: 4000,
+            autoClose: 5000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,

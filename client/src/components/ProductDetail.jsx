@@ -7,8 +7,11 @@ import useToastError from "../hooks/useToastError";
 
 const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId }) => {
   
-  const [ qty, setQty ] = useState(1)
-  const updateQty = (e) => setQty(e.target.innerHTML)
+  const [ qty, setQty ] = useState("1")
+  const updateQty = (e) => {
+    // console.log(typeof e.target.innerHTML)
+    setQty(e.target.innerHTML)
+  }
   const navigate = useNavigate()
 
   const mutation = useMutation(formData => addToCart(formData), 
@@ -39,7 +42,7 @@ const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId })
       const formData = JSON.stringify({
         ProductId: productId,
         UserId: userId,
-        quantity: qty
+        quantity: parseInt(qty)
       })
       
       mutation.mutate(formData)
@@ -76,19 +79,19 @@ const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId })
           <div className="modal-box relative">
             <h3 className="text-lg font-bold mb-2">Qty:</h3>
             <label htmlFor="my-modal" 
-            className={`btn btn-outline btn-wide text-lg ${qty===1 && 'btn-active'}`} 
+            className={`btn btn-outline btn-wide text-lg ${qty==='1' && 'btn-active'}`} 
             onClick={updateQty}>1</label>
             <label htmlFor="my-modal" 
-            className={`btn btn-outline btn-wide text-lg ${qty===2 && 'btn-active'}`} 
+            className={`btn btn-outline btn-wide text-lg ${qty==='2' && 'btn-active'}`} 
             onClick={updateQty}>2</label>
             <label htmlFor="my-modal" 
-            className={`btn btn-outline btn-wide text-lg ${qty===3 && 'btn-active'}`} 
+            className={`btn btn-outline btn-wide text-lg ${qty==='3' && 'btn-active'}`} 
             onClick={updateQty}>3</label>
             <label htmlFor="my-modal" 
-            className={`btn btn-outline btn-wide text-lg ${qty===4 && 'btn-active'}`} 
+            className={`btn btn-outline btn-wide text-lg ${qty==='4' && 'btn-active'}`} 
             onClick={updateQty}>4</label>
             <label htmlFor="my-modal" 
-            className={`btn btn-outline btn-wide text-lg ${qty===5 && 'btn-active'}`} 
+            className={`btn btn-outline btn-wide text-lg ${qty==='5' && 'btn-active'}`} 
             onClick={updateQty}>5</label>
           </div>
         </div>

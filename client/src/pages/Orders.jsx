@@ -42,6 +42,7 @@ const Orders = () => {
       <div className="">
         <div className="text-2xl mb-2">Orders</div>
         {orderCards}
+        {orderCards.length===0 && <div>You have no orders</div>}
       </div>
     </>
   )

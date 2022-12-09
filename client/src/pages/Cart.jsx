@@ -2,12 +2,13 @@ import { getCartByUserId } from "../api/cart";
 import { useQuery } from "react-query";
 import useGroupBuyStore from "../store/store";
 import CartCard from "../components/CartCard";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
 
-  const authDetails = useGroupBuyStore((state) => state.authDetails)
+    const authDetails = useGroupBuyStore((state) => state.authDetails)
     const userId = authDetails.id
-    
+        
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId))
   
@@ -19,11 +20,37 @@ const Cart = () => {
       return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
+    const cartCards = data.map(item => {
+      
+      return (
+        <CartCard
+          imgUrl={item.Product.imgUrl}
+          name={item.Product.name}
+          productId={item.ProductId}
+          price={item.Product.price}
+          listed={item.Product.listed}
+          quantity={item.quantity}
+          cartId={item.id}
+          key={item.id} 
+          userId={userId}         
+        />
+      )
+    })
 
   return (
     <>
       {!data && <div>Your cart is empty.</div>}
+      {data.length===0 && <div>Your cart is empty.</div>}
+      {
+        data.length===0 ||
+        <div>
+        <Link to="/checkout">
+          <button className="btn btn-wide my-2">Checkout</button>
+        </Link>
+      </div>
+      }
+      {cartCards}
     </>
   )
 }

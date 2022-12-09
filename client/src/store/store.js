@@ -30,16 +30,7 @@ const useGroupBuyStore = create(
                 return error.response
             }
         },
-        
 
-        
-        
-        
-        
-        
-        
-        
-        
     }))
 )
 
