@@ -1,25 +1,22 @@
-import useGroupBuyStore from "../store/store";
-import { useEffect } from "react";
 import CategoryCard from "../components/CategoryCard";
-
+import { useQuery } from 'react-query'
+import { getAllCategories } from "../api/category";
 
 const Categories = () => {
 
-  const getAllCategories = useGroupBuyStore((state) => state.getAllCategories)
-  const categories = useGroupBuyStore((state) => state.categories)
-  // const isLoading = useGroupBuyStore((state) => state.isLoading)
-  // const setIsLoading = useGroupBuyStore((state) => state.setIsLoading)
+  const { isLoading, isError, data, error } = useQuery(
+    ['categories'], getAllCategories)
 
-  // setIsLoading(true)
-  
-  useEffect(() => {
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
 
-    getAllCategories()      
-    
-  }, [])
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
 
-  
-  const categoryCards = categories.map(cat => {
+  // console.log(data)
+  const categoryCards = data.map(cat => {
     return(
       <CategoryCard 
       key={cat.id}
@@ -37,8 +34,7 @@ const Categories = () => {
       <div>Categories</div>
       <div className="grid gap-2 grid-cols-2">
         {categoryCards}
-      </div>
-      
+      </div>      
 
     </>
   )

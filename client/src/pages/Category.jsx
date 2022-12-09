@@ -2,20 +2,34 @@ import useGroupBuyStore from "../store/store";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { useQuery } from "react-query";
+import { getProductsByCategory } from "../api/product";
 
 const Category = () => {
 
   const { id } = useParams()
-  const getProductsByCategory = useGroupBuyStore((state) => state.getProductsByCategory)
 
-  useEffect(() => {
-    
-    getProductsByCategory(id)    
-    
-  }, [])
+  const { isLoading, isError, data, error } = useQuery(
+    ['products', id], () => getProductsByCategory(id))
 
-  const products = useGroupBuyStore((state) => state.products)
-  const productCards = products.map(prod => {
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+
+  // const getProductsByCategory = useGroupBuyStore((state) => state.getProductsByCategory)
+
+  // useEffect(() => {
+    
+  //   getProductsByCategory(id)    
+    
+  // }, [])
+
+  // const products = useGroupBuyStore((state) => state.products)
+  const productCards = data.map(prod => {
     return (
       <ProductCard 
         imgUrl={prod.imgUrl}

@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import useGroupBuyStore from "../store/store";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import { updatePassword } from "../api/user";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import useToastSuccess from "../hooks/useToastSuccess";
 
 const UpdatePassword = () => {
 
@@ -25,20 +25,11 @@ const UpdatePassword = () => {
       onSuccess: (response) => {
 
         if (response.status === 200) {
-        toast.success('Password updated', {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          }); 
-        
-        setCurrentPassword("")
-        setNewPassword("")
-        navigate("/account")
+
+          useToastSuccess('Password updated')        
+          setCurrentPassword("")
+          setNewPassword("")
+          navigate("/account")
         } else {
           setError(response.data.message)
         }
@@ -98,7 +89,6 @@ const UpdatePassword = () => {
       <button className="btn btn-primary btn-wide" type="submit">Update</button>
       </div>
     </form>
-
         
     </>
   );

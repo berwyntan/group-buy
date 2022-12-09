@@ -19,7 +19,7 @@ const OrderDetail = (
             if (!cancel && !fulfil && !paid && !collect) {
                 setStatus("Payment pending")
                 setBadge("badge-primary")
-                setMessage(`Please pay $${price * quantity} using Paynow to 95551234 with the comment ${shortOrderId}. Thank you!`)
+                setMessage(`Please pay $${price * quantity} by Paynow to 95551234 using your registered mobile and with the comment '${shortOrderId}'. Thank you!`)
             } else if (!cancel && !fulfil && paid && !collect) {
                 setStatus("Fulfiling order")
                 setBadge("badge-secondary")

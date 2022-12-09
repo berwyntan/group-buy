@@ -1,5 +1,3 @@
-
-import useGroupBuyStore from "../store/store"
 import { useParams } from "react-router-dom"
 import OrderDetail from "../components/OrderDetail"
 import { useQuery } from 'react-query'
@@ -7,10 +5,11 @@ import { getOrderById } from "../api/order"
 
 const Order = () => {
     const { id } = useParams()
-    const setOrderSingle = useGroupBuyStore((state) => state.setOrderSingle)
+    // const setOrderSingle = useGroupBuyStore((state) => state.setOrderSingle)
+    // , { onSuccess: (data) => setOrderSingle(data)}
              
     const { isLoading, isError, data, error } = useQuery(
-      ['order', id], () => getOrderById(id), { onSuccess: (data) => setOrderSingle(data)})
+      ['order', id], () => getOrderById(id))
 
     if (isLoading) {
       return <span>Loading...</span>

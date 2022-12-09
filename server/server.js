@@ -11,6 +11,7 @@ const productRouter = require("./routes/productRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const orderRouter = require("./routes/orderRouter");
+const cartRouter = require("./routes/cartRouter");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -42,7 +43,7 @@ app.use("/api/order", orderRouter);
 app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
-
+app.use("/api/cart", cartRouter);
 
 app.get("/", (req, res) => {res.json({msg: "hello world"})});
 

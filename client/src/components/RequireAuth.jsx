@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from "react-router-dom"
-import Navbar from "./Navbar"
 import useGroupBuyStore from "../store/store"
 
 const RequireAuth = () => {
@@ -11,7 +10,7 @@ const RequireAuth = () => {
     <>
         
         <div>RequireAuth</div>
-        {name ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace={true} />}
+        {name ? <Outlet /> : <Navigate to="/login" />}
         
     </>
     

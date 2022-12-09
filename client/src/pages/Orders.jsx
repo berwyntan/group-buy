@@ -1,20 +1,25 @@
-import { useEffect } from "react"
-import OrderCard from "../components/OrderCard"
-import useGroupBuyStore from "../store/store"
+import OrderCard from "../components/OrderCard";
+import useGroupBuyStore from "../store/store";
+import { getOrdersByUserId } from "../api/order";
+import { useQuery } from "react-query";
 
 const Orders = () => {
 
     const authDetails = useGroupBuyStore((state) => state.authDetails)
-    const getOrdersByUserId = useGroupBuyStore((state) => state.getOrdersByUserId)
+    const userId = authDetails.id
     
+    const { isLoading, isError, data, error } = useQuery(
+      ['orders', userId], () => getOrdersByUserId(userId))
+  
+    if (isLoading) {
+      return <span>Loading...</span>
+    }
+  
+    if (isError) {
+      return <span>Error: {error.message}</span>
+    }
     
-    useEffect(() => {
-        getOrdersByUserId(authDetails.id)
-    }, [])
-
-    
-    const orders = useGroupBuyStore((state) => state.orders)
-    const orderCards = orders.map(order => {
+    const orderCards = data.map(order => {
       return (
         <OrderCard
           imgUrl={order.Product.imgUrl}

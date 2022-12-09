@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import useGroupBuyStore from "../store/store";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import { updateUser } from "../api/user";
 import { useNavigate } from "react-router-dom";
+import useToastSuccess from "../hooks/useToastSuccess";
+import useToastError from "../hooks/useToastError";
 
 const UpdateDetails = () => {
 
@@ -28,20 +29,11 @@ const UpdateDetails = () => {
       onSuccess: (response) => {
         // console.log(response)
         if (response.status === 200) {
-          toast.success('User details updated', {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            }); 
-            setPassword("")
-            setAuthDetails({...response.data, accessToken})
-            navigate("/account")
-        } else {
+          useToastSuccess('User details updated')
+          setPassword("")
+          setAuthDetails({...response.data, accessToken})
+          navigate("/account")
+      } else {
           setError(response.data.message)
         }
       },
@@ -52,17 +44,8 @@ const UpdateDetails = () => {
     
     if (formData.name === oldName && formData.mobile === oldMobile) {
            
-      toast.error('Error: no change to details', {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });      
-        return
+      useToastError('Error: no change to details')
+      return
     }
     const data = {...formData, oldMobile: oldMobile}
 
@@ -74,7 +57,7 @@ const UpdateDetails = () => {
     setError("")
   }, [name, mobile, password])
   
-  console.log(authDetails)
+  // console.log(authDetails)
   return (
     <>
             

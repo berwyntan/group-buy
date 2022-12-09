@@ -1,16 +1,55 @@
 import { useState } from "react";
-import useGroupBuyStore from "../store/store";
+import { useMutation } from "react-query";
+import { addToCart } from "../api/cart";
+import { useNavigate } from "react-router-dom";
+import useToastSuccess from "../hooks/useToastSuccess";
+import useToastError from "../hooks/useToastError";
 
-const ProductDetail = ({ imgUrl, name, id, desc, price, listed, handleOrder }) => {
+const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId }) => {
   
   const [ qty, setQty ] = useState(1)
   const updateQty = (e) => setQty(e.target.innerHTML)
+  const navigate = useNavigate()
+
+  const mutation = useMutation(formData => addToCart(formData), 
+    {
+      onError: (response) => {
+        console.log(response)
+      },
+      onSuccess: (response) => {
+        // console.log(response)
+        if (response.status === 201) {
+          
+          useToastSuccess("Item added to cart")
+            
+        } else {
+
+          useToastError("Error: Item not added to cart")
+          
+        }
+      },
+    })
+
+    const handleAddToCart = ( productId, userId, qty) => {
+      
+      if (!userId) {
+        navigate("/login")
+        return
+      }
+      const formData = JSON.stringify({
+        ProductId: productId,
+        UserId: userId,
+        quantity: qty
+      })
+      
+      mutation.mutate(formData)
+    }
 
   return (
     <>
         
         <div className="card md:card-side bg-base-100 shadow-xl">
-        <figure><img className="p-2" src={imgUrl} alt={name}/></figure>
+        <figure><img className="p-8" src={imgUrl} alt={name}/></figure>
         <div className="card-body">
             <div className="flex flex-col items-start">
                 <div className="card-title text-left mb-3">{name}</div>
@@ -24,7 +63,8 @@ const ProductDetail = ({ imgUrl, name, id, desc, price, listed, handleOrder }) =
                 <div className="ml-1 font-bold text-lg">{qty}</div>
                 </label>
 
-                {listed && <button className="btn btn-primary" onClick={() => handleOrder(id, qty)}>Order</button>}
+                {listed && <button className="btn btn-primary" 
+                  onClick={() => handleAddToCart(productId, userId, qty)}>Add to Cart</button>}
                 {listed || <button className="btn btn-disabled">Closed</button>}
             </div>
             

@@ -120,4 +120,22 @@ const User = db.define('User', {
   User.hasMany(Order);
   Order.sync({ alter: true });
 
-  module.exports = { User, Category, Product, Order }
+  const Cart = db.define('Cart', {
+  
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },    
+  }, );
+
+  Product.hasMany(Cart);  
+  Cart.belongsTo(Product);
+  User.hasOne(Cart);
+  Cart.sync({ alter: true })
+
+  module.exports = { User, Category, Product, Order, Cart }

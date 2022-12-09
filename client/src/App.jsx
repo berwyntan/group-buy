@@ -27,6 +27,7 @@ import NotFound from './pages/NotFound'
 import Orders from './pages/Orders'
 import Order from './pages/Order'
 import Layout from './pages/Layout'
+import Cart from './pages/Cart';
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ function App() {
           <Route path='/updatepassword' element={<UpdatePassword />}/>
           <Route path='/confirmation' element={<Confirmation />}/>
           <Route path='/orders' element={<Orders />}/>
+          <Route path='/cart' element={<Cart />}/>
           <Route path='/order/:id' element={<Order />}/>
         </Route>
         <Route element={<RequireAdmin />}> 

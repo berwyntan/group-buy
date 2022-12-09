@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { signup } from "../api/user";
-import { toast } from "react-toastify";
+import useToastSuccess from "../hooks/useToastSuccess";
 
 const Signup = () => {
   const [error, setError] = useState("") 
@@ -18,16 +18,7 @@ const Signup = () => {
       onSuccess: (response) => {
         // console.log(response)
         if (response.status === 201) {
-          toast.success('Account successfully created', {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            }); 
+          useToastSuccess('Account successfully created')
           navigate("/login")
         } else {
           setError(response.data.message)
@@ -35,14 +26,12 @@ const Signup = () => {
       },
     })
 
-  // const signup = useGroupBuyStore((state) => state.signup)
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = (formData) => {
     
     mutation.mutate(formData)
   }
-  // console.log(errors.mobile)
-  // console.log(Boolean(errors.password))
+  
  
   return (
 
