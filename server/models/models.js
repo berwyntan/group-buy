@@ -81,6 +81,7 @@ const User = db.define('User', {
   }, );
 
   Category.hasMany(Product);
+  Product.belongsTo(Category);
   Product.sync({ alter: true });
 
   const Order = db.define('Order', {
@@ -118,6 +119,7 @@ const User = db.define('User', {
   Product.hasMany(Order);  
   Order.belongsTo(Product);
   User.hasMany(Order);
+  Order.belongsTo(User);
   Order.sync({ alter: true });
 
   const Cart = db.define('Cart', {

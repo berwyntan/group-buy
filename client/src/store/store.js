@@ -31,6 +31,9 @@ const useGroupBuyStore = create(
             }
         },
 
+        productId: "",
+        setProductId: (data) => set({ productId: data}),
+
     }))
 )
 

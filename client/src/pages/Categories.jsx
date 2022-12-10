@@ -1,6 +1,7 @@
 import CategoryCard from "../components/CategoryCard";
 import { useQuery } from 'react-query'
 import { getAllCategories } from "../api/category";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
 
@@ -31,7 +32,12 @@ const Categories = () => {
 
   return (
     <>
-      <div>Categories</div>
+      <div className="text-sm breadcrumbs mt-1 mb-3">
+        <ul>
+          <li><Link to="/">Categories</Link></li>           
+          
+        </ul>
+      </div>
       <div className="grid gap-2 grid-cols-2">
         {categoryCards}
       </div>      

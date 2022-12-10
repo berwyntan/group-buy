@@ -1,5 +1,5 @@
 import useGroupBuyStore from "../store/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation } from "react-query";
 import { getCartByUserId, clearCartByUserId } from "../api/cart";
 import CheckoutCard from "../components/CheckoutCard";
@@ -25,7 +25,7 @@ const Checkout = () => {
       return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
 
     data.map(item => {
       const subtotal = item.quantity * item.Product.price
@@ -91,7 +91,7 @@ const Checkout = () => {
           "UserId": item.UserId,
           "quantity": item.quantity.toString()
         }
-        console.log(formData)
+        // console.log(formData)
         try {
           mutation.mutate(formData)
         } catch (error) {
@@ -105,6 +105,12 @@ const Checkout = () => {
 
     return (
       <>
+        <div className="text-sm breadcrumbs">
+          <ul>
+            <li><Link to="/cart">Cart</Link></li>  
+            <li>Checkout</li>          
+          </ul>
+        </div>  
         <div className="text-2xl mb-2">Checkout</div>
         <button className="btn btn-wide" onClick={() => checkout(data)}>Confirm Checkout</button>
         <div className="flex justify-center my-3">

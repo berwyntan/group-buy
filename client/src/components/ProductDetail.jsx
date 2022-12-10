@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { addToCart } from "../api/cart";
 import { useNavigate } from "react-router-dom";
-import useToastSuccess from "../hooks/useToastSuccess";
+import useToastDefault from "../hooks/useToastDefault";
 import useToastError from "../hooks/useToastError";
 
 const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId }) => {
@@ -23,7 +23,7 @@ const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId })
         // console.log(response)
         if (response.status === 201) {
           
-          useToastSuccess("Item added to cart")
+          useToastDefault("Item added to cart")
             
         } else {
 

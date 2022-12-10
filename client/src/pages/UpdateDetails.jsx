@@ -3,7 +3,7 @@ import useGroupBuyStore from "../store/store";
 import { useState, useEffect } from "react";
 import { useMutation } from "react-query";
 import { updateUser } from "../api/user";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 
@@ -60,6 +60,12 @@ const UpdateDetails = () => {
   // console.log(authDetails)
   return (
     <>
+    <div className="text-sm breadcrumbs">
+      <ul>
+        <li><Link to="/account">Account</Link></li> 
+        <li>Update Details</li>        
+      </ul>
+    </div> 
             
     <div className="text-2xl mb-2">Update Account Details</div>
 

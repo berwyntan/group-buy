@@ -2,6 +2,7 @@ import OrderCard from "../components/OrderCard";
 import useGroupBuyStore from "../store/store";
 import { getOrdersByUserId } from "../api/order";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
 
@@ -40,6 +41,12 @@ const Orders = () => {
   return (
     <>
       <div className="">
+        <div className="text-sm breadcrumbs">
+          <ul>
+            <li><Link to="/account">Account</Link></li>  
+            <li><Link to="/orders">Orders</Link></li>              
+          </ul>
+        </div> 
         <div className="text-2xl mb-2">Orders</div>
         {orderCards}
         {orderCards.length===0 && <div>You have no orders</div>}

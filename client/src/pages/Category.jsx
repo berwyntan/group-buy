@@ -1,5 +1,4 @@
-import useGroupBuyStore from "../store/store";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useQuery } from "react-query";
@@ -20,15 +19,7 @@ const Category = () => {
     return <span>Error: {error.message}</span>
   }
 
-  // const getProductsByCategory = useGroupBuyStore((state) => state.getProductsByCategory)
-
-  // useEffect(() => {
-    
-  //   getProductsByCategory(id)    
-    
-  // }, [])
-
-  // const products = useGroupBuyStore((state) => state.products)
+  
   const productCards = data.map(prod => {
     return (
       <ProductCard 
@@ -43,12 +34,20 @@ const Category = () => {
     )
   })
 
+  const category = data?.[0]?.Category?.name
+
   return (
     
     <>
-      <div>Category</div>
+      <div className="text-sm breadcrumbs">
+        <ul>
+          <li><Link to="/">Categories</Link></li> 
+          <li>{category}</li>          
+        </ul>
+      </div>
       <div className="grid gap-2 grid-cols-2">
         {productCards}
+        {data.length===0 && <div>No products</div>}
       </div>
       
 

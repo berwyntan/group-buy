@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 
-const useToastError = (message) => {
+const useToastDefault = (message) => {
     return (
-        toast.error(message, {
+        toast(message, {
             position: "bottom-right",
-            autoClose: 4000,
+            autoClose: 5000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -15,4 +15,4 @@ const useToastError = (message) => {
     )
 }
 
-export default useToastError
+export default useToastDefault

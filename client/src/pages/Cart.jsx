@@ -40,6 +40,13 @@ const Cart = () => {
 
   return (
     <>
+      <div className="text-sm breadcrumbs">
+          <ul>
+            <li><Link to="/cart">Cart</Link></li>  
+                      
+          </ul>
+        </div>  
+      <div className="text-2xl mb-2">Cart</div>
       {!data && <div>Your cart is empty.</div>}
       {data.length===0 && <div>Your cart is empty.</div>}
       {

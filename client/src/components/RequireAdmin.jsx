@@ -1,13 +1,16 @@
-import { Outlet } from "react-router-dom"
-import Navbar from "./Navbar"
-
+import { Outlet, Navigate } from "react-router-dom"
+import useGroupBuyStore from "../store/store"
 
 const RequireAdmin = () => {
+
+  const authDetails = useGroupBuyStore((state) => state.authDetails)
+  const role = authDetails?.role
+
   return (
     <>
         
         <div>RequireAdmin</div>
-        <Outlet />
+        {role ? <Outlet /> : <Navigate to="/" />}
     </>
     
   )

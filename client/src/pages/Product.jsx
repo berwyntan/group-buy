@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useGroupBuyStore from "../store/store";
 import { useQuery } from "react-query";
 import { getProductById } from "../api/product";
-
+import { Link } from "react-router-dom";
 
 const Product = () => {
 
@@ -22,10 +22,17 @@ const Product = () => {
     return <span>Error: {error.message}</span>
   }
 
+  const category = data?.Category?.name
+
    
   return (
     <>
-           
+      <div className="text-sm breadcrumbs">
+        <ul>
+          <li><Link to="/">Categories</Link></li>  
+          <li>{category}</li>          
+        </ul>
+      </div>    
       <ProductDetail 
         imgUrl={data.imgUrl}
         name={data.name}

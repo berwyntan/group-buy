@@ -18,7 +18,7 @@ import UpdateDetails from './pages/UpdateDetails'
 import UpdatePassword from './pages/UpdatePassword'
 import RequireAdmin from './components/RequireAdmin'
 import AdminHome from './pages/AdminHome'
-import AdminUpdate from './pages/AdminUpdate'
+import AdminListings from './pages/AdminListings'
 import AdminNewListing from './pages/AdminNewListing'
 import AdminProduct from './pages/AdminProduct'
 import Confirmation from './pages/Confirmation'
@@ -31,6 +31,8 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import UpdateCart from './pages/UpdateCart';
 import UpdateOrder from './pages/UpdateOrder';
+import AdminCategory from './pages/AdminCategory';
+import UpdateProduct from './pages/UpdateProduct';
 
 const queryClient = new QueryClient();
 
@@ -66,9 +68,11 @@ function App() {
         </Route>
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>
-          <Route path='/adminupdate' element={<AdminUpdate />}/>
+          <Route path='/adminlistings' element={<AdminListings />}/>
           <Route path='/adminnewlisting' element={<AdminNewListing />}/>
-          <Route path='/admin/:id' element={<AdminProduct />}/>
+          <Route path='/admin/product/:id' element={<AdminProduct />}/>
+          <Route path='/admin/cat/:id' element={<AdminCategory />}/>
+          <Route path='/admin/updateproduct' element={<UpdateProduct />}/>
         </Route>
         </Route>
       </Routes>

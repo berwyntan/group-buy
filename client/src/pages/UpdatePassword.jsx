@@ -3,7 +3,7 @@ import useGroupBuyStore from "../store/store";
 import { useState, useEffect } from "react";
 import { updatePassword } from "../api/user";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useToastSuccess from "../hooks/useToastSuccess";
 
 const UpdatePassword = () => {
@@ -52,6 +52,12 @@ const UpdatePassword = () => {
 
   return (
     <>
+    <div className="text-sm breadcrumbs">
+      <ul>
+        <li><Link to="/account">Account</Link></li> 
+        <li>Update Password</li>        
+      </ul>
+    </div> 
         
     <div className="text-2xl mb-2">Update Password</div>
 

@@ -89,7 +89,7 @@ const handleLogin = async (req, res) => {
             // console.log(`refresh: ${refreshToken}`)
 
             // Creates Secure Cookie with refresh token
-            res.cookie('jwt', refreshToken, { /*httpOnly: true,*/ secure: true, sameSite: 'None', maxAge: 2 * 24 * 60 * 60 * 1000 });
+            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 2 * 24 * 60 * 60 * 1000 });
 
             return res.status(200).json({ 
                 name: foundUser.name,

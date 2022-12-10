@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import OrderDetail from "../components/OrderDetail"
 import { useQuery } from 'react-query'
 import { getOrderById } from "../api/order"
@@ -22,6 +22,12 @@ const Order = () => {
     
     return (
       <>
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li><Link to="/account">Account</Link></li>  
+              <li><Link to="/orders">Orders</Link></li>        
+            </ul>
+          </div> 
           <div className="text-2xl mb-2">Order Detail</div>
           <OrderDetail 
               imgUrl={data.Product.imgUrl}
