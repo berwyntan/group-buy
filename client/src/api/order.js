@@ -44,3 +44,15 @@ export const getOrdersByUserId = async (id) => {
         console.log(error)
     }
 }
+
+export const getOrdersByProductId = async (id) => {
+    try {
+        const response = await axios.get(`/api/order/product/${id}`)
+        
+        if (response.status === 200) {
+            return response.data }
+                        
+    } catch (error) {
+        console.log(error)
+    }
+}

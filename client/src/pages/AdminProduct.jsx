@@ -21,6 +21,7 @@ const AdminProduct = () => {
   // console.log(data)
   const category = data.Category.name
   const categoryId = data.CategoryId
+  const productId = data.id
 
   return (
     
@@ -39,7 +40,9 @@ const AdminProduct = () => {
       
       <div className="flex flex-col">
 
+      <Link to={`/admin/orders/${productId}`}>
       <button className="btn btn-wide mx-auto">View Orders for Product</button>
+      </Link>
       
       <AdminProductDetail 
         imgUrl={data.imgUrl}

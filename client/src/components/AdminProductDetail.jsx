@@ -25,7 +25,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
         console.log(response)
       },
       onSuccess: (response) => {
-        console.log(response)
+        // console.log(response)
         if (response?.status === 200) {
           
           useToastSuccess("Product updated")
@@ -70,7 +70,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
         listed: listed,
         id: productId
       }
-      console.log(newFormData)
+      // console.log(newFormData)
       mutation.mutate(newFormData)
     }
 
@@ -122,7 +122,6 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
             className="input input-bordered w-full max-w-xs"/>
           </label>
           
-
           <div className="my-4">
             {errors.name?.type === 'required' && <span>Product name is required</span>}
 
@@ -139,13 +138,8 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
           <button className="btn btn-primary btn-wide" type="submit">Update</button>
           </div>
         </form>
-            
-            
+        
         </div>
-
-        
-        
-
         </div>
         
     </>

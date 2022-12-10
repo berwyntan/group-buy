@@ -68,16 +68,14 @@ const getOrdersByUserId = async (req, res) => {
 const getOrdersByProductId = async (req, res) => {
     const { id } = req.params;
     // check id
-    try {
-        const checkProduct = await Product.findByPk(id);
-    } catch (error) {
-        return res.status(404).json({ 'message': 'Invalid user id.'})
-    }
+    
+    const checkProduct = await Product.findByPk(id);
+    if (!checkProduct) return res.status(404).json({ 'message': 'Invalid user id.'})    
 
     try {        
         const result = await Order.findAll({where: {ProductId: id}, include: User,
             order: [['createdAt', 'DESC']]});
-        res.status(200).json(result);
+        res.status(200).json({result: result, product: checkProduct});
     } catch (err) {
         res.status(500).json({ 'message': err.message });
     }
