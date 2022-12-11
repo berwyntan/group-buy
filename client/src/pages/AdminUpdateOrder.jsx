@@ -6,12 +6,13 @@ import AdminOrderCard from "../components/AdminOrderCard";
 import { updateOrder } from "../api/order";
 import useGroupBuyStore from "../store/store";
 import { useEffect } from "react";
+import PaymentCrm from "../components/crm/PaymentCrm";
 
 const AdminUpdateOrder = () => {
     const { id } = useParams()
-    const setOrderId = useGroupBuyStore((state) => state.setOrderId)
+    // const setOrderId = useGroupBuyStore((state) => state.setOrderId)
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     
     const { isLoading, isError, data, error } = useQuery(
         ['orderAdmin', id], () => getOrderByIdAdmin(id))
@@ -24,7 +25,7 @@ const AdminUpdateOrder = () => {
     return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
 
     // const mutation = useMutation(formData => updateOrder(formData), 
     // {
@@ -44,19 +45,19 @@ const AdminUpdateOrder = () => {
     // const status = useStatusCheck(data?.user.cancel, data?.user.fulfil, data.user.paid, data.user.collect)    
     // console.log(status)
 
-    const paymentMade = () => {
-        const formData = {
-            "fulfil": "false",
-            "cancel": "false",
-            "paid": "true",
-            "collect": "false",
-            "id": id
-        }
+    // const paymentMade = () => {
+    //     const formData = {
+    //         "fulfil": "false",
+    //         "cancel": "false",
+    //         "paid": "true",
+    //         "collect": "false",
+    //         "id": id
+    //     }
         
-        mutation.mutate(formData)
-    }
+    //     mutation.mutate(formData)
+    // }
 
-    useEffect(() => {setOrderId(id)}, [])
+    // useEffect(() => {setOrderId(id)}, [])
     
     return (
         <>
@@ -87,14 +88,15 @@ const AdminUpdateOrder = () => {
                 buyerName={data.user.User.name}
                 mobile={data.user.User.mobile}
             />
-            <div className="divider">Payment</div>
+            {/* <div className="divider">Payment</div>
             <button className="btn btn-success mx-3 my-2">
                 WhatsApp: Payment Reminder                
             </button>
             <button className="btn btn-primary mx-3 my-2" onClick={paymentMade}>Payment made</button>            
             <button className="btn btn-success mx-3 my-2">
                 WhatsApp: Payment Received                
-            </button>
+            </button> */}
+            <PaymentCrm id={id} />
 
             <div className="divider">Collection</div>
             <button className="btn btn-success mx-3 my-2">WhatsApp: Ready for collection</button>
