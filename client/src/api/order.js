@@ -18,7 +18,7 @@ export const getOrderByIdAdmin = async (id) => {
     try {
         
         const response = await axios.get(`/api/order/admin/${id}`)
-        console.log(response)
+        // console.log(response)
         if (response.status === 200) {
             
             return response.data

@@ -1,12 +1,10 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "react-query";
 import { getOrderByIdAdmin } from "../api/order";
-import useStatusCheck from "../hooks/useStatusCheck";
 import AdminOrderCard from "../components/AdminOrderCard";
 import { updateOrder } from "../api/order";
-import useGroupBuyStore from "../store/store";
-import { useEffect } from "react";
-import PaymentCrm from "../components/crm/PaymentCrm";
+
+import OrderCrm from "../components/crm/OrderCrm";
 
 const AdminUpdateOrder = () => {
     const { id } = useParams()
@@ -15,7 +13,7 @@ const AdminUpdateOrder = () => {
     // const navigate = useNavigate()
     
     const { isLoading, isError, data, error } = useQuery(
-        ['orderAdmin', id], () => getOrderByIdAdmin(id))
+        ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000})
   
     if (isLoading) {
     return <span>Loading...</span>
@@ -25,45 +23,13 @@ const AdminUpdateOrder = () => {
     return <span>Error: {error.message}</span>
     }
 
-    // console.log(data)
-
-    // const mutation = useMutation(formData => updateOrder(formData), 
-    // {
-    //   onError: (response) => {
-        
-    //     console.log(response)
-    //   },
-    //   onSuccess: (response) => {
-    //     setOrderId(id)
-    //     console.log(response)
-    //     if (response.status === 200) {
-    //       navigate("/admin/updatingorder", {replace: true})
-    //     } 
-    //   },
-    // })
-
-    // const status = useStatusCheck(data?.user.cancel, data?.user.fulfil, data.user.paid, data.user.collect)    
-    // console.log(status)
-
-    // const paymentMade = () => {
-    //     const formData = {
-    //         "fulfil": "false",
-    //         "cancel": "false",
-    //         "paid": "true",
-    //         "collect": "false",
-    //         "id": id
-    //     }
-        
-    //     mutation.mutate(formData)
-    // }
-
-    // useEffect(() => {setOrderId(id)}, [])
+    
     
     return (
         <>
             <div className="text-sm breadcrumbs">
               <ul>
-              <li><Link to="/admin">Admin</Link></li> 
+              <li><Link to="/adminhome">Admin</Link></li> 
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
               <li><Link to={`/admin/cat/${data.category.id}`}>{data.category.name}</Link></li> 
@@ -88,26 +54,17 @@ const AdminUpdateOrder = () => {
                 buyerName={data.user.User.name}
                 mobile={data.user.User.mobile}
             />
-            {/* <div className="divider">Payment</div>
-            <button className="btn btn-success mx-3 my-2">
-                WhatsApp: Payment Reminder                
-            </button>
-            <button className="btn btn-primary mx-3 my-2" onClick={paymentMade}>Payment made</button>            
-            <button className="btn btn-success mx-3 my-2">
-                WhatsApp: Payment Received                
-            </button> */}
-            <PaymentCrm id={id} />
+            
+            <OrderCrm 
+                id={id} 
+                buyerName={data.user.User.name}
+                price={data.product.Product.price}
+                quantity={data.product.quantity}
+                name={data.product.Product.name}
+                mobile={data.user.User.mobile}
+            />
 
-            <div className="divider">Collection</div>
-            <button className="btn btn-success mx-3 my-2">WhatsApp: Ready for collection</button>
-            <button className="btn btn-primary mx-3 my-2">Collected</button>
-
-            <div className="divider">Cancellation / Refund</div>
-            <button className="btn btn-primary mx-3 my-2">Order cancelled</button>
-            <button className="btn btn-primary mx-3 my-2">Refund pending</button>
-            <button className="btn btn-success mx-3 my-2">
-                WhatsApp: Refund processed                
-            </button>
+            
             
         </>
         

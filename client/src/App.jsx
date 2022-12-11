@@ -29,13 +29,13 @@ import Order from './pages/Order'
 import Layout from './pages/Layout'
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import UpdateCart from './pages/UpdateCart';
+
 import UpdateOrder from './pages/UpdateOrder';
 import AdminCategory from './pages/AdminCategory';
-import UpdateProduct from './pages/UpdateProduct';
+
 import AdminOrders from './pages/AdminOrders';
 import AdminUpdateOrder from './pages/AdminUpdateOrder';
-import UpdatingOrder from './pages/UpdatingOrder';
+
 
 const queryClient = new QueryClient();
 
@@ -66,7 +66,7 @@ function App() {
           <Route path='/cart' element={<Cart />}/>
           <Route path='/order/:id' element={<Order />}/>
           <Route path='/checkout' element={<Checkout />}/>
-          <Route path='/updatecart' element={<UpdateCart />}/>
+          
           <Route path='/updateorder' element={<UpdateOrder />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
@@ -75,10 +75,10 @@ function App() {
           <Route path='/adminnewlisting' element={<AdminNewListing />}/>
           <Route path='/admin/product/:id' element={<AdminProduct />}/>
           <Route path='/admin/cat/:id' element={<AdminCategory />}/>
-          <Route path='/admin/updateproduct' element={<UpdateProduct />}/>
+          
           <Route path='/admin/orders/:id' element={<AdminOrders />}/>
           <Route path='/admin/updateorder/:id' element={<AdminUpdateOrder />}/>
-          <Route path='/admin/updatingorder' element={<UpdatingOrder />}/>
+          
         </Route>
         </Route>
       </Routes>

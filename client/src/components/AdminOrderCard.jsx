@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -33,7 +32,8 @@ const OrderCard = (
             }
         }
 
-        useEffect(() => statusCheck(cancel, fulfil, paid, collect), [])
+        useEffect(() => statusCheck(cancel, fulfil, paid, collect), 
+            [cancel, fulfil, paid, collect])
         const sliceDate = date?.slice(0, 10)
         
   return (

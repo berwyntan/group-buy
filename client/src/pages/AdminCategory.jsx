@@ -45,7 +45,7 @@ const AdminCategory = () => {
     <>
         <div className="text-sm breadcrumbs">
             <ul>
-            <li><Link to="/admin">Admin</Link></li> 
+            <li><Link to="/adminhome">Admin</Link></li> 
             <li><Link to="/adminlistings">Listings</Link></li> 
             <li><Link to="/adminlistings">Categories</Link></li> 
             <li>{category}</li> 

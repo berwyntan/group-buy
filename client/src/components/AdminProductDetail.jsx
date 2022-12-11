@@ -47,7 +47,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
         if (response?.status === 200) {
           
           useToastSuccess("Listing updated")
-          navigate("/admin/updateproduct")
+          // navigate("/admin/updateproduct")
             
         } else {
 
@@ -74,7 +74,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
       mutation.mutate(newFormData)
     }
 
-    useEffect(() => {setProductId(productId)}, [])
+    // useEffect(() => {setProductId(productId)}, [])
 
   return (
     <>

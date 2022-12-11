@@ -6,11 +6,13 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);  
 
 const sendWhatsapp = async (req, res) => {
-    const { message } = req.body;
+    const { message, mobile } = req.body;
+    if (typeof mobile !== "number") return res.sendStatus(400)
+    if (mobile > 99999999 || mobile <9999999) return res.sendStatus(400)
     const messageInfo = { 
         body: message, 
         from: 'whatsapp:+14155238886',       
-        to: 'whatsapp:+6596261806' 
+        to: `whatsapp:+65${mobile}` 
     }
     client.messages 
     .create(messageInfo) 

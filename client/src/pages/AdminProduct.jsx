@@ -8,7 +8,7 @@ const AdminProduct = () => {
   const { id } = useParams()
   
   const { isLoading, isError, data, error } = useQuery(
-    ['product', id], () => getProductById(id))
+    ['product', id], () => getProductById(id), { refetchInterval: 1000 })
 
   if (isLoading) {
     return <span>Loading...</span>
@@ -28,7 +28,7 @@ const AdminProduct = () => {
     <>
       <div className="text-sm breadcrumbs">
           <ul>
-          <li><Link to="/admin">Admin</Link></li> 
+          <li><Link to="/adminhome">Admin</Link></li> 
           <li><Link to="/adminlistings">Listings</Link></li> 
           <li><Link to="/adminlistings">Categories</Link></li> 
           <li><Link to={`/admin/cat/${categoryId}`}>{category}</Link></li> 

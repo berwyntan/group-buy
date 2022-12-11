@@ -10,7 +10,7 @@ const Cart = () => {
     const userId = authDetails.id
         
     const { isLoading, isError, data, error } = useQuery(
-      ['cart'], () => getCartByUserId(userId))
+      ['cart'], () => getCartByUserId(userId), { refetchInterval: 1000})
   
     if (isLoading) {
       return <span>Loading...</span>

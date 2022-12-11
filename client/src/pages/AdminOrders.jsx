@@ -17,7 +17,7 @@ const AdminOrders = () => {
       return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
     const isListed = data.product.listed
     const sellPrice = data.product.price
 
@@ -83,13 +83,13 @@ const AdminOrders = () => {
       )
     })
     
-    console.log(quantities)
+    // console.log(quantities)
 
     return (
         <>
           <div className="text-sm breadcrumbs">
               <ul>
-              <li><Link to="/admin">Admin</Link></li> 
+              <li><Link to="/adminhome">Admin</Link></li> 
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
               <li><Link to={`/admin/cat/${data.product.categoryId}`}>{data.product.Category.name}</Link></li> 

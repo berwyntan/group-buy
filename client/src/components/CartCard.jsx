@@ -48,7 +48,7 @@ const CartCard = (
                       
         } else {
           useToastSuccess("Cart updated")
-          navigate("/updatecart")
+          // navigate("/updatecart")
         }
       },
     })

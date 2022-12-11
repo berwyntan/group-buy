@@ -20,20 +20,20 @@ const Account = () => {
       {
         role === "admin" &&
         <Link to="/adminhome">
-        <button className="btn btn-secondary btn-wide my-2">Admin Page</button>
+        <button className="btn btn-secondary btn-wide my-2 mx-2">Admin Page</button>
       </Link>   
       }
          
       <Link to="/orders">
-        <button className="btn btn-wide btn-primary my-2">My Orders</button>
+        <button className="btn btn-wide btn-primary my-2 mx-2">My Orders</button>
       </Link>      
       <Link to="/updatedetails">
-        <button className="btn btn-wide my-2">Update Account Details</button>
+        <button className="btn btn-wide my-2 mx-2">Update Account Details</button>
       </Link>
       <Link to="/updatepassword">
-        <button className="btn btn-wide my-2">Update Password</button>
+        <button className="btn btn-wide my-2 mx-2">Update Password</button>
       </Link>
-      <button className="btn btn-wide my-2">Logout</button>
+      <button className="btn btn-wide my-2 mx-2">Logout</button>
       
     </>
   )

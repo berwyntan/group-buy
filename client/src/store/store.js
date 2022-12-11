@@ -31,11 +31,11 @@ const useGroupBuyStore = create(
             }
         },
 
-        productId: "",
-        setProductId: (data) => set({ productId: data}),
+        // productId: "",
+        // setProductId: (data) => set({ productId: data}),
 
-        orderId: "",
-        setOrderId: (data) => set({ orderId: data}),
+        // orderId: "",
+        // setOrderId: (data) => set({ orderId: data}),
 
     }))
 )
