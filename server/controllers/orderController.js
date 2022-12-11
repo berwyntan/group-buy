@@ -1,5 +1,6 @@
 const { Order, Product, User, Category } = require('../models/models');
 const validator = require('validator');
+const { col } = require('sequelize');
 
 const addNewOrder = async (req, res) => {
     const { fulfil, cancel, ProductId, UserId, quantity } = req.body;
@@ -111,6 +112,41 @@ const getOrderByIdAdmin = async (req, res) => {
     }
 }
 
-const updateOrder = async (req, res) => {}
+const updateOrder = async (req, res) => {
+    const { fulfil, cancel, collect, paid, id } = req.body;
+    
+    // validation
 
-module.exports = { addNewOrder, getOrdersByUserId, getOrderById, getOrdersByProductId, getOrderByIdAdmin }
+    if (!fulfil || !cancel || !id || !collect || !paid) 
+        return res.status(400).json({ 'message': 'Order details are missing.'});
+    if (!validator.isBoolean(fulfil)) 
+        return res.status(400).json({ 'message': 'Invalid fulfilment status.'});
+    if (!validator.isBoolean(cancel)) 
+        return res.status(400).json({ 'message': 'Invalid order status.'});    
+    if (!validator.isBoolean(collect)) 
+        return res.status(400).json({ 'message': 'Invalid collect status.'});    
+    if (!validator.isBoolean(paid)) 
+        return res.status(400).json({ 'message': 'Invalid paid status.'});
+   
+    try {
+        
+        const result = await Order.update({
+            fulfil: fulfil,
+            cancel: cancel,
+            collect: collect,
+            paid: paid
+        }, { where: {id: id} });
+
+        if (result[0] === 1) {
+            const update = await Order.findByPk(id);
+            return res.status(200).json(update)
+        } else {
+            return res.status(404).json({ 'message': 'Invalid order id.'})
+        }
+
+    } catch (err) {
+        res.status(500).json({ 'message': err.message });
+    } 
+}
+
+module.exports = { addNewOrder, getOrdersByUserId, getOrderById, getOrdersByProductId, getOrderByIdAdmin, updateOrder }

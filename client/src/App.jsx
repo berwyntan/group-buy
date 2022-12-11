@@ -35,6 +35,7 @@ import AdminCategory from './pages/AdminCategory';
 import UpdateProduct from './pages/UpdateProduct';
 import AdminOrders from './pages/AdminOrders';
 import AdminUpdateOrder from './pages/AdminUpdateOrder';
+import UpdatingOrder from './pages/UpdatingOrder';
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ function App() {
           <Route path='/admin/updateproduct' element={<UpdateProduct />}/>
           <Route path='/admin/orders/:id' element={<AdminOrders />}/>
           <Route path='/admin/updateorder/:id' element={<AdminUpdateOrder />}/>
+          <Route path='/admin/updatingorder' element={<UpdatingOrder />}/>
         </Route>
         </Route>
       </Routes>

@@ -70,3 +70,17 @@ export const getOrdersByProductId = async (id) => {
         console.log(error)
     }
 }
+
+export const updateOrder = async (data) => {
+    try {
+        const response = await axios.put("/api/order", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        })
+        if (response.status === 200) {
+            return response }
+    } catch (error) {
+        console.log(error)
+    }
+}

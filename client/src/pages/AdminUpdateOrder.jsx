@@ -1,13 +1,18 @@
-import { useParams, Link } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useQuery, useMutation } from "react-query";
 import { getOrderByIdAdmin } from "../api/order";
 import useStatusCheck from "../hooks/useStatusCheck";
 import AdminOrderCard from "../components/AdminOrderCard";
+import { updateOrder } from "../api/order";
+import useGroupBuyStore from "../store/store";
+import { useEffect } from "react";
 
 const AdminUpdateOrder = () => {
     const { id } = useParams()
-    console.log(id)
+    const setOrderId = useGroupBuyStore((state) => state.setOrderId)
 
+    const navigate = useNavigate()
+    
     const { isLoading, isError, data, error } = useQuery(
         ['orderAdmin', id], () => getOrderByIdAdmin(id))
   
@@ -21,10 +26,37 @@ const AdminUpdateOrder = () => {
 
     console.log(data)
 
-    // const status = useStatusCheck(data?.user.cancel, data?.user.fulfil, data.user.paid, data.user.collect)
-    
+    // const mutation = useMutation(formData => updateOrder(formData), 
+    // {
+    //   onError: (response) => {
+        
+    //     console.log(response)
+    //   },
+    //   onSuccess: (response) => {
+    //     setOrderId(id)
+    //     console.log(response)
+    //     if (response.status === 200) {
+    //       navigate("/admin/updatingorder", {replace: true})
+    //     } 
+    //   },
+    // })
+
+    // const status = useStatusCheck(data?.user.cancel, data?.user.fulfil, data.user.paid, data.user.collect)    
     // console.log(status)
 
+    const paymentMade = () => {
+        const formData = {
+            "fulfil": "false",
+            "cancel": "false",
+            "paid": "true",
+            "collect": "false",
+            "id": id
+        }
+        
+        mutation.mutate(formData)
+    }
+
+    useEffect(() => {setOrderId(id)}, [])
     
     return (
         <>
@@ -55,18 +87,26 @@ const AdminUpdateOrder = () => {
                 buyerName={data.user.User.name}
                 mobile={data.user.User.mobile}
             />
-
-            <button className="btn btn-primary mx-3 my-2">Payment made</button>
-            <button className="btn btn-primary mx-3 my-2">
+            <div className="divider">Payment</div>
+            <button className="btn btn-success mx-3 my-2">
+                WhatsApp: Payment Reminder                
+            </button>
+            <button className="btn btn-primary mx-3 my-2" onClick={paymentMade}>Payment made</button>            
+            <button className="btn btn-success mx-3 my-2">
                 WhatsApp: Payment Received                
             </button>
+
+            <div className="divider">Collection</div>
+            <button className="btn btn-success mx-3 my-2">WhatsApp: Ready for collection</button>
+            <button className="btn btn-primary mx-3 my-2">Collected</button>
+
+            <div className="divider">Cancellation / Refund</div>
             <button className="btn btn-primary mx-3 my-2">Order cancelled</button>
             <button className="btn btn-primary mx-3 my-2">Refund pending</button>
-            <button className="btn btn-primary mx-3 my-2">
+            <button className="btn btn-success mx-3 my-2">
                 WhatsApp: Refund processed                
             </button>
-            <button className="btn btn-primary mx-3 my-2">WhatsApp: Ready for collection</button>
-            <button className="btn btn-primary mx-3 my-2">Collected</button>
+            
         </>
         
     )
