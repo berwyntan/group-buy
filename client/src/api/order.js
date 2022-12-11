@@ -14,6 +14,20 @@ export const getOrderById = async (id) => {
         console.log(error)
     }
   }
+export const getOrderByIdAdmin = async (id) => {
+    try {
+        
+        const response = await axios.get(`/api/order/admin/${id}`)
+        console.log(response)
+        if (response.status === 200) {
+            
+            return response.data
+            
+        }                
+    } catch (error) {
+        console.log(error)
+    }
+  }
 
 export const createOrder = async(data) => {
     try {

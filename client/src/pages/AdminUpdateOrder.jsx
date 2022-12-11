@@ -1,0 +1,75 @@
+import { useParams, Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getOrderByIdAdmin } from "../api/order";
+import useStatusCheck from "../hooks/useStatusCheck";
+import AdminOrderCard from "../components/AdminOrderCard";
+
+const AdminUpdateOrder = () => {
+    const { id } = useParams()
+    console.log(id)
+
+    const { isLoading, isError, data, error } = useQuery(
+        ['orderAdmin', id], () => getOrderByIdAdmin(id))
+  
+    if (isLoading) {
+    return <span>Loading...</span>
+    }
+
+    if (isError) {
+    return <span>Error: {error.message}</span>
+    }
+
+    console.log(data)
+
+    // const status = useStatusCheck(data?.user.cancel, data?.user.fulfil, data.user.paid, data.user.collect)
+    
+    // console.log(status)
+
+    
+    return (
+        <>
+            <div className="text-sm breadcrumbs">
+              <ul>
+              <li><Link to="/admin">Admin</Link></li> 
+              <li><Link to="/adminlistings">Listings</Link></li> 
+              <li><Link to="/adminlistings">Categories</Link></li> 
+              <li><Link to={`/admin/cat/${data.category.id}`}>{data.category.name}</Link></li> 
+                      
+              </ul>
+            </div>
+
+
+            <div className="text-2xl mb-2">Update Order</div>
+            <div className="">{id}</div>
+            <AdminOrderCard
+                imgUrl={data.product.Product.imgUrl}
+                name={data.product.Product.name}
+                id={data.product.ProductId}
+                price={data.product.Product.price}
+                date={data.product.createdAt}
+                quantity={data.product.quantity}
+                cancel={data.product.cancel}
+                fulfil={data.product.fulfil}
+                paid={data.product.paid}
+                collect={data.product.collect}
+                buyerName={data.user.User.name}
+                mobile={data.user.User.mobile}
+            />
+
+            <button className="btn btn-primary mx-3 my-2">Payment made</button>
+            <button className="btn btn-primary mx-3 my-2">
+                WhatsApp: Payment Received                
+            </button>
+            <button className="btn btn-primary mx-3 my-2">Order cancelled</button>
+            <button className="btn btn-primary mx-3 my-2">Refund pending</button>
+            <button className="btn btn-primary mx-3 my-2">
+                WhatsApp: Refund processed                
+            </button>
+            <button className="btn btn-primary mx-3 my-2">WhatsApp: Ready for collection</button>
+            <button className="btn btn-primary mx-3 my-2">Collected</button>
+        </>
+        
+    )
+}
+
+export default AdminUpdateOrder

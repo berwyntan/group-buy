@@ -1,4 +1,4 @@
-const { Order, Product, User } = require('../models/models');
+const { Order, Product, User, Category } = require('../models/models');
 const validator = require('validator');
 
 const addNewOrder = async (req, res) => {
@@ -69,7 +69,7 @@ const getOrdersByProductId = async (req, res) => {
     const { id } = req.params;
     // check id
     
-    const checkProduct = await Product.findByPk(id);
+    const checkProduct = await Product.findByPk(id, {include: Category});
     if (!checkProduct) return res.status(404).json({ 'message': 'Invalid user id.'})    
 
     try {        
@@ -98,6 +98,19 @@ const getOrderById = async (req, res) => {
     }
 }
 
+const getOrderByIdAdmin = async (req, res) => {
+    const { id } = req.params;
+    
+    try {        
+        const resultUser = await Order.findByPk(id, {include: User});
+        const resultProduct = await Order.findByPk(id, {include: Product});
+        const resultCategory = await Category.findByPk(resultProduct.Product.CategoryId);
+        res.status(200).json({user: resultUser, product: resultProduct, category: resultCategory});
+    } catch (err) {
+        res.status(500).json({ 'message': err.message });
+    }
+}
+
 const updateOrder = async (req, res) => {}
 
-module.exports = { addNewOrder, getOrdersByUserId, getOrderById, getOrdersByProductId }
+module.exports = { addNewOrder, getOrdersByUserId, getOrderById, getOrdersByProductId, getOrderByIdAdmin }

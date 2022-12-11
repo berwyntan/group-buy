@@ -24,7 +24,8 @@ const AdminCategory = () => {
   const count = data?.count
   console.log(data)
 
-  const productCards = data.rows.map((item) => {
+
+  const productCards = data?.rows.map((item) => {
     return(
         <AdminProductCard
             imgUrl={item.imgUrl}
@@ -37,6 +38,7 @@ const AdminCategory = () => {
         />
     )
   })
+  
 
   return (
     
@@ -56,7 +58,7 @@ const AdminCategory = () => {
         <div className="text-lg mb-2">Listings: {count}</div>
 
         <div className="grid gap-2 grid-cols-1">
-            {productCards}
+            {data && productCards}
             {data.length===0 && <div>No products</div>}
         </div>
       
