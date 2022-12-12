@@ -62,11 +62,24 @@ export const updatePassword = async (data) => {
         )
         // console.log(response)
         
-        return response
-                     
+        return response                     
     
     } catch (error) {
         console.log(error)
         return error.response
+    }
+}
+
+export const refreshToken = async () => {
+    try {
+        const response = await axios.get("/api/user/refresh",
+        {
+            withCredentials: true
+        }
+        )
+        console.log(response)
+        return response 
+    } catch (error) {
+        console.log(error)
     }
 }
