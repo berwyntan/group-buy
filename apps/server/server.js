@@ -5,7 +5,8 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const morgan = require("morgan");
 const db = require("./config/database");
-const credentials = require("./middleware/credentials")
+const credentials = require("./middleware/credentials");
+const cookieParser = require('cookie-parser');
 
 // routers
 const productRouter = require("./routes/productRouter");
@@ -36,6 +37,7 @@ app.use(cors(corsOptions));
 app.use(credentials);
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cookieParser());
 
 // routes
 app.use("/api/order", orderRouter);

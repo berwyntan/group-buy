@@ -19,7 +19,17 @@ const Navbar = () => {
     ['countCart', id], () => countCartByUserId(id), { refetchInterval: 2500, enabled: refetch })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return (
+      <div className="navbar bg-slate-200">
+      
+        <div className="flex-1">
+        <Link to="/">
+        <div className="btn btn-ghost normal-case text-lg">GroupBuy</div>
+        </Link>
+        </div>    
+    
+      </div>
+    )
   }
 
   if (isError) {
@@ -63,3 +73,6 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+    

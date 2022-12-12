@@ -107,7 +107,7 @@ const handleLogin = async (req, res) => {
 }
 
 const handleRefreshToken = async (req, res) => {
-    console.log(req.cookies)
+    // console.log(req.cookies)
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.status(401).json({ message: "No cookie found" });
     const refreshToken = cookies.jwt;

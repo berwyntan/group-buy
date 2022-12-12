@@ -13,30 +13,6 @@ const useGroupBuyStore = create(
         authDetails: {},
         setAuthDetails: (data) => set({ authDetails: data}),
 
-        refresh: async () => {
-            try {
-                const response = await axios.get("/api/user/refresh",
-                {
-                    withCredentials: true,
-                }
-                )
-                console.log(response)
-                if (response.statusText === "OK") {
-                    return response
-                }                
-            
-            } catch (error) {
-                console.log(error)
-                return error.response
-            }
-        },
-
-        // productId: "",
-        // setProductId: (data) => set({ productId: data}),
-
-        // orderId: "",
-        // setOrderId: (data) => set({ orderId: data}),
-
     }))
 )
 
