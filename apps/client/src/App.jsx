@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { lazy } from 'react'
 
 import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,31 +14,30 @@ import Signup from './pages/Signup'
 import Category from './pages/Category'
 import Product from './pages/Product'
 import RequireAuth from './components/RequireAuth'
-import Account from './pages/Account'
-import UpdateDetails from './pages/UpdateDetails'
-import UpdatePassword from './pages/UpdatePassword'
 import RequireAdmin from './components/RequireAdmin'
-import AdminHome from './pages/AdminHome'
-import AdminListings from './pages/AdminListings'
-import AdminNewListing from './pages/AdminNewListing'
-import AdminProduct from './pages/AdminProduct'
-import Confirmation from './pages/Confirmation'
 import ErrorPage from './pages/ErrorPage'
 import NotFound from './pages/NotFound'
-import Orders from './pages/Orders'
-import Order from './pages/Order'
 import Layout from './pages/Layout'
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-
-import UpdateOrder from './pages/UpdateOrder';
-import AdminCategory from './pages/AdminCategory';
-
-import AdminOrders from './pages/AdminOrders';
-import AdminUpdateOrder from './pages/AdminUpdateOrder';
-
 
 const queryClient = new QueryClient();
+
+const Account = lazy(() => import('./pages/Account'))
+const UpdateDetails = lazy(() => import('./pages/UpdateDetails'))
+const UpdatePassword = lazy(() => import('./pages/UpdatePassword'))
+const Confirmation = lazy(() => import('./pages/Confirmation'))
+const Orders = lazy(() => import('./pages/Orders'))
+const Cart = lazy(() => import('./pages/Cart'))
+const Order = lazy(() => import('./pages/Order'))
+const Checkout = lazy(() => import('./pages/Checkout'))
+const UpdateOrder = lazy(() => import('./pages/UpdateOrder'))
+
+const AdminHome = lazy(() => import('./pages/AdminHome'))
+const AdminListings = lazy(() => import('./pages/AdminListings'))
+const AdminNewListing = lazy(() => import('./pages/AdminNewListing'))
+const AdminProduct = lazy(() => import('./pages/AdminProduct'))
+const AdminCategory = lazy(() => import('./pages/AdminCategory'))
+const AdminOrders = lazy(() => import('./pages/AdminOrders'))
+const AdminUpdateOrder = lazy(() => import('./pages/AdminUpdateOrder'))
 
 function App() {  
 
@@ -65,8 +65,7 @@ function App() {
           <Route path='/orders' element={<Orders />}/>
           <Route path='/cart' element={<Cart />}/>
           <Route path='/order/:id' element={<Order />}/>
-          <Route path='/checkout' element={<Checkout />}/>
-          
+          <Route path='/checkout' element={<Checkout />}/>          
           <Route path='/updateorder' element={<UpdateOrder />}/>
         </Route>
         <Route element={<RequireAdmin />}> 
@@ -74,11 +73,9 @@ function App() {
           <Route path='/adminlistings' element={<AdminListings />}/>
           <Route path='/adminnewlisting/:id' element={<AdminNewListing />}/>
           <Route path='/admin/product/:id' element={<AdminProduct />}/>
-          <Route path='/admin/cat/:id' element={<AdminCategory />}/>
-          
+          <Route path='/admin/cat/:id' element={<AdminCategory />}/>          
           <Route path='/admin/orders/:id' element={<AdminOrders />}/>
-          <Route path='/admin/updateorder/:id' element={<AdminUpdateOrder />}/>
-          
+          <Route path='/admin/updateorder/:id' element={<AdminUpdateOrder />}/>          
         </Route>
         </Route>
       </Routes>

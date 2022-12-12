@@ -11,7 +11,7 @@ const LoadingSpinner = () => {
     ariaLabel="blocks-loading"
     wrapperStyle={{margin: 'auto', marginTop: '25px'}}
     wrapperClass="blocks-wrapper"
-    colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+    colors={['#1F2937', '#4B5563', '#9CA3AF', '#6B7280', '#111827']}
     />
     
   )
