@@ -16,8 +16,8 @@ const Categories = () => {
     return <span>Error: {error.message}</span>
   }
 
-  // console.log(data)
   const categoryCards = data.map(cat => {
+     
     return(
       <CategoryCard 
       key={cat.id}
@@ -39,7 +39,7 @@ const Categories = () => {
         </ul>
       </div>
       <div className="grid gap-2 grid-cols-2">
-        {categoryCards}
+        {data && categoryCards}
       </div>      
 
     </>
