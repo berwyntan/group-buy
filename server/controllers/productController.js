@@ -4,7 +4,7 @@ const validator = require('validator');
 const addNewProduct = async (req, res) => {
     const { name, desc, price, imgUrl, listed, CategoryId } = req.body;
 
-    
+       
     // validation
 
     if (!imgUrl || !name || !desc || !price || !listed || !CategoryId) 
@@ -53,7 +53,8 @@ const getProductByCategory = async (req, res) => {
     }
 
     try {        
-        const result = await Product.findAll({where: {CategoryId: id}, include: Category});
+        const result = await Product.findAll({where: {CategoryId: id}, include: Category, 
+            order: [['createdAt', 'DESC']]});
         res.status(200).json(result);
     } catch (err) {
         res.status(500).json({ 'message': err.message });

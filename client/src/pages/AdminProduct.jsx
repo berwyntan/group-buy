@@ -8,7 +8,7 @@ const AdminProduct = () => {
   const { id } = useParams()
   
   const { isLoading, isError, data, error } = useQuery(
-    ['product', id], () => getProductById(id), { refetchInterval: 1000 })
+    ['product', id], () => getProductById(id), { refetchInterval: 5000 })
 
   if (isLoading) {
     return <span>Loading...</span>

@@ -13,6 +13,19 @@ export const getCartByUserId = async (id) => {
         console.log(error)
     }
   }
+export const countCartByUserId = async (id) => {
+    try {
+        
+        const response = await axios.get(`/api/cart/user/count/${id}`)
+        // console.log(response)
+        
+        return response.data
+            
+                        
+    } catch (error) {
+        console.log(error)
+    }
+  }
 
 export const clearCartByUserId = async (id) => {
     try {

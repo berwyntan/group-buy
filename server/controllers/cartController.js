@@ -132,6 +132,22 @@ const removeAllFromCart = async (req, res) => {
         res.status(500).json({ 'message': err.message });
     }
 }
+const countCartByUserId = async (req, res) => {
+    const { id } = req.params;
+    // check id
+    try {
+        const checkUser = await User.findByPk(id);
+    } catch (error) {
+        return res.status(404).json({ 'message': 'Invalid user id.'})
+    }
+
+    try {        
+        const result = await Cart.findAndCountAll({where: {UserId: id}});
+        return res.status(200).json(result);
+    } catch (err) {
+        res.status(500).json({ 'message': err.message });
+    }
+}
 
 
-module.exports = { addToCart, getCartByUserId, updateCart, deleteFromCart, removeAllFromCart }
+module.exports = { addToCart, getCartByUserId, updateCart, deleteFromCart, removeAllFromCart, countCartByUserId }

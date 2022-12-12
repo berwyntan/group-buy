@@ -3,9 +3,7 @@ import { Link } from "react-router-dom"
 const AdminHome = () => {
   return (
     <>
-      <div>Admin Account</div>
-      <div>Update Particulars</div>
-      <div>Listed products</div>
+      
       <div className="text-sm breadcrumbs">
         <ul>
           <li><Link to="/adminhome">Admin</Link></li>                    
@@ -17,9 +15,7 @@ const AdminHome = () => {
       <Link to="/adminlistings">
         <button className="btn btn-wide btn-primary my-2">View Listings</button>
       </Link>      
-      <Link to="/adminnewlisting">
-        <button className="btn btn-wide btn-primary my-2">Create Listing</button>
-      </Link>      
+      
 
     </>
   )

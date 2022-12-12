@@ -6,7 +6,6 @@ import useToastError from "../hooks/useToastError";
 import { useForm } from "react-hook-form";
 import { updateProductById, updateProductListingById } from "../api/product";
 import useGroupBuyStore from "../store/store";
-import { useEffect } from "react";
 
 const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, categoryId }) => {
   
@@ -15,9 +14,9 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
   const [ productDesc, setProductDesc ] = useState(desc)
   const [ productPrice, setProductPrice ] = useState(price)
 
-  const setProductId = useGroupBuyStore((state) => state.setProductId)
+  // const setProductId = useGroupBuyStore((state) => state.setProductId)
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const mutation = useMutation(formData => updateProductById(formData), 
     {

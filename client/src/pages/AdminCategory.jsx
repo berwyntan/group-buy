@@ -53,7 +53,11 @@ const AdminCategory = () => {
             </ul>
         </div>
         <div className="text-2xl mb-2">{category}</div>
-        <button className="btn btn-wide my-2">Edit Category</button>
+        
+
+        <Link to={`/adminnewlisting/${id}`}>
+        <button className="btn btn-wide btn-primary my-2">Create Listing</button>
+        </Link>      
 
         <div className="text-lg mb-2">Listings: {count}</div>
 

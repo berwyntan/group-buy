@@ -40,6 +40,9 @@ const AdminListings = () => {
           </ul>
         </div>
         <div className="text-2xl mb-2">Admin - Categories</div>
+
+        <button className="btn btn-wide my-2">Add Category</button>
+
         <div className="grid gap-2 grid-cols-2">
           {categoryCards}
         </div>       

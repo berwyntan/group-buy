@@ -72,7 +72,7 @@ function App() {
         <Route element={<RequireAdmin />}> 
           <Route path='/adminhome' element={<AdminHome />}/>
           <Route path='/adminlistings' element={<AdminListings />}/>
-          <Route path='/adminnewlisting' element={<AdminNewListing />}/>
+          <Route path='/adminnewlisting/:id' element={<AdminNewListing />}/>
           <Route path='/admin/product/:id' element={<AdminProduct />}/>
           <Route path='/admin/cat/:id' element={<AdminCategory />}/>
           

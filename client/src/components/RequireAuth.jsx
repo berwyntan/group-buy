@@ -9,7 +9,7 @@ const RequireAuth = () => {
   return (
     <>
         
-        <div>RequireAuth</div>
+        
         {name ? <Outlet /> : <Navigate to="/login" />}
         
     </>

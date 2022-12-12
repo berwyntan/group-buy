@@ -69,3 +69,17 @@ export const updateProductListingById = async (id) => {
         console.log(error)
     }
 }
+
+export const addNewProduct = async (data) => {
+    try {
+        const response = await axios.post(`/api/product/`, data,  
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        })
+        
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
