@@ -5,6 +5,7 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const morgan = require("morgan");
 const db = require("./config/database");
+const credentials = require("./middleware/credentials")
 
 // routers
 const productRouter = require("./routes/productRouter");
@@ -32,10 +33,7 @@ app.use(express.static("../client/dist"));
 app.use(cors(corsOptions));
 // app.use(cors());
 
-// app.use(
-//   session(sessionOptions)
-// );
-
+app.use(credentials);
 app.use(morgan("dev"));
 app.use(express.json());
 

@@ -1,7 +1,4 @@
-const whitelist = [
-    'http://127.0.0.1:5173',
-    'https://confused-puce-cuttlefish.cyclic.app'
-]
+const whitelist = require('./whitelist');
 
 const corsOptions = {
     origin: (origin, callback) => {
