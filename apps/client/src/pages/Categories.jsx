@@ -2,6 +2,7 @@ import CategoryCard from "../components/CategoryCard";
 import { useQuery } from 'react-query'
 import { getAllCategories } from "../api/category";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Categories = () => {
 
@@ -9,7 +10,7 @@ const Categories = () => {
     ['categories'], getAllCategories)
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <LoadingSpinner />
   }
 
   if (isError) {

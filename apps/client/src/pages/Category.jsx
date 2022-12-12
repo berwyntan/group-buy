@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useQuery } from "react-query";
 import { getProductsByCategory } from "../api/product";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Category = () => {
 
@@ -12,7 +13,7 @@ const Category = () => {
     ['products', id], () => getProductsByCategory(id))
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <LoadingSpinner />
   }
 
   if (isError) {

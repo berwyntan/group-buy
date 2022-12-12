@@ -3,6 +3,7 @@ import useGroupBuyStore from "../store/store";
 import { getOrdersByUserId } from "../api/order";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Orders = () => {
 
@@ -13,7 +14,7 @@ const Orders = () => {
       ['orders', userId], () => getOrdersByUserId(userId))
   
     if (isLoading) {
-      return <span>Loading...</span>
+      return <LoadingSpinner />
     }
   
     if (isError) {

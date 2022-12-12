@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom"
 import OrderDetail from "../components/OrderDetail"
 import { useQuery } from 'react-query'
 import { getOrderById } from "../api/order"
+import LoadingSpinner from "../components/LoadingSpinner"
 
 const Order = () => {
     const { id } = useParams()
@@ -12,7 +13,7 @@ const Order = () => {
       ['order', id], () => getOrderById(id))
 
     if (isLoading) {
-      return <span>Loading...</span>
+      return <LoadingSpinner />
     }
   
     if (isError) {

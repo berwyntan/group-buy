@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getProductById } from "../api/product";
 
+
 const AdminProduct = () => {
 
   const { id } = useParams()
@@ -11,7 +12,7 @@ const AdminProduct = () => {
     ['product', id], () => getProductById(id), { refetchInterval: 5000 })
 
   if (isLoading) {
-    return <span>Loading...</span>
+      return <LoadingSpinner />
   }
 
   if (isError) {

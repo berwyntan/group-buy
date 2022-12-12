@@ -2,6 +2,7 @@ import AdminCategoryCard from "../components/AdminCategoryCard";
 import { useQuery } from 'react-query'
 import { getAllCategories } from "../api/category";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminListings = () => {
 
@@ -9,7 +10,7 @@ const AdminListings = () => {
     ['categories'], getAllCategories)
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <LoadingSpinner />
   }
 
   if (isError) {

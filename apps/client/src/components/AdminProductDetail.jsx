@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import { useForm } from "react-hook-form";
 import { updateProductById, updateProductListingById } from "../api/product";
-import useGroupBuyStore from "../store/store";
 
 const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, categoryId }) => {
   
@@ -14,9 +12,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
   const [ productDesc, setProductDesc ] = useState(desc)
   const [ productPrice, setProductPrice ] = useState(price)
 
-  // const setProductId = useGroupBuyStore((state) => state.setProductId)
-
-  // const navigate = useNavigate()
+  
 
   const mutation = useMutation(formData => updateProductById(formData), 
     {
@@ -73,7 +69,7 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
       mutation.mutate(newFormData)
     }
 
-    // useEffect(() => {setProductId(productId)}, [])
+  
 
   return (
     <>

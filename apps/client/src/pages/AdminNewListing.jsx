@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { useParams, Link } from "react-router-dom";
 import { getCategoryById } from "../api/category";
 import ProductNewListingForm from "../components/ProductNewListingForm";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminNewListing = () => {
 
@@ -12,7 +13,7 @@ const AdminNewListing = () => {
     ['category', id], () => getCategoryById(id), { staleTime: 20000 })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <LoadingSpinner />
   }
 
   if (isError) {

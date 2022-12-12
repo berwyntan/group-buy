@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { getOrdersByProductId } from "../api/order";
 import { useQuery } from "react-query";
-import ProductCard from "../components/ProductCard"
+import ProductCard from "../components/ProductCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminOrders = () => {
     const { id } = useParams()
@@ -10,7 +11,7 @@ const AdminOrders = () => {
         ['ordersAdmin', id], () => getOrdersByProductId(id))
     
     if (isLoading) {
-      return <span>Loading...</span>
+      return <LoadingSpinner />
     }
   
     if (isError) {

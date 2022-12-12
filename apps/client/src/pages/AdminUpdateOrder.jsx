@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "react-query";
 import { getOrderByIdAdmin } from "../api/order";
 import AdminOrderCard from "../components/AdminOrderCard";
-import { updateOrder } from "../api/order";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 import OrderCrm from "../components/crm/OrderCrm";
 
@@ -16,7 +16,7 @@ const AdminUpdateOrder = () => {
         ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000})
   
     if (isLoading) {
-    return <span>Loading...</span>
+        return <LoadingSpinner />
     }
 
     if (isError) {

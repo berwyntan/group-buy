@@ -2,7 +2,8 @@ import { getCartByUserId } from "../api/cart";
 import { useQuery } from "react-query";
 import useGroupBuyStore from "../store/store";
 import CartCard from "../components/CartCard";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Cart = () => {
 
@@ -13,7 +14,7 @@ const Cart = () => {
       ['cart'], () => getCartByUserId(userId), { refetchInterval: 1000})
   
     if (isLoading) {
-      return <span>Loading...</span>
+      return <LoadingSpinner />
     }
   
     if (isError) {

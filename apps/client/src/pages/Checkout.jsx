@@ -6,6 +6,7 @@ import CheckoutCard from "../components/CheckoutCard";
 import { createOrder } from "../api/order";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Checkout = () => {
 
@@ -18,7 +19,7 @@ const Checkout = () => {
       ['cart'], () => getCartByUserId(userId))
   
     if (isLoading) {
-      return <span>Loading...</span>
+      return <LoadingSpinner />
     }
   
     if (isError) {

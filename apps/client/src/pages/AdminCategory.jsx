@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "react-query";
 import { countProductsByCategory } from "../api/product";
 import AdminProductCard from "../components/AdminProductCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminCategory = () => {
 
@@ -12,7 +13,7 @@ const AdminCategory = () => {
     ['productsAdmin', id], () => countProductsByCategory(id))
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <LoadingSpinner />
   }
 
   if (isError) {

@@ -44,7 +44,7 @@ const ProductNewListingForm = ({ id }) => {
       listed: "true",
       CategoryId: id
     }
-    console.log(newFormData)
+    // console.log(newFormData)
     mutation.mutate(newFormData)
   }
 
