@@ -22,7 +22,7 @@ const AdminCategory = () => {
   
   const category = data?.rows?.[0]?.Category?.name
   const count = data?.count
-  console.log(data)
+  // console.log(data)
 
 
   const productCards = data?.rows.map((item) => {

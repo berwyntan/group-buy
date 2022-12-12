@@ -1,1 +1,3 @@
-# group-buy
+# GroupBuy App
+
+An app for 

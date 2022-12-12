@@ -1,5 +1,5 @@
 require("dotenv").config();
-// const path = require("path");
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
@@ -27,7 +27,7 @@ try {
 
 // middleware
 // app.set('trust proxy', 1); // trust first proxy
-// app.use(express.static("../client/dist"));
+app.use(express.static("../client/dist"));
 
 app.use(cors(corsOptions));
 // app.use(cors());
@@ -49,9 +49,9 @@ app.use("/api/sms", smsRouter)
 
 app.get("/", (req, res) => {res.json({msg: "hello world"})});
 
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.resolve("../client/dist/index.html"));
-// });
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve("../client/dist/index.html"));
+});
 
 
 app.listen(PORT, () => {
