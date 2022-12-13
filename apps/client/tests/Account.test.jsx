@@ -19,3 +19,4 @@ describe("Account component", () => {
         expect(screen.getByRole('button', { name: "Update Account Details" })).toHaveClass('my-2')
     })
 })
+

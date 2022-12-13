@@ -64,7 +64,7 @@ const AdminCategory = () => {
 
         <div className="grid gap-2 grid-cols-1">
             {data && productCards}
-            {data.length===0 && <div>No products</div>}
+            {data?.length===0 && <div>No products</div>}
         </div>
       
 
