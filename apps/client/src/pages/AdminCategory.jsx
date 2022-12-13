@@ -5,12 +5,17 @@ import { countProductsByCategory } from "../api/product";
 import AdminProductCard from "../components/AdminProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+export const useCountProductsByCategory = (id) => useQuery(
+  ['productsAdmin', id], () => countProductsByCategory(id))
+
 const AdminCategory = () => {
 
   const { id } = useParams()
 
-  const { isLoading, isError, data, error } = useQuery(
-    ['productsAdmin', id], () => countProductsByCategory(id))
+  // const { isLoading, isError, data, error } = useQuery(
+  //   ['productsAdmin', id], () => countProductsByCategory(id))
+
+  const { isLoading, isError, data, error } = useCountProductsByCategory(id)
 
   if (isLoading) {
     return <LoadingSpinner />

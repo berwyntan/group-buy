@@ -1,3 +1,4 @@
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
 
 > server@1.0.0 test
 > echo "Error: no test specified" && exit 1
