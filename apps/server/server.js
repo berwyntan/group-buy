@@ -15,6 +15,7 @@ const categoryRouter = require("./routes/categoryRouter");
 const orderRouter = require("./routes/orderRouter");
 const cartRouter = require("./routes/cartRouter");
 const smsRouter = require("./routes/smsRouter");
+const cloudinaryRouter = require("./routes/cloudinaryRouter");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -46,6 +47,7 @@ app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/sms", smsRouter)
+app.use("/api/cloudinary", cloudinaryRouter)
 
 app.get("/", (req, res) => {res.json({msg: "hello world"})});
 

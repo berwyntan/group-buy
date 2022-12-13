@@ -31,9 +31,12 @@ class CloudinaryUploadWidget extends Component {
       (error, result) => {
         if (!error && result && result.event === "success") {
           console.log("Done! Here is the image info: ", result.info);
+          console.log(result.info.public_id)
+          console.log(result.info.secure_url)
           document
             .getElementById("uploadedimage")
             // .setAttribute("src", result.info.secure_url);
+          // useMutation to update ImageSQL
         }
       }
     );
