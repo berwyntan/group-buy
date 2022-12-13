@@ -33,7 +33,7 @@ class CloudinaryUploadWidget extends Component {
           console.log("Done! Here is the image info: ", result.info);
           document
             .getElementById("uploadedimage")
-            .setAttribute("src", result.info.secure_url);
+            // .setAttribute("src", result.info.secure_url);
         }
       }
     );

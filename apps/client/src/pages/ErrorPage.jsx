@@ -9,7 +9,7 @@ const ErrorPage = () => {
     <>
       <div>Error {errorStatus}</div>
       <div>{errorStatusText}</div>
-      {/* <CloudinaryUploadWidget /> */}
+      <CloudinaryUploadWidget />
     </>
   )
 }
