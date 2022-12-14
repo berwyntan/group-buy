@@ -111,7 +111,7 @@ const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.status(401).json({ message: "No cookie found" });
     const refreshToken = cookies.jwt;
-    console.log(refreshToken);
+    // console.log(refreshToken);
 
     const foundUser = await User.findOne({where: { refreshToken }});
     if (!foundUser) return res.status(403).json({ message: "User not found"});

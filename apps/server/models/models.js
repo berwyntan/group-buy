@@ -78,6 +78,22 @@ const User = db.define('User', {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },  
+    imgUrl1: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
+    imgUrl2: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
+    imgUrl3: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
+    imgUrl4: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
   }, );
 
   Category.hasMany(Product);
@@ -140,4 +156,28 @@ const User = db.define('User', {
   User.hasOne(Cart);
   Cart.sync({ alter: true })
 
-  module.exports = { User, Category, Product, Order, Cart }
+  const Image = db.define('Image', {
+  
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    imgUrl: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },  
+    publicId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },  
+    next: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },  
+  }
+  )
+
+  Image.sync({ alter: true })
+
+  module.exports = { User, Category, Product, Order, Cart, Image }

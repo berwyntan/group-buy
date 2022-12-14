@@ -1,6 +1,5 @@
 const { Order, Product, User, Category } = require('../models/models');
 const validator = require('validator');
-const { col } = require('sequelize');
 
 const addNewOrder = async (req, res) => {
     const { fulfil, cancel, ProductId, UserId, quantity } = req.body;

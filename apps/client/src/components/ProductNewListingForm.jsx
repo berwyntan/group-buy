@@ -3,15 +3,19 @@ import { addNewProduct } from "../api/product";
 import { useForm } from "react-hook-form";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const ProductNewListingForm = ({ id }) => {
 
     const [ productName, setProductName ] = useState("")
-    const [ productImgUrl, setProductImgUrl ] = useState("")
+    // const [ productImgUrl, setProductImgUrl ] = useState("")
     const [ productDesc, setProductDesc ] = useState("")
     const [ productPrice, setProductPrice ] = useState(1)
+    const [ seq, setSeq ] = useState(0)
+
+    
 
     const navigate = useNavigate()
 
@@ -37,16 +41,23 @@ const ProductNewListingForm = ({ id }) => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const onSubmit = (formData) => {
   
-    console.log(formData)
+    // console.log(formData)
+    
     const newFormData = {
       ...formData,
       price: formData.price.toString(),
       listed: "true",
-      CategoryId: id
+      CategoryId: id,
+      imgUrl: document.getElementById("uploadedimage0").getAttribute("src"),
+      imgUrl1: document.getElementById("uploadedimage1").getAttribute("src"),
+      imgUrl2: document.getElementById("uploadedimage2").getAttribute("src"),
+      imgUrl3: document.getElementById("uploadedimage3").getAttribute("src"),
+      imgUrl4: document.getElementById("uploadedimage4").getAttribute("src"),
     }
     // console.log(newFormData)
     mutation.mutate(newFormData)
   }
+  
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form-control">
@@ -59,14 +70,19 @@ const ProductNewListingForm = ({ id }) => {
           className="input input-bordered w-full max-w-xs"/>
         </label>
 
-        <label className="input-group flex flex-col items-center my-3">
+        {/* <label className="input-group flex flex-col items-center my-3">
         <div className="my-1">Image URL</div>
         <textarea placeholder="Image URL" value={productImgUrl} {...register("imgUrl", { 
           required: true, onChange: (e) => setProductImgUrl(e.target.value) })} 
           className="input input-bordered w-full max-w-xs"/>
-        </label>
-
-        <figure><img className="p-8" src={productImgUrl} alt={productName}/></figure>
+        </label> */}
+        <CloudinaryUploadWidget />
+        <figure><img className="p-6 hidden" id="uploadedimage0" src={null} alt={`${productName}0`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden" id="uploadedimage1" src={null} alt={`${productName}1`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden" id="uploadedimage2" src={null} alt={`${productName}2`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden" id="uploadedimage3" src={null} alt={`${productName}3`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden" id="uploadedimage4" src={null} alt={`${productName}4`} data-publicid=""/></figure>
+        
 
         <label className="input-group flex flex-col items-center my-3">
         <div className="my-1">Description</div>
@@ -85,18 +101,21 @@ const ProductNewListingForm = ({ id }) => {
         <div className="my-4">
           {errors.name?.type === 'required' && <span>Product name is required</span>}
 
-          {Boolean(errors.name) || errors.imgUrl?.type === 'required' && <span>Image URL is required</span>}
+          {/* {Boolean(errors.name) || errors.imgUrl?.type === 'required' && <span>Image URL is required</span>} */}
           
-          {Boolean(errors.name) || Boolean(errors.imgUrl) || errors.desc?.type === 'required' && <span>Description is required</span>}
+          {Boolean(errors.name) || errors.desc?.type === 'required' && <span>Description is required</span>}
             
-          {Boolean(errors.name) || Boolean(errors.imgUrl) || Boolean(errors.desc) || errors.price?.type === 'required' && <span>Price is required</span>}        
-          {Boolean(errors.name) || Boolean(errors.imgUrl) || Boolean(errors.desc) || errors.price?.type === 'valueAsNumber' && <span>Price must be a number</span>}        
+          {Boolean(errors.name) || Boolean(errors.desc) || errors.price?.type === 'required' && <span>Price is required</span>}        
+          {Boolean(errors.name) || Boolean(errors.desc) || errors.price?.type === 'valueAsNumber' && <span>Price must be a number</span>}        
         </div>
 
         {/* <div className="my-1">{error}</div> */}
         {/* {mutation.isLoading && <div>Updating...</div>}  */}
-        <button className="btn btn-primary btn-wide" type="submit">List Product</button>
+        
+        
+        <button className="btn btn-primary btn-wide mt-4" type="submit">List Product</button>
         </div>
+        
       </form>
     )
 }

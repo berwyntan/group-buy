@@ -4,16 +4,21 @@ import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import { useForm } from "react-hook-form";
 import { updateProductById, updateProductListingById } from "../api/product";
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
-const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, categoryId }) => {
+const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, categoryId }) => {
   
   const [ productName, setProductName ] = useState(name)
-  const [ productImgUrl, setProductImgUrl ] = useState(imgUrl)
+  // const [ localImgUrl, setLocalImgUrl ] = useState(imgUrl)
+  // const [ localImgUrl1, setLocalImgUrl1 ] = useState(imgUrl1)
+  // const [ localImgUrl2, setLocalImgUrl2 ] = useState(imgUrl2)
+  // const [ localImgUrl3, setLocalImgUrl3 ] = useState(imgUrl3)
+  // const [ localImgUrl4, setLocalImgUrl4 ] = useState(imgUrl4)
   const [ productDesc, setProductDesc ] = useState(desc)
   const [ productPrice, setProductPrice ] = useState(price)
-
+  // console.log(imgUrl.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', ''))
   
-
+  
   const mutation = useMutation(formData => updateProductById(formData), 
     {
       onError: (response) => {
@@ -63,13 +68,16 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
       const newFormData = {
         ...formData,
         listed: listed,
-        id: productId
+        id: productId,
+        imgUrl: document.getElementById("uploadedimage0")?.getAttribute("src"),
+        imgUrl1: document.getElementById("uploadedimage1")?.getAttribute("src"),
+        imgUrl2: document.getElementById("uploadedimage2")?.getAttribute("src"),
+        imgUrl3: document.getElementById("uploadedimage3")?.getAttribute("src"),
+        imgUrl4: document.getElementById("uploadedimage4")?.getAttribute("src")
       }
       // console.log(newFormData)
       mutation.mutate(newFormData)
-    }
-
-  
+    }  
 
   return (
     <>
@@ -94,14 +102,59 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
             className="input input-bordered w-full max-w-xs"/>
           </label>
 
-          <label className="input-group flex flex-col items-center my-3">
+          {/* <label className="input-group flex flex-col items-center my-3">
           <div className="my-1">Image URL</div>
           <textarea placeholder="Image URL" value={productImgUrl} {...register("imgUrl", { 
             required: true, onChange: (e) => setProductImgUrl(e.target.value) })} 
             className="input input-bordered w-full max-w-xs"/>
           </label>
 
-          <figure><img className="p-8" src={imgUrl} alt={name}/></figure>
+          <figure><img className="p-8" src={imgUrl} alt={name}/></figure> */}
+          <CloudinaryUploadWidget />
+          <div className={`relative my-2 ${imgUrl || "hidden"}`} id="container0">
+          <figure><img className="p-2" id="uploadedimage0" src={imgUrl || null} alt={productName} data-publicid=""/></figure>
+          </div>
+
+          <div className={`relative my-2 ${imgUrl1 || "hidden"}`} id="container1">
+          <figure><img className="p-2" id="uploadedimage1" src={imgUrl1 || null} alt={productName} data-publicid=""/></figure>
+          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+            onClick={() => {
+              document.getElementById("uploadedimage1").setAttribute("src", null);
+              document.getElementById("container1").classList.add("hidden");
+            }}>Delete</div>
+          </div>
+          <div className={`relative my-2 ${imgUrl2 || "hidden"}`} id="container2">
+          <figure><img className="p-2" id="uploadedimage2" src={imgUrl2 || null} alt={productName} data-publicid=""/></figure>
+          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+            onClick={() => {
+              document.getElementById("uploadedimage2").setAttribute("src", null);
+              document.getElementById("container2").classList.add("hidden");
+            }}>Delete</div>
+          </div>
+          <div className={`relative my-2 ${imgUrl3 || "hidden"}`} id="container3">
+          <figure><img className="p-2" id="uploadedimage3" src={imgUrl3 || null} alt={productName} data-publicid=""/></figure>
+          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+            onClick={() => {
+              document.getElementById("uploadedimage3").setAttribute("src", null);
+              document.getElementById("container3").classList.add("hidden");
+            }}>Delete</div>
+          </div>
+          <div className={`relative my-2 ${imgUrl4 || "hidden"}`} id="container4">
+          <figure><img className="p-2" id="uploadedimage4" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure>
+          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+            onClick={() => {
+              document.getElementById("uploadedimage4").setAttribute("src", null);
+              document.getElementById("container4").classList.add("hidden");
+            }}>Delete</div>
+          </div>
+          
+          {/* <div className={`relative my-2 ${imgUrl4 || "hidden"}`}>
+          <figure><img className="p-2" id="uploadedimage0" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure>
+          <button className="btn btn-sm btn-outline absolute top-6 right-6" 
+            onClick={() => document.getElementById("uploadedimage4").setAttribute("src", null)}>Delete</button>
+          </div> */}
+          
+          {/* <figure><img className={`p-8 ${imgUrl4 || "hidden"}`} id="uploadedimage4" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure> */}
 
           <label className="input-group flex flex-col items-center my-3">
           <div className="my-1">Description</div>
@@ -120,12 +173,12 @@ const AdminProductDetail = ({ imgUrl, name, productId, desc, price, listed, cate
           <div className="my-4">
             {errors.name?.type === 'required' && <span>Product name is required</span>}
 
-            {Boolean(errors.name) || errors.imgUrl?.type === 'required' && <span>Image URL is required</span>}
+            {/* {Boolean(errors.name) || errors.imgUrl?.type === 'required' && <span>Image URL is required</span>} */}
             
-            {Boolean(errors.name) || Boolean(errors.imgUrl) || errors.desc?.type === 'required' && <span>Description is required</span>}
+            {Boolean(errors.name) || errors.desc?.type === 'required' && <span>Description is required</span>}
              
-            {Boolean(errors.name) || Boolean(errors.imgUrl) || Boolean(errors.desc) || errors.price?.type === 'required' && <span>Price is required</span>}        
-            {Boolean(errors.name) || Boolean(errors.imgUrl) || Boolean(errors.desc) || errors.price?.type === 'valueAsNumber' && <span>Price must be a number</span>}        
+            {Boolean(errors.name) || Boolean(errors.desc) || errors.price?.type === 'required' && <span>Price is required</span>}        
+            {Boolean(errors.name) || Boolean(errors.desc) || errors.price?.type === 'valueAsNumber' && <span>Price must be a number</span>}        
           </div>
 
           {/* <div className="my-1">{error}</div> */}

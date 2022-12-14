@@ -24,7 +24,7 @@ const Product = () => {
   }
 
   const category = data?.Category?.name
-
+  // console.log(data)
    
   return (
     <>
@@ -36,6 +36,10 @@ const Product = () => {
       </div>    
       <ProductDetail 
         imgUrl={data.imgUrl}
+        imgUrl1={data.imgUrl1}
+        imgUrl2={data.imgUrl2}
+        imgUrl3={data.imgUrl3}
+        imgUrl4={data.imgUrl4}
         name={data.name}
         productId={data.id}
         desc={data.desc}

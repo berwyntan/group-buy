@@ -2,14 +2,14 @@ import AdminProductDetail from "../components/AdminProductDetail";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getProductById } from "../api/product";
-
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminProduct = () => {
 
   const { id } = useParams()
   
   const { isLoading, isError, data, error } = useQuery(
-    ['product', id], () => getProductById(id), { refetchInterval: 5000 })
+    ['product', id], () => getProductById(id)/*, { refetchInterval: 5000 }*/)
 
   if (isLoading) {
       return <LoadingSpinner />
@@ -20,9 +20,9 @@ const AdminProduct = () => {
   }
 
   // console.log(data)
-  const category = data.Category.name
-  const categoryId = data.CategoryId
-  const productId = data.id
+  const category = data?.Category.name
+  const categoryId = data?.CategoryId
+  const productId = data?.id
 
   return (
     
@@ -47,6 +47,10 @@ const AdminProduct = () => {
       
       <AdminProductDetail 
         imgUrl={data.imgUrl}
+        imgUrl1={data.imgUrl1}
+        imgUrl2={data.imgUrl2}
+        imgUrl3={data.imgUrl3}
+        imgUrl4={data.imgUrl4}
         name={data.name}
         desc={data.desc}
         price={data.price}

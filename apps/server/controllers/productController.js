@@ -2,7 +2,7 @@ const { Product, Category } = require('../models/models');
 const validator = require('validator');
 
 const addNewProduct = async (req, res) => {
-    const { name, desc, price, imgUrl, listed, CategoryId } = req.body;
+    const { name, desc, price, imgUrl, listed, CategoryId, imgUrl1, imgUrl2, imgUrl3, imgUrl4 } = req.body;
 
        
     // validation
@@ -32,6 +32,10 @@ const addNewProduct = async (req, res) => {
             desc: desc,
             price: price,
             imgUrl: imgUrl,
+            imgUrl1: imgUrl1,
+            imgUrl2: imgUrl2,
+            imgUrl3: imgUrl3,
+            imgUrl4: imgUrl4,
             listed: listed,
             CategoryId: CategoryId
         });
@@ -121,16 +125,16 @@ const getProductById = async (req, res) => {
 const updateProductById = async (req, res) => {
     const { name, desc, price, imgUrl, listed, id } = req.body;
 
-    console.log(name, desc, price, imgUrl, listed, id)
+    // console.log(name, desc, price, imgUrl, listed, id)
     // validation
-    if (!imgUrl || !name || !desc || !price || !listed || !id)  
+    if (!name || !desc || !price || !listed || !id)  
     return res.status(400).json({ 'message': 'Product details are missing.'});
 
     if (typeof price !== "number") return res.status(400).json({ 'message': 'Invalid price.'});
     if (typeof listed !== "boolean") return res.status(400).json({ 'message': 'Invalid price.'});
        
-    if (!validator.isURL(imgUrl)) 
-        return res.status(400).json({ 'message': 'Invalid image URL.'});
+    // if (!validator.isURL(imgUrl)) 
+    //     return res.status(400).json({ 'message': 'Invalid image URL.'});
     
     // if (!validator.isUUID(CategoryId, {version: 4})) 
     //     return res.status(400).json({ 'message': 'Invalid category id.'});

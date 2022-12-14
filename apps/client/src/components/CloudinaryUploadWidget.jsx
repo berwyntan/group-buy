@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
+
+
 class CloudinaryUploadWidget extends Component {
   componentDidMount() {
     const cloudName = "dkilrhnk7"; // replace with your own cloud name
     const uploadPreset = "l65djxbq"; // replace with your own upload preset
-
+    let seq = 0;
     // Remove the comments from the code below to add
     // additional functionality.
     // Note that these are only a few examples, to see
@@ -29,14 +31,14 @@ class CloudinaryUploadWidget extends Component {
         // theme: "purple", //change to a purple theme
       },
       (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
-          console.log(result.info.public_id)
-          console.log(result.info.secure_url)
-          document
-            .getElementById("uploadedimage")
-            // .setAttribute("src", result.info.secure_url);
-          // useMutation to update ImageSQL
+        if (!error && result && result.event === "success" && seq<5) {
+          // console.log("Done! Here is the image info: ", result.info);
+          console.log(`uploadedimage${seq}`)
+          const image = document.getElementById(`uploadedimage${seq}`)
+          image.setAttribute("src", result.info.secure_url)
+          image.dataset.publicid = result.info.public_id    
+          image.classList.remove("hidden")    
+          seq ++
         }
       }
     );
@@ -52,7 +54,7 @@ class CloudinaryUploadWidget extends Component {
   render() {
     return (
       <button id="upload_widget" className="cloudinary-button">
-        Upload
+        Upload Image
       </button>
     );
   }

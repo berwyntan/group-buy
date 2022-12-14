@@ -4,8 +4,9 @@ import { addToCart } from "../api/cart";
 import { useNavigate } from "react-router-dom";
 import useToastDefault from "../hooks/useToastDefault";
 import useToastError from "../hooks/useToastError";
+import Swiper from "../components/SwiperProduct";
 
-const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId }) => {
+const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, userId }) => {
   
   const [ qty, setQty ] = useState("1")
   const updateQty = (e) => {
@@ -52,7 +53,17 @@ const ProductDetail = ({ imgUrl, name, productId, desc, price, listed, userId })
     <>
         
         <div className="card md:card-side bg-base-100 shadow-xl">
-        <figure><img className="p-8" src={imgUrl} alt={name}/></figure>
+        {/* <figure><img className="p-8" src={imgUrl} alt={name}/></figure> */}
+        <figure className="h-80">
+        <Swiper 
+          imgUrl={imgUrl}
+          imgUrl1={imgUrl1}
+          imgUrl2={imgUrl2}
+          imgUrl3={imgUrl3}
+          imgUrl4={imgUrl4}
+        />
+        </figure>
+        
         <div className="card-body">
             <div className="flex flex-col items-start">
                 <div className="card-title text-left mb-3">{name}</div>
