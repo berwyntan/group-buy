@@ -15,7 +15,6 @@ import Category from './pages/Category'
 import Product from './pages/Product'
 import RequireAuth from './components/RequireAuth'
 import RequireAdmin from './components/RequireAdmin'
-import ErrorPage from './pages/ErrorPage'
 import NotFound from './pages/NotFound'
 import Layout from './pages/Layout'
 
@@ -56,7 +55,6 @@ function App() {
           <Route path='/signup' element={<Signup />}/>
           <Route path='/cat/:id' element={<Category />}/>
           <Route path='/prod/:id' element={<Product />}/>
-          <Route path='/error' element={<ErrorPage />}/>
           <Route path='/*' element={<NotFound />}/>
         </Route>
         <Route element={<RequireAuth />}> 
