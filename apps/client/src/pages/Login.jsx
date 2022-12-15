@@ -21,7 +21,7 @@ const Login = () => {
         // console.log(response)
         if (response.status === 200) {
           setAuthDetails(response.data);
-          navigate(-1, {replace: true})
+          navigate("/", {replace: true})
         } else {
           setError(response.data.message)
         }

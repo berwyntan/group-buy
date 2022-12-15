@@ -10,7 +10,7 @@ const RequireAdmin = () => {
     <>
         
         
-        {role==="admin" ? <Outlet /> : <Navigate to="/" />}
+        {role==="admin" ? <Outlet /> : <Navigate to="/login" />}
     </>
     
   )
