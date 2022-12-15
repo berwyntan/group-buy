@@ -23,7 +23,6 @@ const queryClient = new QueryClient();
 const Account = lazy(() => import('./pages/Account'))
 const UpdateDetails = lazy(() => import('./pages/UpdateDetails'))
 const UpdatePassword = lazy(() => import('./pages/UpdatePassword'))
-const Confirmation = lazy(() => import('./pages/Confirmation'))
 const Orders = lazy(() => import('./pages/Orders'))
 const Cart = lazy(() => import('./pages/Cart'))
 const Order = lazy(() => import('./pages/Order'))
@@ -61,7 +60,6 @@ function App() {
           <Route path='/account' element={<Account />}/>
           <Route path='/updatedetails' element={<UpdateDetails />}/>
           <Route path='/updatepassword' element={<UpdatePassword />}/>
-          <Route path='/confirmation' element={<Confirmation />}/>
           <Route path='/orders' element={<Orders />}/>
           <Route path='/cart' element={<Cart />}/>
           <Route path='/order/:id' element={<Order />}/>
