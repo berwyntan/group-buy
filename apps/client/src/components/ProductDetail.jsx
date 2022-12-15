@@ -54,7 +54,7 @@ const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, produ
         
         <div className="card md:card-side bg-base-100 shadow-xl">
         {/* <figure><img className="p-8" src={imgUrl} alt={name}/></figure> */}
-        <figure className="h-80">
+        <figure className="h-80 w-92 md:w-full mt-4 flex items-center">
         <Swiper 
           imgUrl={imgUrl}
           imgUrl1={imgUrl1}

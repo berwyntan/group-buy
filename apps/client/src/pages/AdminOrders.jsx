@@ -93,7 +93,7 @@ const AdminOrders = () => {
               <li><Link to="/adminhome">Admin</Link></li> 
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
-              <li><Link to={`/admin/cat/${data.product.categoryId}`}>{data.product.Category.name}</Link></li> 
+              <li><Link to={`/admin/cat/${data.product.CategoryId}`}>{data.product.Category.name}</Link></li> 
                       
               </ul>
           </div>

@@ -5,7 +5,7 @@ import useToastError from "../../hooks/useToastError"
 import { whatsapp } from "../../api/whatsapp"
 
 const OrderCrm = ({
-    id, buyerName, price, quantity, name
+    id, buyerName, price, quantity, name, mobile
 }) => {
 
     const mutation = useMutation(formData => updateOrder(formData), 
@@ -31,7 +31,7 @@ const OrderCrm = ({
         },
         onSuccess: (response) => {
             
-            console.log(response)
+            // console.log(response)
             if (response.status === 201) {
                 useToastSuccess("WhatsApp sent")   
             } else useToastError("Error: WhatsApp not sent")
@@ -82,22 +82,22 @@ const OrderCrm = ({
     const paymentReminder = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, you have not paid $${price*quantity} for ${quantity}nos of ${name}. Please login to GroupBuy for payment details.`
-        whatsappMutation.mutate({message: message})
+        whatsappMutation.mutate({message: message, mobile: mobile})
         }
     const paymentReceived = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, we have received $${price*quantity} for your order of ${quantity}nos of ${name}. Thank you.`
-        whatsappMutation.mutate({message: message})
+        whatsappMutation.mutate({message: message, mobile: mobile})
         }
     const readyForCollection = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, your order of ${quantity}nos of ${name} is ready for collection.`
-        whatsappMutation.mutate({message: message})
+        whatsappMutation.mutate({message: message, mobile: mobile})
         }
     const refundProcessed = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, your payment of $${quantity*price} has been refunded.`
-        whatsappMutation.mutate({message: message})
+        whatsappMutation.mutate({message: message, mobile: mobile})
         }
 
     

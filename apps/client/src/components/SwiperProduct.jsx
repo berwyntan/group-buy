@@ -25,31 +25,31 @@ export default ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4 }) => {
       {imgUrl && 
         <SwiperSlide>
           <div className="flex justify-center h-60">
-          <img className="" src={imgUrl} alt="image1" />
+          <img className="object-contain" src={imgUrl} alt="image1" />
           </div>
         </SwiperSlide>}
       {imgUrl1 && 
         <SwiperSlide>
           <div className="flex justify-center h-60">
-          <img className="" src={imgUrl1} alt="image2" />
+          <img className="object-contain" src={imgUrl1} alt="image2" />
           </div>
         </SwiperSlide>}      
       {imgUrl2 && 
         <SwiperSlide>
           <div className="flex justify-center h-60">
-          <img className="" src={imgUrl2} alt="image3" />
+          <img className="object-contain" src={imgUrl2} alt="image3" />
           </div>
         </SwiperSlide>}      
       {imgUrl3 && 
         <SwiperSlide>
           <div className="flex justify-center h-60">
-          <img className="" src={imgUrl3} alt="image3" />
+          <img className="object-contain" src={imgUrl3} alt="image3" />
           </div>
         </SwiperSlide>}
       {imgUrl4 && 
         <SwiperSlide>
           <div className="flex justify-center h-60">
-          <img className="" src={imgUrl4} alt="image3" />
+          <img className="object-contain" src={imgUrl4} alt="image3" />
           </div>
         </SwiperSlide>}
       

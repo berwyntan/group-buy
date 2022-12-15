@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ imgUrl, name, id, desc, price, listed }) => {
   return (
     <>
-        <Link to={`/prod/${id}`}>
-        <div className="card card-compact max-w-sm bg-base-100 shadow-xl min-h-72">
-            <figure><img className="object-contain p-2 h-40" src={imgUrl} alt={name} /></figure>
+        
+        <div className="card card-compact max-w-sm bg-base-100 shadow-xl min-h-72 sm:mx-auto">
+            <figure><Link to={`/prod/${id}`}>
+              <img className="object-contain p-2 h-40" src={imgUrl} alt={name} />
+              </Link></figure>
+
             <div className="card-body">
                 <div className="text-lg font-semibold text-left line-clamp-2">{name}</div>
                 <div className="flex items-center justify-between">
@@ -26,7 +29,7 @@ const ProductCard = ({ imgUrl, name, id, desc, price, listed }) => {
                 </div>
             </div>
         </div>
-        </Link>
+        
     </>
   )
 }

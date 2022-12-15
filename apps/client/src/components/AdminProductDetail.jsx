@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import { useForm } from "react-hook-form";
-import { updateProductById, updateProductListingById } from "../api/product";
+import { updateProductById, updateProductListingById, deleteImageFromCloud } from "../api/product";
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, categoryId }) => {
@@ -17,7 +17,7 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
   const [ productDesc, setProductDesc ] = useState(desc)
   const [ productPrice, setProductPrice ] = useState(price)
   // console.log(imgUrl.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', ''))
-  
+  // const publicId = (url) => url.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', '')
   
   const mutation = useMutation(formData => updateProductById(formData), 
     {
@@ -56,6 +56,26 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
       },
     })
 
+
+  // const cloudMutation = useMutation(data => updateProductListingById(data), 
+  //   {
+  //     onError: (response) => {
+  //       console.log(response)
+  //     },
+  //     onSuccess: (response) => {
+  //       console.log(response)
+  //       if (response?.status === 200) {
+          
+  //         useToastSuccess("Image deleted")
+  //         // navigate("/admin/updateproduct")
+            
+  //       } else {
+
+  //         useToastError("Error: Image not deleted")          
+  //       }
+  //     },
+  //   })
+
     const changeListing = () => {
       
       listingMutation.mutate(productId)
@@ -63,21 +83,36 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
 
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = (formData) => {
-    
+      
+      const convertToNull = (attr) => {
+        if (attr === "null") {
+          return null
+        } else return attr
+      }
+
       // console.log(formData)
       const newFormData = {
         ...formData,
         listed: listed,
         id: productId,
-        imgUrl: document.getElementById("uploadedimage0")?.getAttribute("src"),
-        imgUrl1: document.getElementById("uploadedimage1")?.getAttribute("src"),
-        imgUrl2: document.getElementById("uploadedimage2")?.getAttribute("src"),
-        imgUrl3: document.getElementById("uploadedimage3")?.getAttribute("src"),
-        imgUrl4: document.getElementById("uploadedimage4")?.getAttribute("src")
+        imgUrl: convertToNull(document.getElementById("uploadedimage0")?.getAttribute("src")),
+        imgUrl1: convertToNull(document.getElementById("uploadedimage1")?.getAttribute("src")),
+        imgUrl2: convertToNull(document.getElementById("uploadedimage2")?.getAttribute("src")),
+        imgUrl3: convertToNull(document.getElementById("uploadedimage3")?.getAttribute("src")),
+        imgUrl4: convertToNull(document.getElementById("uploadedimage4")?.getAttribute("src"))
       }
       // console.log(newFormData)
       mutation.mutate(newFormData)
     }  
+
+    // const replaceImageWithNext = (num) => {
+    //   const replace = document.getElementById(`uploadedimage${num}`).getAttribute("src")
+    //   document.getElementById(`uploadedimage${num-1}`).setAttribute("src", replace)
+    //   if (replace === null) {
+    //     document.getElementById(`container${num}`).classList.add("hidden")
+    //     document.getElementById(`container${num-1}`).classList.add("hidden")
+    //   }
+    // }
 
   return (
     <>
@@ -87,7 +122,7 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
           onClick={changeListing}>Open Product Listing</button>}
         {mutation.isLoading && <div>Updating...</div>} 
 
-        <div className="card md:card-side bg-base-100 shadow-xl">        
+        <div className="card bg-base-100 shadow-xl md:items-center">        
         <div className="mt-2 text-lg">Update Product Details</div>
 
         <div className="card-body">
@@ -111,43 +146,69 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
 
           <figure><img className="p-8" src={imgUrl} alt={name}/></figure> */}
           <CloudinaryUploadWidget />
-          <div className={`relative my-2 ${imgUrl || "hidden"}`} id="container0">
-          <figure><img className="p-2" id="uploadedimage0" src={imgUrl || null} alt={productName} data-publicid=""/></figure>
-          </div>
 
-          <div className={`relative my-2 ${imgUrl1 || "hidden"}`} id="container1">
-          <figure><img className="p-2" id="uploadedimage1" src={imgUrl1 || null} alt={productName} data-publicid=""/></figure>
-          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
-            onClick={() => {
-              document.getElementById("uploadedimage1").setAttribute("src", null);
-              document.getElementById("container1").classList.add("hidden");
-            }}>Delete</div>
+          <div className="sm:grid sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 md:gap-6">
+
+            <div className={`relative my-2 ${imgUrl || "hidden"} md:w-9/10`} id="container0">
+            <figure><img className="p-2" id="uploadedimage0" src={imgUrl || null} alt={productName} data-publicid=""/></figure>
+            {/* <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+              onClick={() => {
+                const replace = document.getElementById("uploadedimage1").getAttribute("src")
+                document.getElementById("uploadedimage0").setAttribute("src", replace)
+                if (!replace) {
+                  document.getElementById("container1").classList.add("hidden")
+                  document.getElementById("container0").classList.add("hidden")
+                }
+                for (let i=1; i<5; i++) {
+                  replaceImageWithNext(i)
+                }              
+              }}>Delete</div> */}
+            </div>
+
+            <div className={`relative my-2 ${imgUrl1 || "hidden"} md:w-9/10`} id="container1">
+            <figure><img className="p-2" id="uploadedimage1" src={imgUrl1 || null} alt={productName} data-publicid=""/></figure>
+            <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+              onClick={() => {
+                // const url = document.getElementById("uploadedimage1").getAttribute("src")
+                document.getElementById("uploadedimage1").setAttribute("src", null)
+                document.getElementById("container1").classList.add("hidden")
+                // for (let i=2; i<5; i++) {
+                //   replaceImageWithNext(i)
+                // } 
+              }}>Delete</div>
+            </div>
+            <div className={`relative my-2 ${imgUrl2 || "hidden"} md:w-9/10`} id="container2">
+            <figure><img className="p-2" id="uploadedimage2" src={imgUrl2 || null} alt={productName} data-publicid=""/></figure>
+            <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+              onClick={() => {
+                document.getElementById("uploadedimage2").setAttribute("src", null);
+                document.getElementById("container2").classList.add("hidden");
+                // for (let i=3; i<5; i++) {
+                //   replaceImageWithNext(i)
+                // } 
+              }}>Delete</div>
+            </div>
+            <div className={`relative my-2 ${imgUrl3 || "hidden"} md:w-9/10`} id="container3">
+            <figure><img className="p-2" id="uploadedimage3" src={imgUrl3 || null} alt={productName} data-publicid=""/></figure>
+            <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+              onClick={() => {
+                document.getElementById("uploadedimage3").setAttribute("src", null);
+                document.getElementById("container3").classList.add("hidden");
+                // for (let i=4; i<5; i++) {
+                //   replaceImageWithNext(i)
+                // } 
+              }}>Delete</div>
+            </div>
+            <div className={`relative my-2 ${imgUrl4 || "hidden"} md:w-9/10`} id="container4">
+            <figure><img className="p-2" id="uploadedimage4" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure>
+            <div className="btn btn-sm btn-outline absolute top-6 right-6" 
+              onClick={() => {
+                document.getElementById("uploadedimage4").setAttribute("src", null);
+                document.getElementById("container4").classList.add("hidden");
+              }}>Delete</div>
+            </div>
+            
           </div>
-          <div className={`relative my-2 ${imgUrl2 || "hidden"}`} id="container2">
-          <figure><img className="p-2" id="uploadedimage2" src={imgUrl2 || null} alt={productName} data-publicid=""/></figure>
-          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
-            onClick={() => {
-              document.getElementById("uploadedimage2").setAttribute("src", null);
-              document.getElementById("container2").classList.add("hidden");
-            }}>Delete</div>
-          </div>
-          <div className={`relative my-2 ${imgUrl3 || "hidden"}`} id="container3">
-          <figure><img className="p-2" id="uploadedimage3" src={imgUrl3 || null} alt={productName} data-publicid=""/></figure>
-          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
-            onClick={() => {
-              document.getElementById("uploadedimage3").setAttribute("src", null);
-              document.getElementById("container3").classList.add("hidden");
-            }}>Delete</div>
-          </div>
-          <div className={`relative my-2 ${imgUrl4 || "hidden"}`} id="container4">
-          <figure><img className="p-2" id="uploadedimage4" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure>
-          <div className="btn btn-sm btn-outline absolute top-6 right-6" 
-            onClick={() => {
-              document.getElementById("uploadedimage4").setAttribute("src", null);
-              document.getElementById("container4").classList.add("hidden");
-            }}>Delete</div>
-          </div>
-          
           {/* <div className={`relative my-2 ${imgUrl4 || "hidden"}`}>
           <figure><img className="p-2" id="uploadedimage0" src={imgUrl4 || null} alt={productName} data-publicid=""/></figure>
           <button className="btn btn-sm btn-outline absolute top-6 right-6" 

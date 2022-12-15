@@ -83,3 +83,17 @@ export const refreshToken = async () => {
         console.log(error)
     }
 }
+
+export const logout = async () => {
+    try {
+        const response = await axios.get("/api/user/logout",
+        {
+            withCredentials: true
+        }
+        )
+        console.log(response)
+        return response 
+    } catch (error) {
+        console.log(error)
+    }
+}

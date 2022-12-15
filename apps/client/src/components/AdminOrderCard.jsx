@@ -59,7 +59,7 @@ const OrderCard = (
                 <div className="">{sliceDate}</div>
             </div>
             
-            <div className={`mr-5 text-xl badge ${badge}`}>{status}</div>
+            <div className={`mr-5 badge ${badge}`}>{status}</div>
 
             </div>
             <div className="flex justify-end mr-5 items-center">

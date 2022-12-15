@@ -55,7 +55,7 @@ const Login = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
-      <input placeholder="Password" {...register("password", { 
+      <input type="password" placeholder="Password" {...register("password", { 
         required: true, minLength: 5, pattern: /^[a-z0-9]+$/i, onChange: () => setError("")
       })} 
         className="input input-bordered border border-black w-full max-w-xs"/>

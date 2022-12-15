@@ -31,7 +31,7 @@ const Product = () => {
       <div className="text-sm breadcrumbs">
         <ul>
           <li><Link to="/">Categories</Link></li>  
-          <li>{category}</li>          
+          <li><Link to={`/cat/${data.CategoryId}`}>{category}</Link></li>          
         </ul>
       </div>    
       <ProductDetail 

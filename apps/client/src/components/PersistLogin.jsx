@@ -22,13 +22,19 @@ const PersistLogin = () => {
         setAuthDetails(response.data)
         return response 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
   }
   
   useEffect(() => {
     
-    refreshToken()    
+      
+    const delay = () => {
+      refreshToken()
+    }
+    setTimeout(delay, 1000)  
+
+    return clearTimeout(delay)  
     
   }, [])
 

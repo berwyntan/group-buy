@@ -11,7 +11,7 @@ const Cart = () => {
     const userId = authDetails.id
         
     const { isLoading, isError, data, error } = useQuery(
-      ['cart'], () => getCartByUserId(userId), { refetchInterval: 1000})
+      ['cart'], () => getCartByUserId(userId), { refetchInterval: 2000})
   
     if (isLoading) {
       return <LoadingSpinner />

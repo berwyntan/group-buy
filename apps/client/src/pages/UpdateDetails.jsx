@@ -91,7 +91,7 @@ const UpdateDetails = () => {
       
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
-      <input  placeholder="Confirm Password" value={password} {...register("password", 
+      <input type="password" placeholder="Confirm Password" value={password} {...register("password", 
         { required: true, onChange: (e) => setPassword(e.target.value) })} 
         className="input input-bordered w-full max-w-xs"/>
       {/* errors will return when field validation fails  */}      

@@ -7,5 +7,6 @@ router.post('/login', userController.handleLogin)
 router.post('/update', userController.handleUpdateUser)
 router.post('/updatepw', userController.handleUpdatePassword)
 router.get('/refresh', userController.handleRefreshToken)
+router.get('/logout', userController.handleLogout)
 
 module.exports = router

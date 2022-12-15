@@ -7,11 +7,13 @@ import { createOrder } from "../api/order";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { whatsapp } from "../api/whatsapp"
 
 const Checkout = () => {
 
     const authDetails = useGroupBuyStore((state) => state.authDetails)
     const userId = authDetails.id
+    const mobile = authDetails.mobile
     let total = 0
     const navigate = useNavigate()
     
@@ -26,7 +28,7 @@ const Checkout = () => {
       return <span>Error: {error.message}</span>
     }
 
-    // console.log(data)
+    console.log(data)
 
     data.map(item => {
       const subtotal = item.quantity * item.Product.price
@@ -57,7 +59,7 @@ const Checkout = () => {
         // console.log(response)
         if (response.status === 201) {
           
-          // useToastSuccess("Checkout complete")
+          // useToastSuccess("Order completed")
                       
         } else {
           // useToastError("Error: Cannot checkout")
@@ -95,13 +97,32 @@ const Checkout = () => {
         // console.log(formData)
         try {
           mutation.mutate(formData)
+          whatsappMutation.mutate({
+            message: `Your order of ${item.quantity} nos of ${item.Product.name} is being processed. Please log in to GroupBuy for payment details.`,
+            mobile: mobile
+          })    
         } catch (error) {
           console.log(error)
         }        
       })
-      clearCartMutation.mutate(userId)      
+      clearCartMutation.mutate(userId)  
 
     }
+
+    const whatsappMutation = useMutation(formData => whatsapp(formData), 
+    {
+        onError: (response) => {
+            
+            console.log(response)
+        },
+        onSuccess: (response) => {
+            
+            console.log(response)
+            if (response.status === 201) {
+                useToastSuccess("WhatsApp sent")   
+            } else useToastError("Error: WhatsApp not sent")
+        },
+    })
 
 
     return (

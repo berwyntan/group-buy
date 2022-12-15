@@ -13,7 +13,7 @@ const ProductNewListingForm = ({ id }) => {
     // const [ productImgUrl, setProductImgUrl ] = useState("")
     const [ productDesc, setProductDesc ] = useState("")
     const [ productPrice, setProductPrice ] = useState(1)
-    const [ seq, setSeq ] = useState(0)
+    // const [ seq, setSeq ] = useState(0)
 
     
 
@@ -77,12 +77,14 @@ const ProductNewListingForm = ({ id }) => {
           className="input input-bordered w-full max-w-xs"/>
         </label> */}
         <CloudinaryUploadWidget />
-        <figure><img className="p-6 hidden" id="uploadedimage0" src={null} alt={`${productName}0`} data-publicid=""/></figure>
-        <figure><img className="p-6 hidden" id="uploadedimage1" src={null} alt={`${productName}1`} data-publicid=""/></figure>
-        <figure><img className="p-6 hidden" id="uploadedimage2" src={null} alt={`${productName}2`} data-publicid=""/></figure>
-        <figure><img className="p-6 hidden" id="uploadedimage3" src={null} alt={`${productName}3`} data-publicid=""/></figure>
-        <figure><img className="p-6 hidden" id="uploadedimage4" src={null} alt={`${productName}4`} data-publicid=""/></figure>
-        
+
+        <div className="sm:grid sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 md:gap-6">
+        <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage0" src={null} alt={`${productName}0`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage1" src={null} alt={`${productName}1`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage2" src={null} alt={`${productName}2`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage3" src={null} alt={`${productName}3`} data-publicid=""/></figure>
+        <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage4" src={null} alt={`${productName}4`} data-publicid=""/></figure>
+        </div>
 
         <label className="input-group flex flex-col items-center my-3">
         <div className="my-1">Description</div>

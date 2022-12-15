@@ -123,7 +123,7 @@ const getProductById = async (req, res) => {
 
 }
 const updateProductById = async (req, res) => {
-    const { name, desc, price, imgUrl, listed, id } = req.body;
+    const { name, desc, price, imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, listed, id } = req.body;
 
     // console.log(name, desc, price, imgUrl, listed, id)
     // validation
@@ -153,6 +153,10 @@ const updateProductById = async (req, res) => {
             desc: desc,
             price: price,
             imgUrl: imgUrl,
+            imgUrl1: imgUrl1,
+            imgUrl2: imgUrl2,
+            imgUrl3: imgUrl3,
+            imgUrl4: imgUrl4,
             listed: listed,
             
         }, {

@@ -83,3 +83,17 @@ export const addNewProduct = async (data) => {
         console.log(error)
     }
 }
+
+export const deleteImageFromCloud = async (data) => {
+    try {
+        const response = await axios.post("/api/cloudinary/del", data, 
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        })
+        
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}

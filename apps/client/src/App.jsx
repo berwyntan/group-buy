@@ -30,6 +30,7 @@ const Cart = lazy(() => import('./pages/Cart'))
 const Order = lazy(() => import('./pages/Order'))
 const Checkout = lazy(() => import('./pages/Checkout'))
 const UpdateOrder = lazy(() => import('./pages/UpdateOrder'))
+const Logout = lazy(() => import('./pages/Logout'))
 
 const AdminHome = lazy(() => import('./pages/AdminHome'))
 const AdminListings = lazy(() => import('./pages/AdminListings'))
@@ -48,6 +49,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
+        <Route path='/logout' element={<Logout />}/>
         <Route element={<PersistLogin />}> 
           <Route path='/' element={<Categories />}/>
           <Route path='/login' element={<Login />}/>

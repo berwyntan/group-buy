@@ -57,7 +57,7 @@ const OrderCard = (
                 <div className="">{sliceDate}</div>
             </div>
             
-            <div className={`mr-5 text-lg badge ${badge}`}>{status}</div>
+            <div className={`mr-5 badge ${badge}`}>{status}</div>
             <button className="btn btn-primary mr-5">View Details</button>
             </div>
         </div>
