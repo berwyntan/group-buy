@@ -12,9 +12,6 @@ const AdminCategory = () => {
 
   const { id } = useParams()
 
-  // const { isLoading, isError, data, error } = useQuery(
-  //   ['productsAdmin', id], () => countProductsByCategory(id))
-
   const { isLoading, isError, data, error } = useCountProductsByCategory(id)
 
   if (isLoading) {

@@ -1,11 +1,9 @@
 # GroupBuy App
 
 ## The Pain Point
-
 I read that people who organise group buys may spend a lot of time on WhatsApp and Google Forms collecting orders. Besides that, they also have to handle enquiries, logistics, payment and marketing. This app seeks to simplify part of the workflow: taking orders, keeping track of the status every order made (like paid, collected, cancelled) and an interface to send messages to the buyers.
 
 ## The Idea for this App
-
 GroupBuy will reduce the administrative time spent of managing orders and listings, providing the organiser an interface for:
     
 - Customer facing listings: e-commerce app
@@ -19,14 +17,11 @@ The main form of communication for the organiser is with WhatsApp. Using Twilio,
 
 Given the focus on Paynow and WhatsApp, which are designed first for mobile, the app is built mobile first. Nevertheless it also works for desktop.
 
-
 ### Tech Stack
-
 This is a PERN stack app hosted on Cyclic. 
 The Postgres database is hosted on Bit.io
 
 ### Code Features
-
 - Admin interface:
     - Requires admin role to access
     - Add or edit listings
@@ -57,7 +52,6 @@ The Postgres database is hosted on Bit.io
 
 - Users can update their account details, password. Forms are controlled inputs with validation
 
-
 ### Customer Journey
 
 #### Returning Customer
@@ -68,11 +62,9 @@ Home Page >> Category >> Product >> Add to Cart >> Log In >> Sign Up >> Log In >
 
 Improvements to shorten the journey can be 1 click purchase (reduce 4 steps) or a button on product page that directly goes to checkout (reduce 2 steps)
 
-
 ### Libraries
 
 #### Client
-
 - Client state management: Zustand
 - Server state management: React Query, Axios
 - Styling: Tailwind, DaisyUI, Swiper, React Toastify, React Loader Spinner
@@ -81,7 +73,6 @@ Improvements to shorten the journey can be 1 click purchase (reduce 4 steps) or 
 - Testing: Vitest
 
 #### Server
-
 - Authentication: Jsonwebtoken, Cookie parser
 - ORM for SQL: Sequelize
 - Validation: Validator

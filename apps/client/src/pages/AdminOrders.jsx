@@ -200,15 +200,3 @@ const AdminOrders = () => {
 }
 
 export default AdminOrders
-
-{/* <div className="dropdown dropdown-bottom dropdown-end">
-              <label tabIndex={0} className="btn btn-sm m-1">Update</label>
-              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 border">
-                <li className="text-lg"><a>Payment pending</a></li>
-                <li className="text-lg"><a>Cancelled</a></li>
-                <li className="text-lg"><a>Paid, fulfilling order</a></li>
-                <li className="text-lg"><a>Refund pending</a></li>
-                <li className="text-lg"><a>Ready for collection</a></li>
-                <li className="text-lg"><a>Collected</a></li>
-              </ul>
-            </div> */}

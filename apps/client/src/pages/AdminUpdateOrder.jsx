@@ -8,9 +8,7 @@ import OrderCrm from "../components/crm/OrderCrm";
 
 const AdminUpdateOrder = () => {
     const { id } = useParams()
-    // const setOrderId = useGroupBuyStore((state) => state.setOrderId)
-
-    // const navigate = useNavigate()
+    
     
     const { isLoading, isError, data, error } = useQuery(
         ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000})

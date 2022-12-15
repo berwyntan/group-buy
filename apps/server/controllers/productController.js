@@ -77,13 +77,6 @@ const updateProductListingById = async (req, res) => {
     checkProduct.save()
     return res.status(200).json(checkProduct)
 
-    // try {        
-    //     const result = await Product.findAll({where: {CategoryId: id}, include: Category});
-    //     res.status(200).json(result);
-    // } catch (err) {
-    //     res.status(500).json({ 'message': err.message });
-    // }
-
 }
 
 const countProductByCategory = async (req, res) => {
@@ -107,12 +100,6 @@ const countProductByCategory = async (req, res) => {
 
 const getProductById = async (req, res) => {
     const { id } = req.params;
-    // check id
-    // try {
-    //     const checkCategory = await Category.findByPk(id);
-    // } catch (error) {
-    //     return res.status(404).json({ 'message': 'Invalid category id.'})
-    // }
 
     try {        
         const result = await Product.findByPk(id, {include: Category});
@@ -133,12 +120,6 @@ const updateProductById = async (req, res) => {
     if (typeof price !== "number") return res.status(400).json({ 'message': 'Invalid price.'});
     if (typeof listed !== "boolean") return res.status(400).json({ 'message': 'Invalid price.'});
        
-    // if (!validator.isURL(imgUrl)) 
-    //     return res.status(400).json({ 'message': 'Invalid image URL.'});
-    
-    // if (!validator.isUUID(CategoryId, {version: 4})) 
-    //     return res.status(400).json({ 'message': 'Invalid category id.'});
-
     // check if product exists
     try {
         const checkProduct = await Product.findByPk(id);
