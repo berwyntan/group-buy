@@ -67,14 +67,14 @@ const UpdatePassword = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* register your input into the hook by invoking the "register" function */}
-      <input type="password" placeholder="Current password" value={currentPassword} {...register("oldPassword", 
+      <input type="password" autoComplete="off" placeholder="Current password" value={currentPassword} {...register("oldPassword", 
         { required: true, onChange: (e) => setCurrentPassword(e.target.value) },)} 
         className="input input-bordered w-full max-w-xs"/>
       </label>
 
       <label className="input-group flex flex-col items-center my-3">
       {/* register your input into the hook by invoking the "register" function */}
-      <input type="password" placeholder="New password" value={newPassword} {...register("password", 
+      <input type="password" autoComplete="off" placeholder="New password" value={newPassword} {...register("password", 
         { required: true, onChange: (e) => setNewPassword(e.target.value), minLength: 5, pattern: /^[a-z0-9]+$/i })} 
         className="input input-bordered w-full max-w-xs"/>
       </label>    

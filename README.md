@@ -112,7 +112,7 @@ Improvements to shorten the journey can be 1 click purchase (reduce 4 steps) or 
 - Styling: Tailwind, DaisyUI, Swiper, React Toastify, React Loader Spinner
 - Forms/Validation: React Hook Forms
 - Image uploading/hosting: Cloudinary
-- Testing: Vitest
+- Testing: Vitest, React Testing Library, Mock Service Worker
 
 #### Server
 - Authentication: Jsonwebtoken, Cookie parser

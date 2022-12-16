@@ -59,7 +59,7 @@ const Signup = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
-      <input type="password" placeholder="Password" {...register("password", { 
+      <input type="password" autoComplete="off" placeholder="Password" {...register("password", { 
         required: true, minLength: 5, pattern: /^[a-z0-9]+$/i, 
         onChange: (e) => {setPassword(e.target.value); setError("")}
       })} 
@@ -69,7 +69,7 @@ const Signup = () => {
 
       <label className="input-group flex flex-col items-center my-3">
       {/* include validation with required or other standard HTML validation rules */}
-      <input type="password" placeholder="Confirm Password" {...register("confirmPassword", { 
+      <input type="password" autoComplete="off" placeholder="Confirm Password" {...register("confirmPassword", { 
         validate: value => value === password, onChange: () => setError("")
       })} 
         className="input input-bordered w-full max-w-xs"/>
