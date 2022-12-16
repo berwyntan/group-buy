@@ -30,34 +30,34 @@ The Postgres database is hosted on Bit.io
     - Example code that tests a rendered component, while using MSW and React Query to mock the REST API call that takes place when the component loads:
 
     
-        const queryClient = new QueryClient({
-            defaultOptions: {
-                queries: {
-                    retryDelay: 1,
-                    retry: 0,
-                },
-            },      
-        })
+                const queryClient = new QueryClient({
+                    defaultOptions: {
+                        queries: {
+                            retryDelay: 1,
+                            retry: 0,
+                        },
+                    },      
+                })
 
-        const Wrapper = ({ children }) => (
-            <QueryClientProvider client={queryClient}>
-                <BrowserRouter>
-                    {children}        
-                </BrowserRouter>
-            </QueryClientProvider>
-        )
+                const Wrapper = ({ children }) => (
+                    <QueryClientProvider client={queryClient}>
+                        <BrowserRouter>
+                            {children}        
+                        </BrowserRouter>
+                    </QueryClientProvider>
+                )
 
-        describe("AdminCategory component", () => {
-            it('renders listings', async () => {
+                describe("AdminCategory component", () => {
+                    it('renders listings', async () => {
 
-                render(<Wrapper><AdminCategory /></Wrapper>)   
-                
-                await waitFor(() => {
-                    const listings = screen.getByText(/Create Listing/)
-                    expect(listings).toBeInTheDocument()
-                }) 
-            })     
-        })
+                        render(<Wrapper><AdminCategory /></Wrapper>)   
+                        
+                        await waitFor(() => {
+                            const listings = screen.getByText(/Create Listing/)
+                            expect(listings).toBeInTheDocument()
+                        }) 
+                    })     
+                })
 
     
     - More tests can be found in /apps/client/tests
