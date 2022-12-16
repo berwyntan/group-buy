@@ -19,26 +19,24 @@ const queryClient = new QueryClient({
     }
   })
 
-const wrapper = ({ children }) => (
+const Wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
         {children}
-        <Login />
     </BrowserRouter>
     </QueryClientProvider>
 )
 
 
 describe("Login component", () => {
-    it('renders', async () => {
-        
+    it('renders', async () => {        
 
-        render(<Login />, {wrapper})   
+        render(<Wrapper><Login /></Wrapper>)           
         
-        
-        expect(screen.getAllByText(/Log In/)).toBeInTheDocument()
-        
-        screen.debug()
-        
+        // screen.debug()
+        await waitFor(() => {
+          const signupLink = screen.getByRole('link')
+          expect(signupLink).toHaveTextContent(/Don't have an account/)
+        })        
     })
 })

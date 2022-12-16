@@ -6,7 +6,7 @@ import * as users from '../src/api/user'
 import * as products from '../src/api/product'
 
 const handlers = [
-  rest.post('/api/user/login', async (req, res, ctx) => {
+  rest.post('http://localhost:3000/api/user/login', async (req, res, ctx) => {
     const user = await users.login(JSON.parse(req.body))
     return res(ctx.json({user}))
   }),
@@ -20,9 +20,9 @@ const handlers = [
 //     // do whatever other things you need to do with this shopping cart
 //     return res(ctx.json({success: true}))
 //   }),
-  rest.get('/api/product/cat/count/:id', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/product/cat/count/:id', async (req, res, ctx) => {
     
-    const result = await products.countProductsByCategory()
+    // const result = await products.countProductsByCategory()
     
     return res(ctx.status(200), ctx.json({count: 0, rows: []}))
   }),

@@ -1,29 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { render, screen, renderHook, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom'
-import { QueryClientProvider, QueryClient, useQuery } from "react-query";
-import AdminCategory, { useCountProductsByCategory } from '../src/pages/AdminCategory'
-
+import { QueryClientProvider, QueryClient } from "react-query";
+import AdminCategory from '../src/pages/AdminCategory'
 
 const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // ✅ turns retries off
-        retry: false,
+        retryDelay: 1,
+        retry: 0,
       },
-    },
-    logger: {
-        log: console.log,
-        warn: console.warn,
-        error: () => {},
-    }
+    },      
   })
 
-const wrapper = ({ children }) => (
+const Wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-        {children}
-        <AdminCategory />
+        {children}        
     </BrowserRouter>
     </QueryClientProvider>
 )
@@ -31,17 +24,11 @@ const wrapper = ({ children }) => (
 describe("AdminCategory component", () => {
     it('renders listings', async () => {
 
-        render(<AdminCategory />, {wrapper})   
+        render(<Wrapper><AdminCategory /></Wrapper>)   
         
-        
-        
-        
-        // await waitFor(() => expect(result.current).toBe(null), )
-        // expect(screen.getByText(/Listings/)).toBeInTheDocument()
-        // expect(result.current.data).toEqual({ count: 0 })
-        
-        screen.debug()
-        
-    })
-     
+        await waitFor(() => {
+          const listings = screen.getByText(/Create Listing/)
+          expect(listings).toBeInTheDocument()
+        }) 
+    })     
 })
