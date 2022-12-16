@@ -29,7 +29,7 @@ The Postgres database is hosted on Bit.io
     - Mock Service Worker (MSW) used to mock async API call
     - Example code that tests a rendered component, while using MSW and React Query to mock the REST API call that takes place when the component loads:
 
-    
+        
                 const queryClient = new QueryClient({
                     defaultOptions: {
                         queries: {
@@ -47,6 +47,10 @@ The Postgres database is hosted on Bit.io
                     </QueryClientProvider>
                 )
 
+                rest.get('http://localhost:3000/api/product/cat/count/:id', async (req, res, ctx) => {   
+                     return res(ctx.status(200), ctx.json({count: 0, rows: []}))
+                })
+
                 describe("AdminCategory component", () => {
                     it('renders listings', async () => {
 
@@ -62,10 +66,10 @@ The Postgres database is hosted on Bit.io
     
     - More tests can be found in /apps/client/tests
 
-- Automated or on click WhatsApp messages using Twilio API
+- Automated or one click WhatsApp messages using Twilio API
     - Client makes API call to server, which makes API call to Twilio to send message
-    - Automatic message sent to buyer on checkout
-    - On click messages to send reminders for payment, collect and refund/cancellation
+    - Automated message sent to buyer on checkout
+    - One click button to send reminders for payment, collect and refund/cancellation
 
 - Code splitting: Dynamic loading of all components that require authentication or admin rights
 
