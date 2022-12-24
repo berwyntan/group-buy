@@ -1,11 +1,19 @@
 import axios from "axios";
+import useAccessToken from "../hooks/useAccessToken";
+// import useGroupBuyStore from "../store/store";
 
-export const whatsapp = async (data) => {
-    try {
-        
+// const authDetails = useGroupBuyStore((state) => state.authDetails)
+// const accessToken = authDetails.accessToken
+
+
+export const whatsapp = async (data, accessToken) => {   
+    try {        
         const response = await axios.post("/api/sms", data,
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
             withCredentials: true
         }
         )

@@ -11,7 +11,7 @@ const AdminUpdateOrder = () => {
     
     
     const { isLoading, isError, data, error } = useQuery(
-        ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000})
+        ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000000})
   
     if (isLoading) {
         return <LoadingSpinner />

@@ -3,23 +3,22 @@ import { addNewProduct } from "../api/product";
 import { useForm } from "react-hook-form";
 import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
+import useAccessToken from "../hooks/useAccessToken";
 
 const ProductNewListingForm = ({ id }) => {
 
-    const [ productName, setProductName ] = useState("")
-    // const [ productImgUrl, setProductImgUrl ] = useState("")
+    const [ productName, setProductName ] = useState("")    
     const [ productDesc, setProductDesc ] = useState("")
     const [ productPrice, setProductPrice ] = useState(1)
-    // const [ seq, setSeq ] = useState(0)
 
-    
+    const accessToken = useAccessToken()   
 
     const navigate = useNavigate()
 
-    const mutation = useMutation(formData => addNewProduct(formData), 
+    const mutation = useMutation(formData => addNewProduct(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)

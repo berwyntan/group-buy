@@ -2,11 +2,14 @@ import { useMutation } from "react-query"
 import { updateOrder } from "../../api/order"
 import useToastSuccess from "../../hooks/useToastSuccess"
 import useToastError from "../../hooks/useToastError"
+import useAccessToken from "../../hooks/useAccessToken"
 import { whatsapp } from "../../api/whatsapp"
 
 const OrderCrm = ({
     id, buyerName, price, quantity, name, mobile
 }) => {
+
+    const accessToken = useAccessToken()
 
     const mutation = useMutation(formData => updateOrder(formData), 
     {
@@ -23,7 +26,7 @@ const OrderCrm = ({
         },
     })
 
-    const whatsappMutation = useMutation(formData => whatsapp(formData), 
+    const whatsappMutation = useMutation((formData) => whatsapp(formData, accessToken), 
     {
         onError: (response) => {
             
@@ -82,22 +85,22 @@ const OrderCrm = ({
     const paymentReminder = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, you have not paid $${price*quantity} for ${quantity}nos of ${name}. Please login to GroupBuy for payment details.`
-        whatsappMutation.mutate({message: message, mobile: mobile})
+        whatsappMutation.mutate({message: message, mobile: mobile}, accessToken)
         }
     const paymentReceived = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, we have received $${price*quantity} for your order of ${quantity}nos of ${name}. Thank you.`
-        whatsappMutation.mutate({message: message, mobile: mobile})
+        whatsappMutation.mutate({message: message, mobile: mobile}, accessToken)
         }
     const readyForCollection = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, your order of ${quantity}nos of ${name} is ready for collection.`
-        whatsappMutation.mutate({message: message, mobile: mobile})
+        whatsappMutation.mutate({message: message, mobile: mobile}, accessToken)
         }
     const refundProcessed = () => {
         const message = 
             `FROM GROUPBUY: Hi ${buyerName}, your payment of $${quantity*price} has been refunded.`
-        whatsappMutation.mutate({message: message, mobile: mobile})
+        whatsappMutation.mutate({message: message, mobile: mobile}, accessToken)
         }
 
     

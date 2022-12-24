@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   const { isLoading, isError, data, error } = useQuery(
-    ['countCart', id], () => countCartByUserId(id), { refetchInterval: 4000, enabled: refetch })
+    ['countCart', id], () => countCartByUserId(id), { refetchInterval: 4000000, enabled: refetch })
 
   if (isLoading) {
     return (

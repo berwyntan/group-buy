@@ -7,12 +7,17 @@ const morgan = require("morgan");
 const db = require("./config/database");
 const credentials = require("./middleware/credentials");
 const cookieParser = require('cookie-parser');
+const verifyJWT = require('./middleware/verifyJWT');
+const verifyAdmin = require('./middleware/verifyAdmin');
 
 // routers
 const productRouter = require("./routes/productRouter");
+const productAdminRouter = require("./routes/productAdminRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
+const categoryAdminRouter = require("./routes/categoryAdminRouter");
 const orderRouter = require("./routes/orderRouter");
+const orderAdminRouter = require("./routes/orderAdminRouter");
 const cartRouter = require("./routes/cartRouter");
 const smsRouter = require("./routes/smsRouter");
 const cloudinaryRouter = require("./routes/cloudinaryRouter");
@@ -44,9 +49,19 @@ app.use("/api/order", orderRouter);
 app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
+
+
+// routes that require auth
+app.use(verifyJWT);
 app.use("/api/cart", cartRouter);
-app.use("/api/sms", smsRouter)
-app.use("/api/cloudinary", cloudinaryRouter)
+
+// routes that require admin
+app.use(verifyAdmin);
+app.use("/api/category/admin", categoryAdminRouter);
+app.use("/api/sms", smsRouter);
+app.use("/api/cloudinary", cloudinaryRouter);
+app.use("/api/product/admin", productAdminRouter);
+app.use("/api/order/admin", orderAdminRouter);
 
 app.get("/", (req, res) => {res.json({msg: "hello world"})});
 
@@ -55,4 +70,4 @@ app.get("/*", (req, res) => {
 })
 
 app.listen(PORT, () => {
-console.log(`Example app listening on port ${PORT}`);})
+console.log(`Server listening on port ${PORT}`);})

@@ -42,11 +42,14 @@ export const getProductById = async (id) => {
     }
 }
 
-export const updateProductById = async (data) => {
+export const updateProductById = async (data, accessToken) => {
     try {
-        const response = await axios.put("/api/product/", data, 
+        const response = await axios.put("/api/product/admin", data, 
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}` 
+            },
             withCredentials: true
         })
         
@@ -56,11 +59,14 @@ export const updateProductById = async (data) => {
     }
 }
 
-export const updateProductListingById = async (id) => {
+export const updateProductListingById = async (id, accessToken) => {
     try {
-        const response = await axios.put(`/api/product/list/${id}`,  
+        const response = await axios.put(`/api/product/admin/list/${id}`,  
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
             withCredentials: true
         })
         
@@ -70,11 +76,14 @@ export const updateProductListingById = async (id) => {
     }
 }
 
-export const addNewProduct = async (data) => {
+export const addNewProduct = async (data, accessToken) => {
     try {
-        const response = await axios.post(`/api/product/`, data,  
+        const response = await axios.post(`/api/product/admin`, data,  
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}` 
+            },
             withCredentials: true
         })
         
