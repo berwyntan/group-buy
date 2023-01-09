@@ -6,7 +6,7 @@ import useToastError from "../hooks/useToastError";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
-import useAccessToken from "../hooks/useAccessToken";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const ProductNewListingForm = ({ id }) => {
 
@@ -14,7 +14,7 @@ const ProductNewListingForm = ({ id }) => {
     const [ productDesc, setProductDesc ] = useState("")
     const [ productPrice, setProductPrice ] = useState(1)
 
-    const accessToken = useAccessToken()   
+    const { accessToken } = useAuthDetails()   
 
     const navigate = useNavigate()
 
