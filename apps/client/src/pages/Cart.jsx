@@ -4,14 +4,18 @@ import useGroupBuyStore from "../store/store";
 import CartCard from "../components/CartCard";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useUserId from "../hooks/useUserId";
+import useAccessToken from "../hooks/useAccessToken";
 
 const Cart = () => {
 
-    const authDetails = useGroupBuyStore((state) => state.authDetails)
-    const userId = authDetails.id
+    // const authDetails = useGroupBuyStore((state) => state.authDetails)
+    // const userId = authDetails?.id
+    const userId = useUserId()
+    const accessToken = useAccessToken()
         
     const { isLoading, isError, data, error } = useQuery(
-      ['cart'], () => getCartByUserId(userId), { refetchInterval: 2000})
+      ['cart'], () => getCartByUserId(userId, accessToken), { refetchInterval: 2000})
   
     if (isLoading) {
       return <LoadingSpinner />
@@ -22,7 +26,7 @@ const Cart = () => {
     }
 
     // console.log(data)
-    const cartCards = data.map(item => {
+    const cartCards = data?.map(item => {
       
       return (
         <CartCard
@@ -49,9 +53,9 @@ const Cart = () => {
         </div>  
       <div className="text-2xl mb-2">Cart</div>
       {!data && <div>Your cart is empty.</div>}
-      {data.length===0 && <div>Your cart is empty.</div>}
+      {!data || data.length===0 && <div>Your cart is empty.</div>}
       {
-        data.length===0 ||
+        !data || data.length===0 || 
         <div>
         <Link to="/checkout">
           <button className="btn btn-wide my-2">Checkout</button>

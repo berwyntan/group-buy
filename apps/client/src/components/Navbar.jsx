@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import useGroupBuyStore from "../store/store";
 import { countCartByUserId } from "../api/cart";
 import { useQuery } from "react-query"
+import useCountCart from "../hooks/useCountCart";
+import useAccessToken from "../hooks/useAccessToken";
 
 const Navbar = () => {
 
   const authDetails = useGroupBuyStore((state) => state.authDetails)
   const name = authDetails?.name
   const id = authDetails?.id
+  const accessToken = useAccessToken()
   let refetch
   if (id) {
     refetch = true
@@ -15,8 +18,9 @@ const Navbar = () => {
     refetch = false
   }
 
-  const { isLoading, isError, data, error } = useQuery(
-    ['countCart', id], () => countCartByUserId(id), { refetchInterval: 4000000, enabled: refetch })
+  // const { isLoading, isError, data, error } = useQuery(
+  //   ['countCart', id], () => countCartByUserId(id), { refetchInterval: 4000000, enabled: refetch })
+  const { isLoading, isError, data, error } = useCountCart(id, accessToken)
 
   if (isLoading) {
     return (

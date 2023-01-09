@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { lazy } from 'react'
 
 import './App.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 import PersistLogin from './components/PersistLogin'

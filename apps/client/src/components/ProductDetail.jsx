@@ -1,21 +1,26 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addToCart } from "../api/cart";
 import { useNavigate } from "react-router-dom";
 import useToastDefault from "../hooks/useToastDefault";
 import useToastError from "../hooks/useToastError";
 import Swiper from "../components/SwiperProduct";
+import useAccessToken from "../hooks/useAccessToken";
+import useUserId from "../hooks/useUserId";
 
 const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, userId }) => {
   
   const [ qty, setQty ] = useState("1")
+  const accessToken = useAccessToken()
+  const id = useUserId()
   const updateQty = (e) => {
     // console.log(typeof e.target.innerHTML)
     setQty(e.target.innerHTML)
   }
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
-  const mutation = useMutation(formData => addToCart(formData), 
+  const mutation = useMutation(formData => addToCart(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)
@@ -25,6 +30,7 @@ const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, produ
         if (response.status === 201) {
           
           useToastDefault("Item added to cart")
+          queryClient.invalidateQueries('countCart')
             
         } else {
 
@@ -46,7 +52,7 @@ const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, produ
         quantity: parseInt(qty)
       })
       
-      mutation.mutate(formData)
+      mutation.mutate(formData, accessToken)
     }
 
   return (

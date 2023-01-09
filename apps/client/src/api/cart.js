@@ -1,9 +1,16 @@
 import axios from "axios";
 
-export const getCartByUserId = async (id) => {
+export const getCartByUserId = async (id, accessToken) => {
     try {
         
-        const response = await axios.get(`/api/cart/user/${id}`)
+        const response = await axios.get(`/api/cart/user/${id}`, 
+            {
+                headers: 
+                    { 
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+            }
+        )
         // console.log(response)
         
         return response.data
@@ -13,10 +20,17 @@ export const getCartByUserId = async (id) => {
         console.log(error)
     }
   }
-export const countCartByUserId = async (id) => {
+export const countCartByUserId = async (id, accessToken) => {
     try {
         
-        const response = await axios.get(`/api/cart/user/count/${id}`)
+        const response = await axios.get(`/api/cart/user/count/${id}`,
+            {
+                headers: 
+                    { 
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+            }
+        )
         // console.log(response)
         
         return response.data
@@ -55,11 +69,15 @@ export const deleteCartById = async (id) => {
     }
   }
 
-export const addToCart = async(data) => {
+export const addToCart = async(data, accessToken) => {
     try {
         const response = await axios.post("/api/cart", data,
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: 
+                { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
             withCredentials: true
         }
         )
