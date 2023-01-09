@@ -12,8 +12,8 @@ const verifyJWT = (req, res, next) => {
         (err, decoded) => {
             if (err) return res.sendStatus(403); //invalid token
             console.log(decoded)
-            req.mobile = decoded.UserInfo.mobile;
-            req.role = decoded.UserInfo.role;
+            req.mobile = decoded.userInfo.mobile;
+            req.role = decoded.userInfo.role;
             next();
         }
     );

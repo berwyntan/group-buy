@@ -124,7 +124,7 @@ const handleRefreshToken = async (req, res) => {
             const role = foundUser.role;
             const accessToken = jwt.sign(
                 {
-                    "UserInfo": {
+                    "userInfo": {
                         "mobile": decoded.mobile,
                         "role": role
                     }
