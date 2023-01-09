@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { updateCart, deleteCartById } from "../api/cart";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import useToastError from "../hooks/useToastError";
 import useToastSuccess from "../hooks/useToastSuccess";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const CartCard = (
     { 
@@ -18,24 +19,25 @@ const CartCard = (
       }
     }
 
-    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+    const { accessToken } = useAuthDetails()
 
-    const mutation = useMutation(formData => updateCart(formData), 
+    const mutation = useMutation(formData => updateCart(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)
       },
       onSuccess: (response) => {
         // console.log(response)
-        if (response.status !== 200) {
-          
-            useToastError("Error: Cart not updated")
-                      
+        
+        if (response.status !== 200) {          
+            useToastError("Error: Cart not updated")                      
         } 
+        queryClient.invalidateQueries('cart')
       },
     })
 
-    const deleteMutation = useMutation(formData => deleteCartById(formData), 
+    const deleteMutation = useMutation(formData => deleteCartById(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)
@@ -48,7 +50,7 @@ const CartCard = (
                       
         } else {
           useToastSuccess("Cart updated")
-          // navigate("/updatecart")
+          queryClient.invalidateQueries('cart')
         }
       },
     })

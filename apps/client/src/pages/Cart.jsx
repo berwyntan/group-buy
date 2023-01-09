@@ -1,21 +1,16 @@
 import { getCartByUserId } from "../api/cart";
 import { useQuery } from "react-query";
-import useGroupBuyStore from "../store/store";
 import CartCard from "../components/CartCard";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useUserId from "../hooks/useUserId";
-import useAccessToken from "../hooks/useAccessToken";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const Cart = () => {
 
-    // const authDetails = useGroupBuyStore((state) => state.authDetails)
-    // const userId = authDetails?.id
-    const userId = useUserId()
-    const accessToken = useAccessToken()
+    const { accessToken, id : userId } = useAuthDetails()
         
     const { isLoading, isError, data, error } = useQuery(
-      ['cart'], () => getCartByUserId(userId, accessToken), { refetchInterval: 2000})
+      ['cart'], () => getCartByUserId(userId, accessToken))
   
     if (isLoading) {
       return <LoadingSpinner />

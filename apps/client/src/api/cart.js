@@ -41,10 +41,17 @@ export const countCartByUserId = async (id, accessToken) => {
     }
   }
 
-export const clearCartByUserId = async (id) => {
+export const clearCartByUserId = async (id, accessToken) => {
     try {
         
-        const response = await axios.delete(`/api/cart/user/${id}`)
+        const response = await axios.delete(`/api/cart/user/${id}`,
+            {
+                headers: 
+                    { 
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+            }
+        )
         // console.log(response)
         
         return response
@@ -55,10 +62,17 @@ export const clearCartByUserId = async (id) => {
     }
   }
 
-export const deleteCartById = async (id) => {
+export const deleteCartById = async (id, accessToken) => {
     try {
         
-        const response = await axios.delete(`/api/cart/${id}`)
+        const response = await axios.delete(`/api/cart/${id}`,
+            {
+                headers: 
+                    { 
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+            }
+        )
         // console.log(response)
         
         return response
@@ -90,12 +104,15 @@ export const addToCart = async(data, accessToken) => {
     }
 }
 
-export const updateCart = async(data) => {
+export const updateCart = async(data, accessToken) => {
     try {
         const response = await axios.patch("/api/cart", data,
         {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            withCredentials: true,
         }
         )
         

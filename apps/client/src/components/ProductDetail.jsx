@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 import useToastDefault from "../hooks/useToastDefault";
 import useToastError from "../hooks/useToastError";
 import Swiper from "../components/SwiperProduct";
-import useAccessToken from "../hooks/useAccessToken";
-import useUserId from "../hooks/useUserId";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const ProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, userId }) => {
   
   const [ qty, setQty ] = useState("1")
-  const accessToken = useAccessToken()
-  const id = useUserId()
+  const { accessToken } = useAuthDetails()
+  
   const updateQty = (e) => {
     // console.log(typeof e.target.innerHTML)
     setQty(e.target.innerHTML)

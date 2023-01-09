@@ -1,5 +1,5 @@
 import axios from "axios";
-import useAccessToken from "../hooks/useAccessToken";
+import useAccessToken from "../hooks/useAuthDetails";
 // import useGroupBuyStore from "../store/store";
 
 // const authDetails = useGroupBuyStore((state) => state.authDetails)

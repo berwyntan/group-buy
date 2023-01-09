@@ -8,6 +8,7 @@ import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { whatsapp } from "../api/whatsapp"
+import useAccessToken from "../hooks/useAuthDetails";
 
 const Checkout = () => {
 
