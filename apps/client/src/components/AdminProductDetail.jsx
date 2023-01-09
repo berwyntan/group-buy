@@ -5,7 +5,7 @@ import useToastError from "../hooks/useToastError";
 import { useForm } from "react-hook-form";
 import { updateProductById, updateProductListingById, deleteImageFromCloud } from "../api/product";
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
-import useAccessToken from "../hooks/useAccessToken";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, productId, desc, price, listed, categoryId }) => {
   
@@ -19,7 +19,7 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
   const [ productPrice, setProductPrice ] = useState(price)
   // console.log(imgUrl.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', ''))
   // const publicId = (url) => url.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', '')
-  const accessToken = useAccessToken()
+  const { accessToken } = useAuthDetails()
   
   const mutation = useMutation(formData => updateProductById(formData, accessToken), 
     {
