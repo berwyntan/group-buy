@@ -3,15 +3,15 @@ import { useQuery } from "react-query";
 import { getOrderByIdAdmin } from "../api/order";
 import AdminOrderCard from "../components/AdminOrderCard";
 import LoadingSpinner from "../components/LoadingSpinner";
-
 import OrderCrm from "../components/crm/OrderCrm";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const AdminUpdateOrder = () => {
     const { id } = useParams()
-    
+    const { accessToken } = useAuthDetails()
     
     const { isLoading, isError, data, error } = useQuery(
-        ['orderAdmin', id], () => getOrderByIdAdmin(id), {refetchInterval: 1000000})
+        ['orderAdmin', id], () => getOrderByIdAdmin(id, accessToken))
   
     if (isLoading) {
         return <LoadingSpinner />
@@ -37,7 +37,7 @@ const AdminUpdateOrder = () => {
 
 
             <div className="text-2xl mb-2">Update Order</div>
-            <div className="">{id}</div>
+            <div className="mb-2">Order id: {id}</div>
             <AdminOrderCard
                 imgUrl={data.product.Product.imgUrl}
                 name={data.product.Product.name}

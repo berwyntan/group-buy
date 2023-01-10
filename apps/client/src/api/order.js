@@ -14,10 +14,17 @@ export const getOrderById = async (id) => {
         console.log(error)
     }
   }
-export const getOrderByIdAdmin = async (id) => {
+export const getOrderByIdAdmin = async (id, accessToken) => {
     try {
         
-        const response = await axios.get(`/api/order/admin/${id}`)
+        const response = await axios.get(`/api/order/admin/admin/${id}`,
+        {
+            headers: 
+                { 
+                    'Authorization': `Bearer ${accessToken}`
+                },
+        }
+        )
         // console.log(response)
         if (response.status === 200) {
             
@@ -59,9 +66,16 @@ export const getOrdersByUserId = async (id) => {
     }
 }
 
-export const getOrdersByProductId = async (id) => {
+export const getOrdersByProductId = async (id, accessToken) => {
     try {
-        const response = await axios.get(`/api/order/product/${id}`)
+        const response = await axios.get(`/api/order/admin/product/${id}`,
+            {
+                headers: 
+                    { 
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+            }
+        )
         
         if (response.status === 200) {
             return response.data }

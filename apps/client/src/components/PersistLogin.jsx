@@ -16,10 +16,12 @@ const PersistLogin = () => {
             withCredentials: true
         })
         // console.log(response)
-        setAuthDetails(response.data)
+        if (response.data.accessToken) {
+          setAuthDetails(response.data)
+        }        
         return response 
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
   }
   

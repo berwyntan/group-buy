@@ -70,7 +70,7 @@ const getOrdersByProductId = async (req, res) => {
     // check id
     
     const checkProduct = await Product.findByPk(id, {include: Category});
-    if (!checkProduct) return res.status(404).json({ 'message': 'Invalid user id.'})    
+    if (!checkProduct) return res.status(404).json({ 'message': 'Invalid product id.'})    
 
     try {        
         const result = await Order.findAll({where: {ProductId: id}, include: User,

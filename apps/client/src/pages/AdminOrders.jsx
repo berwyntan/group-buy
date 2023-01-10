@@ -3,12 +3,14 @@ import { getOrdersByProductId } from "../api/order";
 import { useQuery } from "react-query";
 import ProductCard from "../components/ProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const AdminOrders = () => {
     const { id } = useParams()
+    const { accessToken } = useAuthDetails()
     
     const { isLoading, isError, data, error } = useQuery(
-        ['ordersAdmin', id], () => getOrdersByProductId(id))
+        ['ordersAdmin', id], () => getOrdersByProductId(id, accessToken))
     
     if (isLoading) {
       return <LoadingSpinner />
@@ -18,7 +20,7 @@ const AdminOrders = () => {
       return <span>Error: {error.message}</span>
     }
 
-    // console.log(data)
+    console.log(data)
     const isListed = data.product.listed
     const sellPrice = data.product.price
 
@@ -94,11 +96,13 @@ const AdminOrders = () => {
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
               <li><Link to={`/admin/cat/${data.product.CategoryId}`}>{data.product.Category.name}</Link></li> 
+              <li>{data.product.name}</li> 
                       
               </ul>
           </div>
 
           <div className="text-2xl mb-2">Product Orders</div>
+          <div className="mb-2">Product id: {id}</div>
           <ProductCard
             imgUrl={data.product.imgUrl}
             name={data.product.name}

@@ -50,7 +50,6 @@ app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
 
-
 // routes that require auth
 app.use(verifyJWT);
 app.use("/api/cart", cartRouter);

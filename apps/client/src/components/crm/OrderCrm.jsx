@@ -1,4 +1,4 @@
-import { useMutation } from "react-query"
+import { useMutation, useQueryClient } from "react-query"
 import { updateOrder } from "../../api/order"
 import useToastSuccess from "../../hooks/useToastSuccess"
 import useToastError from "../../hooks/useToastError"
@@ -10,6 +10,7 @@ const OrderCrm = ({
 }) => {
 
     const accessToken = useAuthDetails()
+    const queryClient = useQueryClient()
 
     const mutation = useMutation(formData => updateOrder(formData), 
     {
@@ -19,9 +20,11 @@ const OrderCrm = ({
         },
         onSuccess: (response) => {
             
-            console.log(response)
+            // console.log(response)
             if (response.status === 200) {
                 useToastSuccess("Order updated")   
+                // re render order status in AdminOrderCard by invalidating cache with order id key
+                queryClient.invalidateQueries(['orderAdmin', `${id}`])
             } 
         },
     })

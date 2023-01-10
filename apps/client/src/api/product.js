@@ -93,11 +93,15 @@ export const addNewProduct = async (data, accessToken) => {
     }
 }
 
-export const deleteImageFromCloud = async (data) => {
+export const deleteImageFromCloud = async (data, accessToken) => {
     try {
         const response = await axios.post("/api/cloudinary/del", data, 
         {
-            headers: { 'Content-Type': 'application/json' },
+            headers: 
+                { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
             withCredentials: true
         })
         

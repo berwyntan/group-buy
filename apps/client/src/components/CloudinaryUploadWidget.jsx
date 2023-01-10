@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-
-
 class CloudinaryUploadWidget extends Component {
   componentDidMount() {
     const cloudName = "dkilrhnk7"; // replace with your own cloud name

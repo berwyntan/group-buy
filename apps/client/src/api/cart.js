@@ -21,6 +21,7 @@ export const getCartByUserId = async (id, accessToken) => {
     }
   }
 export const countCartByUserId = async (id, accessToken) => {
+    if (!id) return
     try {
         
         const response = await axios.get(`/api/cart/user/count/${id}`,
