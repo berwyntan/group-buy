@@ -60,6 +60,7 @@ export const updateProductById = async (data, accessToken) => {
 }
 
 export const updateProductListingById = async (id, accessToken) => {
+    console.log(id, accessToken)
     try {
         const response = await axios.put(`/api/product/admin/list/${id}`,  
         {

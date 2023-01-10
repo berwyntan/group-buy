@@ -12,7 +12,8 @@ const AdminUpdateOrder = () => {
     
     const { isLoading, isError, data, error } = useQuery(
         ['orderAdmin', id], () => getOrderByIdAdmin(id, accessToken))
-  
+    console.log(data)    
+
     if (isLoading) {
         return <LoadingSpinner />
     }
@@ -31,7 +32,9 @@ const AdminUpdateOrder = () => {
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
               <li><Link to={`/admin/cat/${data.category.id}`}>{data.category.name}</Link></li> 
-                      
+              <li>{data.product.Product.name}</li>  
+              <li><Link to={`/admin/orders/${data.product.Product.id}`}>Orders</Link></li>  
+              <li>Update Order</li>   
               </ul>
             </div>
 

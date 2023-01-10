@@ -44,6 +44,16 @@ const OrderCrm = ({
         },
     })
 
+    const paymentNotMade = () => {
+        const formData = {
+            "fulfil": "false",
+            "cancel": "false",
+            "paid": "false",
+            "collect": "false",
+            "id": id
+        }
+        mutation.mutate(formData)
+    }
     const paymentMade = () => {
         const formData = {
             "fulfil": "false",
@@ -111,27 +121,29 @@ const OrderCrm = ({
   return (
     <>
         <div className="divider">Payment</div>
-        <button className="btn btn-success mx-3 my-2" 
+        <button className="btn btn-primary mx-3 my-2 w-72" 
+            onClick={paymentNotMade}>Payment pending</button> 
+        <button className="btn btn-success mx-3 my-2 w-72" 
             onClick={paymentReminder}>WhatsApp: Payment Reminder                
         </button>
-        <button className="btn btn-primary mx-3 my-2" 
+        <button className="btn btn-primary mx-3 my-2 w-72" 
             onClick={paymentMade}>Payment made</button>            
-        <button className="btn btn-success mx-3 my-2"
+        <button className="btn btn-success mx-3 my-2 w-72"
             onClick={paymentReceived}>WhatsApp: Payment Received                
         </button>
 
         <div className="divider">Collection</div>
-        <button className="btn btn-success mx-3 my-2"
+        <button className="btn btn-success mx-3 my-2 w-72"
             onClick={readyForCollection}>WhatsApp: Ready for collection</button>
-        <button className="btn btn-primary mx-3 my-2"
+        <button className="btn btn-primary mx-3 my-2 w-72"
             onClick={collected}>Collected</button>
 
         <div className="divider">Cancellation / Refund</div>
-        <button className="btn btn-primary mx-3 my-2"
+        <button className="btn btn-primary mx-3 my-2 w-72"
             onClick={cancelled}>Order cancelled</button>
-        <button className="btn btn-primary mx-3 my-2"
+        <button className="btn btn-primary mx-3 my-2 w-72"
             onClick={refundPending}>Refund pending</button>
-        <button className="btn btn-success mx-3 my-2"
+        <button className="btn btn-success mx-3 my-2 w-72"
             onClick={refundProcessed}>WhatsApp: Refund processed                
         </button>
     </>

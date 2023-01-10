@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import useGroupBuyStore from "../store/store"
 import { useEffect } from "react"
 import axios from "axios"
@@ -6,7 +6,8 @@ import axios from "axios"
 const PersistLogin = () => {
 
   const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
-  // const authDetails = useGroupBuyStore((state) => state.authDetails)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const refreshToken = async () => {
     
@@ -18,6 +19,10 @@ const PersistLogin = () => {
         // console.log(response)
         if (response.data.accessToken) {
           setAuthDetails(response.data)
+          if (location.pathname === "/login" || location.pathname === "/signup")
+          {
+            navigate("/")
+          }
         }        
         return response 
     } catch (error) {

@@ -20,7 +20,7 @@ const AdminOrders = () => {
       return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
     const isListed = data.product.listed
     const sellPrice = data.product.price
 
@@ -97,7 +97,7 @@ const AdminOrders = () => {
               <li><Link to="/adminlistings">Categories</Link></li> 
               <li><Link to={`/admin/cat/${data.product.CategoryId}`}>{data.product.Category.name}</Link></li> 
               <li>{data.product.name}</li> 
-                      
+              <li><Link to={`/admin/orders/${data.product.id}`}>Orders</Link></li>                       
               </ul>
           </div>
 

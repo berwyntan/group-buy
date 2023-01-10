@@ -48,7 +48,7 @@ const Account = () => {
           try {
             logout()
             setAuthDetails({})
-            navigate("/logout")
+            navigate("/")
           } catch (error) {
             console.log(error)
           }

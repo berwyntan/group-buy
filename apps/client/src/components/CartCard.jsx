@@ -20,7 +20,7 @@ const CartCard = (
     }
 
     const queryClient = useQueryClient()
-    const { accessToken } = useAuthDetails()
+    const { accessToken, id } = useAuthDetails()
 
     const mutation = useMutation(formData => updateCart(formData, accessToken), 
     {
@@ -51,6 +51,7 @@ const CartCard = (
         } else {
           useToastSuccess("Cart updated")
           queryClient.invalidateQueries('cart')
+          queryClient.invalidateQueries('countCart')
         }
       },
     })
