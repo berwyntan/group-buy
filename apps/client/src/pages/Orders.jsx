@@ -1,14 +1,13 @@
 import OrderCard from "../components/OrderCard";
-import useGroupBuyStore from "../store/store";
 import { getOrdersByUserId } from "../api/order";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const Orders = () => {
 
-    const authDetails = useGroupBuyStore((state) => state.authDetails)
-    const userId = authDetails.id
+    const { id: userId } = useAuthDetails()
     
     const { isLoading, isError, data, error } = useQuery(
       ['orders', userId], () => getOrdersByUserId(userId))

@@ -7,7 +7,6 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const AdminNewListing = () => {
 
   const { id } = useParams()  
-
   
   const { isLoading, isError, data, error } = useQuery(
     ['category', id], () => getCategoryById(id), { staleTime: 20000 })

@@ -2,14 +2,14 @@ import { useMutation } from "react-query"
 import { updateOrder } from "../../api/order"
 import useToastSuccess from "../../hooks/useToastSuccess"
 import useToastError from "../../hooks/useToastError"
-import useAccessToken from "../../hooks/useAccessToken"
+import useAuthDetails from "../../hooks/useAuthDetails"
 import { whatsapp } from "../../api/whatsapp"
 
 const OrderCrm = ({
     id, buyerName, price, quantity, name, mobile
 }) => {
 
-    const accessToken = useAccessToken()
+    const accessToken = useAuthDetails()
 
     const mutation = useMutation(formData => updateOrder(formData), 
     {

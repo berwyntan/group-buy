@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import useGroupBuyStore from "../store/store";
 import { useState, useEffect } from "react";
 import { updatePassword } from "../api/user";
 import { useMutation } from "react-query";
 import { useNavigate, Link } from "react-router-dom";
 import useToastSuccess from "../hooks/useToastSuccess";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const UpdatePassword = () => {
 
-  const authDetails = useGroupBuyStore((state) => state.authDetails)
+  const authDetails = useAuthDetails()
   const [ mobile ] = useState(authDetails.mobile.toString())
       
   const [ error, setError ] = useState("") 

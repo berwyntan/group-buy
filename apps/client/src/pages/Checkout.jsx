@@ -8,13 +8,11 @@ import useToastSuccess from "../hooks/useToastSuccess";
 import useToastError from "../hooks/useToastError";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { whatsapp } from "../api/whatsapp"
-import useAccessToken from "../hooks/useAuthDetails";
+import useAuthDetails from "../hooks/useAuthDetails";
 
 const Checkout = () => {
 
-    const authDetails = useGroupBuyStore((state) => state.authDetails)
-    const userId = authDetails.id
-    const mobile = authDetails.mobile
+    const { id: userId, mobile } = useAuthDetails()
     let total = 0
     const navigate = useNavigate()
     

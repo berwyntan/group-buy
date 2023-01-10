@@ -1,5 +1,5 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "react-query";
+import { useParams, Link } from "react-router-dom";
+import { useQuery } from "react-query";
 import { getOrderByIdAdmin } from "../api/order";
 import AdminOrderCard from "../components/AdminOrderCard";
 import LoadingSpinner from "../components/LoadingSpinner";

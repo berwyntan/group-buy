@@ -1,10 +1,9 @@
 import { Outlet, Navigate } from "react-router-dom"
-import useGroupBuyStore from "../store/store"
+import useAuthDetails from "../hooks/useAuthDetails"
 
 const RequireAuth = () => {
 
-  const authDetails = useGroupBuyStore((state) => state.authDetails)
-  const name = authDetails?.name
+  const { name } = useAuthDetails()
 
   return (
     <>
