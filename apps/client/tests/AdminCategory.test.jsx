@@ -22,7 +22,7 @@ const Wrapper = ({ children }) => (
 )
 
 describe("AdminCategory component", () => {
-    it('renders listings', async () => {
+    it('renders Create Listing button', async () => {
 
         render(<Wrapper><AdminCategory /></Wrapper>)   
         

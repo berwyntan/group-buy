@@ -79,9 +79,13 @@ const ProductNewListingForm = ({ id }) => {
 
         <div className="sm:grid sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 md:gap-6">
         <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage0" src={null} alt={`${productName}0`} data-publicid=""/></figure>
+        
         <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage1" src={null} alt={`${productName}1`} data-publicid=""/></figure>
+                
         <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage2" src={null} alt={`${productName}2`} data-publicid=""/></figure>
+        
         <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage3" src={null} alt={`${productName}3`} data-publicid=""/></figure>
+        
         <figure><img className="p-6 hidden md:w-9/10" id="uploadedimage4" src={null} alt={`${productName}4`} data-publicid=""/></figure>
         </div>
 
