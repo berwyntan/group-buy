@@ -1,34 +1,25 @@
 import { describe, expect, it } from "vitest";
-import { render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'
-import { QueryClientProvider, QueryClient } from "react-query";
+import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { renderWithQueryClientBrowserRouter } from "./setup/renderFunctions";
 import AdminCategory from '../src/pages/AdminCategory'
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retryDelay: 1,
-        retry: 0,
-      },
-    },      
-  })
-
-const Wrapper = ({ children }) => (
-    <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-        {children}        
-    </BrowserRouter>
-    </QueryClientProvider>
-)
 
 describe("AdminCategory component", () => {
     it('renders Create Listing button', async () => {
 
-        render(<Wrapper><AdminCategory /></Wrapper>)   
+        renderWithQueryClientBrowserRouter(<AdminCategory />)
         
         await waitFor(() => {
           const listings = screen.getByText(/Create Listing/)
           expect(listings).toBeInTheDocument()
+        }) 
+    })     
+    it('renders mock data', async () => {
+
+        renderWithQueryClientBrowserRouter(<AdminCategory />)
+        
+        await waitFor(() => {
+          const product = screen.getByText(/Creator Expert 10280 Flower Bouquet/)
+          expect(product).toBeInTheDocument()
         }) 
     })     
 })
