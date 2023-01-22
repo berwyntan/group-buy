@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const smsController = require('../controllers/smsController');
 
-router.post('/', smsController.sendWhatsapp);
+router.post('/', smsController.sendOTP);
 
 module.exports = router

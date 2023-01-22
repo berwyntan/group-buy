@@ -81,12 +81,16 @@ const handleLogin = async (req, res) => {
                 { expiresIn: '2d' }
             );
 
+            // cascading prev refreshTokens
+            const refreshToken1 = foundUser.refreshToken
+            const refreshToken2 = foundUser.refreshToken1
+            foundUser.refreshToken2 = refreshToken2
+            foundUser.refreshToken1 = refreshToken1
+
             // Saving refreshToken with current mobile
             foundUser.refreshToken = refreshToken;
-            const result = await foundUser.save();
+            const result = await foundUser.save();           
             
-            // console.log(`access: ${accessToken}`)
-            // console.log(`refresh: ${refreshToken}`)
 
             // Creates Secure Cookie with refresh token
             res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 2 * 24 * 60 * 60 * 1000 });
@@ -113,7 +117,15 @@ const handleRefreshToken = async (req, res) => {
     const refreshToken = cookies.jwt;
     // console.log(refreshToken);
 
-    const foundUser = await User.findOne({where: { refreshToken }});
+    let foundUser = null;
+    // check all refreshtokens on DB
+    foundUser = await User.findOne({where: { refreshToken: refreshToken }});
+    if (!foundUser) {
+        foundUser = await User.findOne({where: { refreshToken1: refreshToken }});
+    }
+    if (!foundUser) {
+        foundUser = await User.findOne({where: { refreshToken2: refreshToken }});
+    }
     if (!foundUser) return res.status(403).json({ message: "User not found"});
     // evaluate jwt 
     jwt.verify(
@@ -262,7 +274,10 @@ const handleLogout = async (req, res) => {
     const refreshToken = cookies.jwt;
 
     // Is refreshToken in db?
-    const foundUser = await User.findOne({where: { refreshToken: refreshToken }});
+    let foundUser = null;
+    foundUser = await User.findOne({where: { refreshToken: refreshToken }});
+    if (!foundUser) await User.findOne({where: { refreshToken1: refreshToken }});
+    if (!foundUser) await User.findOne({where: { refreshToken2: refreshToken }});
     if (!foundUser) {
         res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
         return res.sendStatus(204);
@@ -277,5 +292,23 @@ const handleLogout = async (req, res) => {
     res.sendStatus(204);
 }
 
+const handleForgotPassword = async (req, res) => {
+    const { mobile } = req.body;
+    if (!mobile) return res.status(400).json({ 'message': 'Mobile is required.'});
+    if (!validator.isLength(mobile, {min: 8, max: 8})) 
+        return res.status(400).json({ 'message': 'Mobile number has 8 numbers only.'});
+    if (!validator.isNumeric(mobile, {no_symbols: true})) 
+        return res.status(400).json({ 'message': 'Mobile number cannot have symbols.'});
 
-module.exports = { handleNewUser, handleLogin, handleRefreshToken, handleUpdateUser, handleUpdatePassword, handleLogout }
+    // check user exists 
+    const foundUser = await User.findOne({where: { mobile: mobile }});
+    if (!foundUser) return res.status(404).json({ 'message': 'User not found.'});
+    return res.status(200).json({ 'mobile': mobile})
+}
+
+const handleOTPVerification = async (req, res) => {
+    
+}
+
+module.exports = { handleNewUser, handleLogin, handleRefreshToken, 
+    handleUpdateUser, handleUpdatePassword, handleLogout, handleForgotPassword }

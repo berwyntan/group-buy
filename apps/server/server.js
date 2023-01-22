@@ -20,6 +20,7 @@ const orderRouter = require("./routes/orderRouter");
 const orderAdminRouter = require("./routes/orderAdminRouter");
 const cartRouter = require("./routes/cartRouter");
 const smsRouter = require("./routes/smsRouter");
+const smsAuthRouter = require("./routes/smsAuthRouter");
 const cloudinaryRouter = require("./routes/cloudinaryRouter");
 
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,7 @@ app.use("/api/order", orderRouter);
 app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
+app.use("/api/sms/auth", smsAuthRouter);
 
 // routes that require auth
 app.use(verifyJWT);

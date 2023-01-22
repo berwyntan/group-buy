@@ -82,13 +82,17 @@ const Login = () => {
 
       <button className="btn btn-primary btn-wide" type="submit">Log In</button>
       </div>
-    </form>   
-
-     
+    </form>        
 
     <div className="mt-6 text-lg link">
       <Link to="/signup">
         Don't have an account? Sign up.
+      </Link>     
+    </div>
+
+    <div className="mt-6 text-lg link">
+      <Link to="/forgot">
+        Forgot your password?
       </Link>     
     </div>
     

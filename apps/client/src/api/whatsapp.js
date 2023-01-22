@@ -19,3 +19,22 @@ export const whatsapp = async (data, accessToken) => {
         return error.response
     }
 }
+
+export const sendOTP = async (data) => {   
+    try {        
+        const response = await axios.post("/api/sms/auth", data,
+        {
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        }
+        )
+        console.log(response)
+        return response
+                       
+    } catch (error) {
+        console.log(error)
+        return error.response
+    }
+}

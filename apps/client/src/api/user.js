@@ -97,3 +97,18 @@ export const logout = async () => {
         console.log(error)
     }
 }
+
+export const forgotPassword = async (data) => {
+    try {
+        const response = await axios.post("/api/user/forgot", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+        )
+        // console.log(response)
+        return response 
+    } catch (error) {
+        console.log(error)
+    }
+}

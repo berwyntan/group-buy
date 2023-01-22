@@ -17,9 +17,11 @@ import RequireAuth from './components/RequireAuth'
 import RequireAdmin from './components/RequireAdmin'
 import NotFound from './pages/NotFound'
 import Layout from './pages/Layout'
+import ForgotPassword from './pages/ForgotPassword'
 
 const queryClient = new QueryClient();
 
+const OTPVerify = lazy(() => import('./pages/OTPVerify'))
 const Account = lazy(() => import('./pages/Account'))
 const UpdateDetails = lazy(() => import('./pages/UpdateDetails'))
 const UpdatePassword = lazy(() => import('./pages/UpdatePassword'))
@@ -52,6 +54,8 @@ function App() {
           <Route path='/' element={<Categories />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/signup' element={<Signup />}/>
+          <Route path='/forgot' element={<ForgotPassword />}/>
+          <Route path='/otpverify' element={<OTPVerify />}/>
           <Route path='/cat/:id' element={<Category />}/>
           <Route path='/prod/:id' element={<Product />}/>
           <Route path='/*' element={<NotFound />}/>

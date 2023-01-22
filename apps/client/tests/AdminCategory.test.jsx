@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { renderWithQueryClientBrowserRouter } from "./setup/renderFunctions";
 import AdminCategory from '../src/pages/AdminCategory'
 

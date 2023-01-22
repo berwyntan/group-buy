@@ -27,10 +27,22 @@ const User = db.define('User', {
     },
     refreshToken: {
       type: DataTypes.STRING
-    }
+    },
+    refreshToken1: {
+      type: DataTypes.STRING
+    },
+    refreshToken2: {
+      type: DataTypes.STRING
+    },
+    OTP: {
+      type: DataTypes.INTEGER
+    },
+    OTPExpiry: {
+      type: DataTypes.STRING
+    },
   });
   
-  User.sync();
+  User.sync({alter: true});
 
   const Category = db.define('Category', {
   
