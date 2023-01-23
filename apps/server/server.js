@@ -30,7 +30,7 @@ const app = express();
 // postgres
 try {
     db.authenticate();
-    console.log('Connected to ElephantSQL');
+    console.log('Connected to database');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
@@ -66,7 +66,7 @@ app.use("/api/cloudinary", cloudinaryRouter);
 app.use("/api/product/admin", productAdminRouter);
 app.use("/api/order/admin", orderAdminRouter);
 
-app.get("/", (req, res) => {res.json({msg: "hello world"})});
+// app.get("/", (req, res) => {res.json({msg: "hello world"})});
 
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));

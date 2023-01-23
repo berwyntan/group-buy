@@ -1,6 +1,7 @@
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import useGroupBuyStore from "../store/store"
 import { useEffect } from "react"
+import useVisibleTab from "../hooks/useVisibleTab"
 import axios from "axios"
 
 const PersistLogin = () => {
@@ -8,6 +9,7 @@ const PersistLogin = () => {
   const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
   const navigate = useNavigate()
   const location = useLocation()
+  const visible = useVisibleTab()
 
   const refreshToken = async () => {
     
@@ -40,7 +42,7 @@ const PersistLogin = () => {
 
     return clearTimeout(delay)  
     
-  }, [])
+  }, [visible])
 
   return (
     <>
