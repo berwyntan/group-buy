@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const whatsapp = async (data, accessToken) => {   
+export const whatsapp = async (data, accessToken) => {  
     try {        
         const response = await axios.post("/api/sms", data,
         {
@@ -30,7 +30,7 @@ export const sendOTP = async (data) => {
             withCredentials: true
         }
         )
-        console.log(response)
+        // console.log(response)
         return response
                        
     } catch (error) {

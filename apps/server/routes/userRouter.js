@@ -9,5 +9,6 @@ router.post('/updatepw', userController.handleUpdatePassword)
 router.get('/refresh', userController.handleRefreshToken)
 router.get('/logout', userController.handleLogout)
 router.post('/forgot', userController.handleForgotPassword)
+router.post('/verifyotp', userController.handleOTPVerification)
 
 module.exports = router

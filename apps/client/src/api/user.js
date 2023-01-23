@@ -112,3 +112,40 @@ export const forgotPassword = async (data) => {
         console.log(error)
     }
 }
+
+export const verifyOTP = async (data) => {
+    try {
+        const response = await axios.post("/api/user/verifyotp", data,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+        )
+        // console.log(response)
+        return response 
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const resetPassword = async (data, accessToken) => {
+    try {
+        const response = await axios.post("/api/user/auth/resetpw", data,
+        {
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}` 
+            },
+            withCredentials: true
+        }
+        )
+        // console.log(response)
+        
+        return response                     
+    
+    } catch (error) {
+        console.log(error)
+        return error.response
+    }
+}

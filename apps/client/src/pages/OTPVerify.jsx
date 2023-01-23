@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import useAuthDetails from "../hooks/useAuthDetails";
+import useGroupBuyStore from "../store/store";
 import { sendOTP } from "../api/whatsapp";
+import { verifyOTP } from "../api/user";
 
 const OTPVerify = () => {
     const [error, setError] = useState("")
@@ -11,6 +13,7 @@ const OTPVerify = () => {
     const [OTPCount, setOTPCount] = useState(0)
     const { mobile } = useAuthDetails()
     const navigate = useNavigate()
+    const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
 
     const useSendOTP = useMutation((formData) => {
         if (OTPCount <= 3) {
@@ -34,12 +37,31 @@ const OTPVerify = () => {
       },
     })
 
-    const useVerifyOTP = () => {}
+    const useVerifyOTP = useMutation(
+        (formData) => verifyOTP(formData), 
+        {
+        onError: (response) => {
+            
+            console.log(response)
+        },
+        onSuccess: (response) => {
+            // console.log(response)
+            if (response?.status === 200) {            
+                setError("redirecting...")
+                setAuthDetails(response.data)
+                navigate("/resetpw")
+            } else {
+                setError(response?.response?.data?.message)
+            }
+        },
+        })
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (formData) => {
-        console.log(formData)
-        // mutation.mutate(formData) 
+        
+        formData = {...formData, mobile: mobile}
+        // console.log(formData)
+        useVerifyOTP.mutate(formData) 
         
     }
    
@@ -86,10 +108,10 @@ const OTPVerify = () => {
         
         <div className="my-4">
             
-            {errors.mobile?.type === 'pattern' && <span>Numbers only</span>} 
-            {errors.mobile?.type === 'required' && <span>OTP is required</span>}
-            {errors.mobile?.type === 'minLength' && <span>OTP is 6 digits only</span>}
-            {errors.mobile?.type === 'maxLength' && <span>OTP is 6 digits only</span>}            
+            {errors.otp?.type === 'pattern' && <span>Numbers only</span>} 
+            {errors.otp?.type === 'required' && <span>OTP is required</span>}
+            {errors.otp?.type === 'minLength' && <span>OTP is 6 digits only</span>}
+            {errors.otp?.type === 'maxLength' && <span>OTP is 6 digits only</span>}            
 
         </div>
         <div className="my-1">{error}</div>
@@ -103,7 +125,7 @@ const OTPVerify = () => {
         <div>
             <button 
                 id="resend" 
-                className="btn btn-primary btn-wide my-3 btn-disabled"
+                className="btn btn-sm btn-primary btn-wide my-3 btn-disabled"
                 onClick={() => useSendOTP.mutate({mobile: mobile})}
             >
                 Resend OTP

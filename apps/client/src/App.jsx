@@ -21,6 +21,7 @@ import ForgotPassword from './pages/ForgotPassword'
 
 const queryClient = new QueryClient();
 
+const ResetPassword = lazy(() => import('./pages/ResetPassword'))
 const OTPVerify = lazy(() => import('./pages/OTPVerify'))
 const Account = lazy(() => import('./pages/Account'))
 const UpdateDetails = lazy(() => import('./pages/UpdateDetails'))
@@ -55,6 +56,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/signup' element={<Signup />}/>
           <Route path='/forgot' element={<ForgotPassword />}/>
+          <Route path='/resetpw' element={<ResetPassword />}/>
           <Route path='/otpverify' element={<OTPVerify />}/>
           <Route path='/cat/:id' element={<Category />}/>
           <Route path='/prod/:id' element={<Product />}/>

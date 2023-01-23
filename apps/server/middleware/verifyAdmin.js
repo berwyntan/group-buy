@@ -16,7 +16,8 @@ const verifyAdmin = (req, res, next) => {
     //     }
     // );
     const role = req.role;
-    if (role !== "admin") return res.sendStatus(403)
+    console.log(role)
+    if (role !== "admin") return res.status(403).json({"message": "Access is denied"})
     next();
 }
 

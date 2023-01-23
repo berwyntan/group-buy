@@ -9,7 +9,7 @@ const OrderCrm = ({
     id, buyerName, price, quantity, name, mobile
 }) => {
 
-    const accessToken = useAuthDetails()
+    const { accessToken } = useAuthDetails()
     const queryClient = useQueryClient()
 
     const mutation = useMutation(formData => updateOrder(formData), 
@@ -37,7 +37,7 @@ const OrderCrm = ({
         },
         onSuccess: (response) => {
             
-            // console.log(response)
+            console.log(response)
             if (response.status === 201) {
                 useToastSuccess("WhatsApp sent")   
             } else useToastError("Error: WhatsApp not sent")

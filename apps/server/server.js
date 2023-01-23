@@ -14,6 +14,7 @@ const verifyAdmin = require('./middleware/verifyAdmin');
 const productRouter = require("./routes/productRouter");
 const productAdminRouter = require("./routes/productAdminRouter");
 const userRouter = require("./routes/userRouter");
+const userAuthRouter = require("./routes/userAuthRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const categoryAdminRouter = require("./routes/categoryAdminRouter");
 const orderRouter = require("./routes/orderRouter");
@@ -55,6 +56,7 @@ app.use("/api/sms/auth", smsAuthRouter);
 // routes that require auth
 app.use(verifyJWT);
 app.use("/api/cart", cartRouter);
+app.use("/api/user/auth", userAuthRouter);
 
 // routes that require admin
 app.use(verifyAdmin);

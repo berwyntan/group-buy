@@ -35,7 +35,7 @@ const User = db.define('User', {
       type: DataTypes.STRING
     },
     OTP: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     OTPExpiry: {
       type: DataTypes.STRING
