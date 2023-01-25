@@ -1,42 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { render, screen, renderHook, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'
-import { QueryClientProvider, QueryClient, useQuery } from "react-query";
+import { screen, waitFor } from '@testing-library/react';
 import Login from '../src/pages/Login'
-
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        // ✅ turns retries off
-        retry: false,
-      },
-    },
-    logger: {
-        log: console.log,
-        warn: console.warn,
-        error: () => {},
-    }
-  })
-
-const Wrapper = ({ children }) => (
-    <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-        {children}
-    </BrowserRouter>
-    </QueryClientProvider>
-)
-
+import { renderWithQueryClientBrowserRouter } from "./setup/renderFunctions";
 
 describe("Login component", () => {
     it('renders', async () => {        
 
-        render(<Wrapper><Login /></Wrapper>)           
+        renderWithQueryClientBrowserRouter(<Login />)           
         
-        // screen.debug()
         await waitFor(() => {
-          const signupLink = screen.getByRole('link')
-          expect(signupLink).toHaveTextContent(/Don't have an account/)
+          const signupLink = screen.getAllByRole('link');
+          expect(signupLink[0]).toHaveTextContent(/Don't have an account/)
         })        
     })
 })

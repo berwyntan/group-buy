@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'
+import { screen } from '@testing-library/react';
 import { renderWithQueryClientBrowserRouter } from "./setup/renderFunctions";
 import Account from '../src/pages/Account';
 
