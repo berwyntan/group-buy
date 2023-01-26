@@ -13,8 +13,7 @@ const generateQueryClient = () => {
     return new QueryClient({
         defaultOptions: {
           queries: {
-            retryDelay: 1,
-            retry: 0,
+            retry: false,
           },
         },      
     })

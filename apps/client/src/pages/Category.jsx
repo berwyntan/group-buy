@@ -21,7 +21,7 @@ const Category = () => {
   }
 
   
-  const productCards = data.map(prod => {
+  const productCards = data?.map(prod => {
     return (
       <ProductCard 
         imgUrl={prod.imgUrl}
@@ -48,7 +48,7 @@ const Category = () => {
       </div>
       <div className="grid gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {productCards}
-        {data.length===0 && <div>No products</div>}
+        {data?.length===0 && <div>No products</div>}
       </div>
       
 

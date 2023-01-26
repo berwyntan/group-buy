@@ -26,7 +26,7 @@ const Checkout = () => {
       return <span>Error: {error.message}</span>
     }
 
-    console.log(data)
+    // console.log(data)
 
     data.map(item => {
       const subtotal = item.quantity * item.Product.price
