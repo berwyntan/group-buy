@@ -8,6 +8,7 @@ import useToastError from "../hooks/useToastError";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { whatsapp } from "../api/whatsapp"
 import useAuthDetails from "../hooks/useAuthDetails";
+import useWhatsApp from "../hooks/useWhatsApp";
 
 const Checkout = () => {
 
@@ -15,6 +16,7 @@ const Checkout = () => {
     let total = 0
     const navigate = useNavigate()
     const queryClient = useQueryClient()
+    const sendWhatsApp = useWhatsApp()
     
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId, accessToken))
@@ -97,10 +99,14 @@ const Checkout = () => {
         // console.log(formData)
         try {
           mutation.mutate(formData)
-          whatsappMutation.mutate({
+          sendWhatsApp({
             message: `Your order of ${item.quantity} nos of ${item.Product.name} is being processed. Please log in to GroupBuy for payment details.`,
             mobile: mobile
           })    
+          // whatsappMutation.mutate({
+          //   message: `Your order of ${item.quantity} nos of ${item.Product.name} is being processed. Please log in to GroupBuy for payment details.`,
+          //   mobile: mobile
+          // })    
         } catch (error) {
           console.log(error)
         }        
@@ -109,20 +115,20 @@ const Checkout = () => {
 
     }
 
-    const whatsappMutation = useMutation(formData => whatsapp(formData, accessToken), 
-    {
-        onError: (response) => {
+    // const whatsappMutation = useMutation(formData => whatsapp(formData, accessToken), 
+    // {
+    //     onError: (response) => {
             
-            console.log(response)
-        },
-        onSuccess: (response) => {
+    //         console.log(response)
+    //     },
+    //     onSuccess: (response) => {
             
-            console.log(response)
-            if (response.status === 201) {
-                useToastSuccess("WhatsApp sent")   
-            } else useToastError("Error: WhatsApp not sent")
-        },
-    })
+    //         console.log(response)
+    //         if (response.status === 201) {
+    //             useToastSuccess("WhatsApp sent")   
+    //         } else useToastError("Error: WhatsApp not sent")
+    //     },
+    // })
 
 
     return (
