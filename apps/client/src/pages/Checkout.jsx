@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getCartByUserId, clearCartByUserId } from "../api/cart";
 import CheckoutCard from "../components/CheckoutCard";
 import { createOrder } from "../api/order";
@@ -11,12 +11,13 @@ import useAuthDetails from "../hooks/useAuthDetails";
 
 const Checkout = () => {
 
-    const { id: userId, mobile } = useAuthDetails()
+    const { id: userId, mobile, accessToken } = useAuthDetails()
     let total = 0
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
     
     const { isLoading, isError, data, error } = useQuery(
-      ['cart'], () => getCartByUserId(userId))
+      ['cart'], () => getCartByUserId(userId, accessToken))
   
     if (isLoading) {
       return <LoadingSpinner />
@@ -28,12 +29,12 @@ const Checkout = () => {
 
     // console.log(data)
 
-    data.map(item => {
+    data?.map(item => {
       const subtotal = item.quantity * item.Product.price
       total += subtotal
     })
 
-    const checkoutCards = data.map(item => {
+    const checkoutCards = data?.map(item => {
       if (item.Product.listed) {
         return (
           <CheckoutCard
@@ -65,7 +66,7 @@ const Checkout = () => {
       },
     })
 
-    const clearCartMutation = useMutation(formData => clearCartByUserId(formData), 
+    const clearCartMutation = useMutation(formData => clearCartByUserId(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)
@@ -73,7 +74,8 @@ const Checkout = () => {
       onSuccess: (response) => {
         // console.log(response)
         if (response.status === 200) {          
-          useToastSuccess("Checkout complete")   
+          useToastSuccess("Checkout complete")  
+          queryClient.invalidateQueries('countCart') 
           navigate("/updateorder")                   
         } else if (response.status === 204) {
           useToastError("Error: Cannot clear cart")
@@ -107,7 +109,7 @@ const Checkout = () => {
 
     }
 
-    const whatsappMutation = useMutation(formData => whatsapp(formData), 
+    const whatsappMutation = useMutation(formData => whatsapp(formData, accessToken), 
     {
         onError: (response) => {
             
