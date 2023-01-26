@@ -1,22 +1,21 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { getCartByUserId, clearCartByUserId } from "../api/cart";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getCartByUserId } from "../api/cart";
 import CheckoutCard from "../components/CheckoutCard";
-import { createOrder } from "../api/order";
-import useToastSuccess from "../hooks/useToastSuccess";
-import useToastError from "../hooks/useToastError";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { whatsapp } from "../api/whatsapp"
 import useAuthDetails from "../hooks/useAuthDetails";
 import useWhatsApp from "../hooks/useWhatsApp";
+import useCreateOrder from "../hooks/useCreateOrder";
+import useClearCart from "../hooks/useClearCart";
 
 const Checkout = () => {
 
     const { id: userId, mobile, accessToken } = useAuthDetails()
     let total = 0
-    const navigate = useNavigate()
-    const queryClient = useQueryClient()
+    
     const sendWhatsApp = useWhatsApp()
+    const createOrder = useCreateOrder()
+    const clearCart = useClearCart()
     
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId, accessToken))
@@ -51,42 +50,6 @@ const Checkout = () => {
       }
     })
 
-    const mutation = useMutation(formData => createOrder(formData), 
-    {
-      onError: (response) => {
-        console.log(response)
-      },
-      onSuccess: (response) => {
-        // console.log(response)
-        if (response.status === 201) {
-          
-          // useToastSuccess("Order completed")
-                      
-        } else {
-          // useToastError("Error: Cannot checkout")
-        }
-      },
-    })
-
-    const clearCartMutation = useMutation(formData => clearCartByUserId(formData, accessToken), 
-    {
-      onError: (response) => {
-        console.log(response)
-      },
-      onSuccess: (response) => {
-        // console.log(response)
-        if (response.status === 200) {          
-          useToastSuccess("Checkout complete")  
-          queryClient.invalidateQueries('countCart') 
-          navigate("/updateorder")                   
-        } else if (response.status === 204) {
-          useToastError("Error: Cannot clear cart")
-        } else {
-          useToastError("Error: Cannot checkout")
-        }
-      },
-    })
-
     const checkout = async (data) => {
       const order = await data.map(item => {
         const formData = {
@@ -98,38 +61,19 @@ const Checkout = () => {
         }
         // console.log(formData)
         try {
-          mutation.mutate(formData)
+          createOrder(formData)
           sendWhatsApp({
             message: `Your order of ${item.quantity} nos of ${item.Product.name} is being processed. Please log in to GroupBuy for payment details.`,
             mobile: mobile
           })    
-          // whatsappMutation.mutate({
-          //   message: `Your order of ${item.quantity} nos of ${item.Product.name} is being processed. Please log in to GroupBuy for payment details.`,
-          //   mobile: mobile
-          // })    
+           
         } catch (error) {
           console.log(error)
         }        
       })
-      clearCartMutation.mutate(userId)  
+      clearCart(userId)  
 
     }
-
-    // const whatsappMutation = useMutation(formData => whatsapp(formData, accessToken), 
-    // {
-    //     onError: (response) => {
-            
-    //         console.log(response)
-    //     },
-    //     onSuccess: (response) => {
-            
-    //         console.log(response)
-    //         if (response.status === 201) {
-    //             useToastSuccess("WhatsApp sent")   
-    //         } else useToastError("Error: WhatsApp not sent")
-    //     },
-    // })
-
 
     return (
       <>

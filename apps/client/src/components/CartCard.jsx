@@ -34,6 +34,7 @@ const CartCard = (
             useToastError("Error: Cart not updated")                      
         } 
         queryClient.invalidateQueries('cart')
+        // queryClient.invalidateQueries('countCart')
       },
     })
 

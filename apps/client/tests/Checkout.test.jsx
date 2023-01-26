@@ -9,7 +9,7 @@ describe("Checkout component", () => {
         renderWithQueryClientBrowserRouter(<Checkout />)
         
         await waitFor(() => {
-          const item = screen.getByText(/Whole Fried Chicken/)
+          const item = screen.getByText(/Fried Whole Chicken/)
           expect(item).toBeInTheDocument()
         }) 
     })    
