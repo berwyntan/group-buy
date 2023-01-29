@@ -27,12 +27,12 @@ describe("AdminOrders component", () => {
     //         rest.get(
     //           'http://localhost:3000/api/order/admin/product/undefined',
     //           (req, res, ctx) => {
-    //             return res(ctx.status(400), ctx.json({message: 'Bad Request'}));
+    //             return res(ctx.status(400));
     //           },
     //         ),
     //     );
     //     renderWithQueryClientBrowserRouter(<AdminOrders />)
     //     screen.debug()
-    //     expect(screen.getByText(/Bad Request/)).toBeInTheDocument()
+    //     expect(screen.getByText(/Error/)).toBeInTheDocument()
     // })   
 })
