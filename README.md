@@ -22,6 +22,24 @@ Paynow and WhatsApp are integral to the group buyer. Both these apps are designe
 This is a PERN stack app hosted on Cyclic. 
 The Postgres database is hosted on Bit.io
 
+### Libraries
+
+#### Client
+- Client state management: Zustand
+- Server state management: React Query, Axios
+- Styling: Tailwind, DaisyUI, Swiper, React Toastify, React Loader Spinner
+- Forms/Validation: React Hook Forms
+- Image uploading/hosting: Cloudinary
+- Testing: Vitest, React Testing Library, Mock Service Worker
+
+#### Server
+- Authentication: Jsonwebtoken, Cookie parser
+- ORM for SQL: Sequelize
+- Validation: Validator
+- Encryption of password/OTP: Bcrypt
+- Dates: DayJS
+- WhatsApp communication: Twilio
+
 ### Code Features
 - Automated testing with Vitest, React Testing Library and Mock Service Worker
     - Only a small portion of the app was tested due to time constraints
@@ -76,24 +94,6 @@ The Postgres database is hosted on Bit.io
 12 STEPS: Home Page >> Category >> Product >> Add to Cart >> Log In >> Sign Up >> Log In >> (Same Journey As Returning Customer)
 
 Improvements to shorten the journey can be 1 click purchase (reduce by 4 steps) or a checkout button on product page (reduce by 2 steps)
-
-### Libraries
-
-#### Client
-- Client state management: Zustand
-- Server state management: React Query, Axios
-- Styling: Tailwind, DaisyUI, Swiper, React Toastify, React Loader Spinner
-- Forms/Validation: React Hook Forms
-- Image uploading/hosting: Cloudinary
-- Testing: Vitest, React Testing Library, Mock Service Worker
-
-#### Server
-- Authentication: Jsonwebtoken, Cookie parser
-- ORM for SQL: Sequelize
-- Validation: Validator
-- Encryption of password/OTP: Bcrypt
-- Dates: DayJS
-- WhatsApp communication: Twilio
 
 ### Database
 

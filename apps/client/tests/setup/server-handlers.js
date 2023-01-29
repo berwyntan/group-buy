@@ -5,11 +5,14 @@ import {
 } from './mockDataCategory';
 import { 
   countProductsByCategory,
-  getProductsByCategory
+  getProductsByCategory,
+  getProductById
 } from './mockDataProduct';
 import {
   getOrdersByProductId,
-  getOrderByIdAdmin
+  getOrderByIdAdmin,
+  getOrderById,
+  getOrdersByUserId
 } from './mockDataOrder';
 import {
   getCartByUserId,
@@ -41,6 +44,15 @@ const handlers = [
   }),
   rest.get('http://localhost:3000/api/product/cat/undefined', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getProductsByCategory))
+  }),
+  rest.get('http://localhost:3000/api/order/undefined', async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getOrderById))
+  }),
+  rest.get('http://localhost:3000/api/order/user/undefined', async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getOrdersByUserId))
+  }),
+  rest.get('http://localhost:3000/api/product/undefined', async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getProductById))
   }),
 ]
 

@@ -6,9 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner"
 
 const Order = () => {
     const { id } = useParams()
-    // const setOrderSingle = useGroupBuyStore((state) => state.setOrderSingle)
-    // , { onSuccess: (data) => setOrderSingle(data)}
-             
+                 
     const { isLoading, isError, data, error } = useQuery(
       ['order', id], () => getOrderById(id))
 

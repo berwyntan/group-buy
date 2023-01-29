@@ -20,7 +20,7 @@ const Orders = () => {
       return <span>Error: {error.message}</span>
     }
     
-    const orderCards = data.map(order => {
+    const orderCards = data?.map(order => {
       return (
         <OrderCard
           imgUrl={order.Product.imgUrl}

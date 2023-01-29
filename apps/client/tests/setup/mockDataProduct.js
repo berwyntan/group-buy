@@ -129,3 +129,25 @@ export const getProductsByCategory = [
         }
     }
 ]
+export const getProductById = {
+    "id": "017be763-7259-401d-b018-68b4b8e3effc",
+    "name": "Valencia Orange, 6 Count",
+    "desc": "Product of Australia or South Africa depending on Season",
+    "price": 4,
+    "imgUrl": "https://res.cloudinary.com/dkilrhnk7/image/upload/v1674003878/81nOJmijYwL._AC_SX679__xw4dqk.jpg",
+    "listed": true,
+    "imgUrl1": "https://res.cloudinary.com/dkilrhnk7/image/upload/v1674003885/61iWRmXlx4L._AC_SY679__lwdawj.jpg",
+    "imgUrl2": null,
+    "imgUrl3": null,
+    "imgUrl4": null,
+    "createdAt": "2023-01-18T01:04:59.178Z",
+    "updatedAt": "2023-01-18T01:04:59.178Z",
+    "CategoryId": "99b68abd-d1ec-4552-8a14-d7a60b59f445",
+    "Category": {
+        "id": "99b68abd-d1ec-4552-8a14-d7a60b59f445",
+        "name": "Fruits",
+        "imgUrl": "https://res.cloudinary.com/dkilrhnk7/image/upload/v1670992375/images_fwo3bm.jpg",
+        "createdAt": "2022-12-05T07:05:47.000Z",
+        "updatedAt": "2022-12-05T07:05:47.000Z"
+    }
+}
