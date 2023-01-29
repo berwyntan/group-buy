@@ -1,37 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-import { forgotPassword } from "../api/user";
-import useGroupBuyStore from "../store/store";
+import useForgotPassword from "../hooks/useForgotPassword";
 
 const ForgotPassword = () => {
     const [error, setError] = useState("")
-    const navigate = useNavigate()
-    const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
-
-    const mutation = useMutation(formData => forgotPassword(formData), 
-    {
-      onError: (response) => {
-        
-        console.log(response)
-      },
-      onSuccess: (response) => {
-        // console.log(response)
-        if (response.status === 200) {
-            setAuthDetails(response.data)
-            navigate("/otpverify", {replace: true})
-        } else {
-            setError(response.data.message)
-        }
-      },
-    })
+    const forgotPassword = useForgotPassword({ setError: setError })
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (formData) => {
-        // console.log(formData)
-        mutation.mutate(formData) 
-        
+        forgotPassword(formData)
     }
 
     return (
@@ -60,8 +37,8 @@ const ForgotPassword = () => {
 
         </div>
         <div className="my-1">{error}</div>
-        {mutation.isLoading && <div>Checking...</div>} 
-        {mutation.isError && <div>{mutation.error}</div>} 
+        {forgotPassword.isLoading && <div>Checking...</div>} 
+        {forgotPassword.isError && <div>{forgotPassword.error}</div>} 
 
         <button className="btn btn-primary btn-wide" type="submit">Reset Password</button>
         </div>

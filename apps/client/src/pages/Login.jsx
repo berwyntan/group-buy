@@ -1,39 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
-import useGroupBuyStore from "../store/store";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { login } from "../api/user";
-import { useMutation } from 'react-query'
+import useLogin from "../hooks/useLogin";
 
 const Login = () => {
 
   const [error, setError] = useState("")
-  const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
-  const navigate = useNavigate();
+  const login = useLogin({ setError: setError })
 
-  const mutation = useMutation(formData => login(formData), 
-    {
-      onError: (response) => {
-        
-        console.log(response)
-      },
-      onSuccess: (response) => {
-        // console.log(response)
-        if (response.status === 200) {
-          setAuthDetails(response.data);
-          navigate("/", {replace: true})
-        } else {
-          setError(response.data.message)
-        }
-      },
-    })
-  
   const { register, handleSubmit, formState: { errors } } = useForm();
-  // const login = useGroupBuyStore((state) => state.login)
+  
   const onSubmit = (formData) => {
-      
-    mutation.mutate(formData) 
-    
+    login(formData)
   }
  
   return (
@@ -77,8 +55,8 @@ const Login = () => {
 
       </div>
       <div className="my-1">{error}</div>
-      {mutation.isLoading && <div>Logging In...</div>} 
-      {mutation.isError && <div>{mutation.error}</div>} 
+      {login.isLoading && <div>Logging In...</div>} 
+      {login.isError && <div>{login.error}</div>} 
 
       <button className="btn btn-primary btn-wide" type="submit">Log In</button>
       </div>
