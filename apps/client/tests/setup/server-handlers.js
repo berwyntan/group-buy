@@ -18,6 +18,9 @@ import {
   getCartByUserId,
   updateCart
 } from './mockDataCart';
+import {
+  login
+} from './mockDataUser';
 
 const handlers = [
  
@@ -54,6 +57,9 @@ const handlers = [
   rest.get('http://localhost:3000/api/product/undefined', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getProductById))
   }),
+  rest.post('http://localhost:3000/api/user/login', async (req, res, ctx) => {
+    return res(ctx.status(200))
+  })
 ]
 
 export {handlers}

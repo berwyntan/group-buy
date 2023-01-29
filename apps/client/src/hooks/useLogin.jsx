@@ -16,6 +16,7 @@ const useLogin = ({ setError }) => {
         if (response.status === 200) {
           setAuthDetails(response.data);
           navigate("/", {replace: true})
+          console.log(response)
         } else {
           setError(response.data.message)
         }

@@ -37,3 +37,13 @@ export const renderWithQueryClientBrowserRouter = (ui) => {
     )
 }
 
+export const createWrapper = () => {
+    const queryClient = generateQueryClient()
+    return ({ children }) => (
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+            {children}
+            </BrowserRouter>
+        </QueryClientProvider>
+      )
+}

@@ -8,7 +8,7 @@ describe("AdminUpdateOrder component", () => {
         renderWithQueryClientBrowserRouter(<AdminUpdateOrder />)
         
         await waitFor(() => {
-            expect(screen.getByText(/Order id:/)).toBeInTheDocument()
+            expect(screen.getByText(/Order id/)).toBeInTheDocument()
         })
     })
     it('renders Payment pending button', async () => {

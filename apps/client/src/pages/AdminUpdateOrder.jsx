@@ -12,7 +12,7 @@ const AdminUpdateOrder = () => {
     
     const { isLoading, isError, data, error } = useQuery(
         ['orderAdmin', id], () => getOrderByIdAdmin(id, accessToken))
-    console.log(data)    
+    // console.log(data)    
 
     if (isLoading) {
         return <LoadingSpinner />
