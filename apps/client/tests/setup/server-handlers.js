@@ -24,8 +24,11 @@ import {
 
 const handlers = [
  
-  rest.get('http://localhost:3000/api/product/cat/count/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/product/cat/count/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(countProductsByCategory))
+  }),
+  rest.get('http://localhost:3000/api/product/cat/count/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400), ctx.json({}))
   }),
   rest.get('http://localhost:3000/api/category', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getAllCategory))

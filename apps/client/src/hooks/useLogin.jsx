@@ -2,27 +2,31 @@ import useGroupBuyStore from "../store/store";
 import { login } from "../api/user";
 import { useMutation } from 'react-query'
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const useLogin = ({ setError }) => {
+    const [ success, setSuccess ] = useState(null)
     const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
     const navigate = useNavigate();
     const { mutate } = useMutation(formData => login(formData), 
     {
       onError: (response) => {        
         console.log(response)
+        setSuccess(false)
       },
       onSuccess: (response) => {
         // console.log(response)
         if (response.status === 200) {
           setAuthDetails(response.data);
           navigate("/", {replace: true})
-          console.log(response)
+          setSuccess(true)
         } else {
           setError(response.data.message)
+          setSuccess(false)
         }
       },
     })
-    return mutate
+    return { mutate, success }
 }
 
 export default useLogin

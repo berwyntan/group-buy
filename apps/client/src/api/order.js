@@ -4,7 +4,7 @@ export const getOrderById = async (id) => {
     try {
         
         const response = await axios.get(`/api/order/${id}`)
-        console.log(response)
+        // console.log(response)
         if (response.status === 200) {
             
             return response.data

@@ -11,7 +11,7 @@ export const useCountProductsByCategory = (id) => useQuery(
 const AdminCategory = () => {
 
   const { id } = useParams()
-
+  
   const { isLoading, isError, data, error } = useCountProductsByCategory(id)
 
   if (isLoading) {
@@ -62,7 +62,7 @@ const AdminCategory = () => {
         <button className="btn btn-wide btn-primary my-2">Create Listing</button>
         </Link>      
 
-        <div className="text-lg mb-2">Listings: {count}</div>
+        <div className="text-lg mb-2">{count ? `Listings: ${count}` : "Server error"}</div>
 
         <div className="grid gap-2 grid-cols-1">
             {data && productCards}

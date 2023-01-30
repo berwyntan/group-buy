@@ -1,13 +1,6 @@
 import { render } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
-
-setLogger({
-    
-    log: console.log,
-    warn: console.warn,
-    error: () => {},
-});
+import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';
 
 const generateQueryClient = () => {
     return new QueryClient({
@@ -15,7 +8,12 @@ const generateQueryClient = () => {
           queries: {
             retry: false,
           },
-        },      
+        }, 
+        logger: {
+            log: console.log,
+            warn: console.warn,
+            error: () => {},
+        }    
     })
 }
 
@@ -33,6 +31,20 @@ export const renderWithQueryClientBrowserRouter = (ui) => {
         <BrowserRouter>
             {ui}
         </BrowserRouter>
+        </QueryClientProvider>
+    )
+}
+
+export const renderWithQueryClientMemoryRouter = (ui, route, path) => {
+    const queryClient = generateQueryClient()
+        
+    return render(
+        <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={[route]}>
+            <Routes>
+                <Route path={path} element={ui} />
+            </Routes>            
+        </MemoryRouter>
         </QueryClientProvider>
     )
 }

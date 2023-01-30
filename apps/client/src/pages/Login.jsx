@@ -11,7 +11,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   
   const onSubmit = (formData) => {
-    login(formData)
+    login.mutate(formData)
   }
  
   return (
