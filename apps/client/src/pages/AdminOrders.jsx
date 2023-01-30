@@ -21,8 +21,8 @@ const AdminOrders = () => {
     }
 
     // console.log(data)
-    const isListed = data.product.listed
-    const sellPrice = data.product.price
+    const isListed = data?.product.listed
+    const sellPrice = data?.product.price
 
     const quantities = {
       ordered: 0,
@@ -95,20 +95,21 @@ const AdminOrders = () => {
               <li><Link to="/adminhome">Admin</Link></li> 
               <li><Link to="/adminlistings">Listings</Link></li> 
               <li><Link to="/adminlistings">Categories</Link></li> 
-              <li><Link to={`/admin/cat/${data.product.CategoryId}`}>{data.product.Category.name}</Link></li> 
-              <li>{data.product.name}</li> 
-              <li><Link to={`/admin/orders/${data.product.id}`}>Orders</Link></li>                       
+              <li><Link to={`/admin/cat/${data?.product.CategoryId}`}>{data?.product.Category.name}</Link></li> 
+              <li>{data?.product.name}</li> 
+              <li><Link to={`/admin/orders/${data?.product.id}`}>Orders</Link></li>                       
               </ul>
           </div>
 
           <div className="text-2xl mb-2">Product Orders</div>
           <div className="mb-2">Product id: {id}</div>
+          {data?.product.id || <div className="text-lg">"Server error"</div>}
           <ProductCard
-            imgUrl={data.product.imgUrl}
-            name={data.product.name}
-            id={data.product.id}
-            price={data.product.price}
-            listed={data.product.listed}
+            imgUrl={data?.product.imgUrl}
+            name={data?.product.name}
+            id={data?.product.id}
+            price={data?.product.price}
+            listed={data?.product.listed}
           />
           
           <div className="overflow-x-auto">

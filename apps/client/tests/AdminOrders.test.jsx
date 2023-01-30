@@ -1,13 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { screen, waitFor } from '@testing-library/react';
-import { renderWithQueryClientBrowserRouter } from "./setup/renderFunctions";
+import { renderWithQueryClientMemoryRouter } from "./setup/renderFunctions";
 import AdminOrders from "../src/pages/AdminOrders";
-import { server } from "./setup/server";
-import {rest} from 'msw'
 
 describe("AdminOrders component", () => {
     it('renders Product Orders title', async () => {
-        renderWithQueryClientBrowserRouter(<AdminOrders />)
+        renderWithQueryClientMemoryRouter(
+            <AdminOrders />,
+            '/api/order/admin/product/12345',
+            '/api/order/admin/product/:id'
+        )
         
         await waitFor(() => {
             expect(screen.getByText(/Product Orders/)).toBeInTheDocument()
@@ -15,24 +17,28 @@ describe("AdminOrders component", () => {
     })
     it('renders mock data', async () => {
 
-        renderWithQueryClientBrowserRouter(<AdminOrders />)
+        renderWithQueryClientMemoryRouter(
+            <AdminOrders />,
+            '/api/order/admin/product/12345',
+            '/api/order/admin/product/:id'
+        )
         
         await waitFor(() => {
           const product = screen.getAllByText(/Kinohimitsu Bird's Nest With Collagen/)
           expect(product[0]).toBeInTheDocument()
         }) 
     }) 
-    // it('handles error', async () => {
-    //     server.resetHandlers(
-    //         rest.get(
-    //           'http://localhost:3000/api/order/admin/product/undefined',
-    //           (req, res, ctx) => {
-    //             return res(ctx.status(400));
-    //           },
-    //         ),
-    //     );
-    //     renderWithQueryClientBrowserRouter(<AdminOrders />)
-    //     screen.debug()
-    //     expect(screen.getByText(/Error/)).toBeInTheDocument()
-    // })   
+    it('handles error 400', async () => {
+
+        renderWithQueryClientMemoryRouter(
+            <AdminOrders />,
+            '/api/order/admin/product/sadcase',
+            '/api/order/admin/product/:id'
+        )
+        
+        await waitFor(() => {
+          const message = screen.getByText(/Server error/)
+          expect(message).toBeInTheDocument()
+        }) 
+    })     
 })

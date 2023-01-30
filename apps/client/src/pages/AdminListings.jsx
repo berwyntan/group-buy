@@ -18,7 +18,7 @@ const AdminListings = () => {
   }
 
   // console.log(data)
-  const categoryCards = data.map(cat => {
+  const categoryCards = data?.map(cat => {
     return(
       <AdminCategoryCard 
       key={cat.id}
@@ -45,7 +45,7 @@ const AdminListings = () => {
         <button className="btn btn-wide my-2">Add Category</button>
 
         <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-          {categoryCards}
+          {data ? categoryCards : "Server error"}
         </div>       
 
       </>

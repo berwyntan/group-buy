@@ -36,11 +36,17 @@ const handlers = [
   rest.get('http://localhost:3000/api/category/undefined', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getCategoryById))
   }),
-  rest.get('http://localhost:3000/api/order/admin/product/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/order/admin/product/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getOrdersByProductId))
   }),
-  rest.get('http://localhost:3000/api/order/admin/admin/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/order/admin/product/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400))
+  }),
+  rest.get('http://localhost:3000/api/order/admin/admin/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getOrderByIdAdmin))
+  }),
+  rest.get('http://localhost:3000/api/order/admin/admin/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400))
   }),
   rest.get('http://localhost:3000/api/cart/user/undefined', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getCartByUserId))
