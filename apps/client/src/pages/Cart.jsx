@@ -47,10 +47,10 @@ const Cart = () => {
           </ul>
         </div>  
       <div className="text-2xl mb-2">Cart</div>
-      {!data && <div>Your cart is empty.</div>}
-      {!data || data.length===0 && <div>Your cart is empty.</div>}
+      {!data && <div>Server error</div>}
+      {data?.length===0 && <div>Your cart is empty.</div>}
       {
-        !data || data.length===0 || 
+        !data || data?.length===0 || 
         <div>
         <Link to="/checkout">
           <button className="btn btn-wide my-2">Checkout</button>

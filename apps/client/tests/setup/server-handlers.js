@@ -48,8 +48,11 @@ const handlers = [
   rest.get('http://localhost:3000/api/order/admin/admin/sadcase', async (req, res, ctx) => {
     return res(ctx.status(400))
   }),
-  rest.get('http://localhost:3000/api/cart/user/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/cart/user/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getCartByUserId))
+  }),
+  rest.get('http://localhost:3000/api/cart/user/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400))
   }),
   rest.patch('http://localhost:3000/api/cart', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(updateCart))
