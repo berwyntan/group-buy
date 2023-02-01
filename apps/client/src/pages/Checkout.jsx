@@ -90,7 +90,8 @@ const Checkout = () => {
             <div className="text-xl mr-2">$</div>
             <div className="text-xl font-semibold">{total}</div>
         </div>
-        {checkoutCards}        
+        {checkoutCards}     
+        {!data && <div className="text-lg">Server error</div>}   
       </>
     )
 }

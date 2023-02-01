@@ -17,7 +17,7 @@ const Categories = () => {
     return <span>Error: {error.message}</span>
   }
 
-  const categoryCards = data.map(cat => {
+  const categoryCards = data?.map(cat => {
      
     return(
       <CategoryCard 
@@ -41,6 +41,7 @@ const Categories = () => {
       </div>
       <div className="grid gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {data && categoryCards}
+        {!data && <div className="text-lg">Server error</div>}
       </div>      
 
     </>

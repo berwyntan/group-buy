@@ -49,6 +49,7 @@ const Category = () => {
       <div className="grid gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {productCards}
         {data?.length===0 && <div>No products</div>}
+        {!data && <div className="text-lg">Server error</div>}
       </div>
       
 
