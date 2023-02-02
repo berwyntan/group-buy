@@ -42,9 +42,13 @@ The Postgres database is hosted on Bit.io
 
 ### Code Features
 - Automated testing with Vitest, React Testing Library and Mock Service Worker
-    - Only a small portion of the app was tested due to time constraints
-    - React Testing Library (RTL) used to test React components
+    - 80% test coverage
+    - React Testing Library (RTL) used to test React components and check the DOM
     - Mock Service Worker (MSW) used to mock async API call
+    - React components are passed through a function which wraps React Query's `QueryClientProvider` and React Router DOM's `BrowserRouter` or `MemoryRouter` in order to render the component
+    - Tested successful and unsuccessful API calls
+    - Custom hooks: successful and unsuccessful test case
+![](https://res.cloudinary.com/dkilrhnk7/image/upload/v1675325080/groupbuy-testing_twogfn.png)
 
 - Automated or one click WhatsApp messages using Twilio API
     - Client makes API call to server, which makes API call to Twilio to send message

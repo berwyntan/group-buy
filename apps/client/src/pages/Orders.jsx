@@ -48,8 +48,9 @@ const Orders = () => {
           </ul>
         </div> 
         <div className="text-2xl mb-2">Orders</div>
+        {!data && <div className="text-lg">Server error</div>}
         {orderCards}
-        {orderCards.length===0 && <div>You have no orders</div>}
+        {orderCards?.length===0 && <div>You have no orders</div>}
       </div>
     </>
   )

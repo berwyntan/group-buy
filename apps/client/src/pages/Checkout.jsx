@@ -15,7 +15,7 @@ const Checkout = () => {
     
     const sendWhatsApp = useWhatsApp()
     const createOrder = useCreateOrder()
-    const clearCart = useClearCart()
+    const { mutate: clearCart } = useClearCart()
     
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId, accessToken))

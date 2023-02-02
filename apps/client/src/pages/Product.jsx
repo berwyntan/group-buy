@@ -31,20 +31,21 @@ const Product = () => {
       <div className="text-sm breadcrumbs">
         <ul>
           <li><Link to="/">Categories</Link></li>  
-          <li><Link to={`/cat/${data.CategoryId}`}>{category}</Link></li>          
+          <li><Link to={`/cat/${data?.CategoryId}`}>{category}</Link></li>          
         </ul>
       </div>    
+      {!data && <div className="text-lg">Server error</div>}
       <ProductDetail 
-        imgUrl={data.imgUrl}
-        imgUrl1={data.imgUrl1}
-        imgUrl2={data.imgUrl2}
-        imgUrl3={data.imgUrl3}
-        imgUrl4={data.imgUrl4}
-        name={data.name}
-        productId={data.id}
-        desc={data.desc}
-        price={data.price}
-        listed={data.listed}
+        imgUrl={data?.imgUrl}
+        imgUrl1={data?.imgUrl1}
+        imgUrl2={data?.imgUrl2}
+        imgUrl3={data?.imgUrl3}
+        imgUrl4={data?.imgUrl4}
+        name={data?.name}
+        productId={data?.id}
+        desc={data?.desc}
+        price={data?.price}
+        listed={data?.listed}
         userId={authDetails.id}
       />
 

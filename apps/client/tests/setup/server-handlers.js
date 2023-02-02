@@ -60,18 +60,27 @@ const handlers = [
   rest.get('http://localhost:3000/api/product/cat/sadcase', async (req, res, ctx) => {
     return res(ctx.status(400))
   }),
-  rest.get('http://localhost:3000/api/order/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/order/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getOrderById))
+  }),
+  rest.get('http://localhost:3000/api/order/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400))
   }),
   rest.get('http://localhost:3000/api/order/user/undefined', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getOrdersByUserId))
   }),
-  rest.get('http://localhost:3000/api/product/undefined', async (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/product/12345', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getProductById))
+  }),
+  rest.get('http://localhost:3000/api/product/sadcase', async (req, res, ctx) => {
+    return res(ctx.status(400))
   }),
   rest.post('http://localhost:3000/api/user/login', async (req, res, ctx) => {
     return res(ctx.status(200))
-  })
+  }),
+  rest.delete('http://localhost:3000/api/cart/user/12345', async (req, res, ctx) => {
+    return res(ctx.status(200))
+  }),
 ]
 
 export {handlers}

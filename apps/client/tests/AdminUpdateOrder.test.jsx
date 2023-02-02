@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import { renderWithQueryClientMemoryRouter } from "./setup/renderFunctions";
 import AdminUpdateOrder from "../src/pages/AdminUpdateOrder";
 
@@ -37,9 +37,10 @@ describe("AdminUpdateOrder component", () => {
         
         await waitFor(() => {
           const buttons = screen.getAllByRole('button')
+          console.log(buttons)
           expect(buttons[0]).toHaveTextContent(/Payment pending/)
         }) 
-    }) 
+    })  
     it('handles error 400', async () => {
 
         renderWithQueryClientMemoryRouter(

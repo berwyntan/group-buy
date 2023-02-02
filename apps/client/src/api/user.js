@@ -91,7 +91,7 @@ export const logout = async () => {
             withCredentials: true
         }
         )
-        console.log(response)
+        // console.log(response)
         return response 
     } catch (error) {
         console.log(error)
