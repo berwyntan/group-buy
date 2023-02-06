@@ -22,7 +22,7 @@ const User = db.define('User', {
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: "user",
+      defaultValue: "admin",
       allowNull: false
     },
     refreshToken: {
