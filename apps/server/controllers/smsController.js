@@ -18,11 +18,15 @@ const sendWhatsapp = async (req, res) => {
         from: 'whatsapp:+14155238886',       
         to: `whatsapp:+65${mobile}` 
     }
-    await client.messages 
-    .create(messageInfo) 
-    .then(message => console.log(message.sid)) 
-    .done();
-    return res.status(201).json(messageInfo)
+    try {
+        await client.messages 
+        .create(messageInfo) 
+        .then(message => console.log(message.sid)) 
+        return res.status(201).json(messageInfo)
+    } catch (error) {
+        console.log(error)
+    }
+    
     
 }
 
@@ -52,11 +56,15 @@ const sendOTP = async (req, res) => {
         from: 'whatsapp:+14155238886',       
         to: `whatsapp:+65${mobile}` 
     }
-    await client.messages 
-    .create(messageInfo) 
-    .then(message => console.log(message.sid)) 
-    .done();
-    return res.status(201).json({'message': 'OTP sent'})
+    try {
+        await client.messages 
+        .create(messageInfo) 
+        .then(message => console.log(message.sid)) 
+        return res.status(201).json({'message': 'OTP sent'})
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 module.exports = { sendWhatsapp, sendOTP }
