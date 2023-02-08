@@ -4,7 +4,10 @@ const express = require("express");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const morgan = require("morgan");
-const db = require("./config/database");
+// const db = require("./config/database");
+const { Sequelize } = require('sequelize');
+
+
 const credentials = require("./middleware/credentials");
 const cookieParser = require('cookie-parser');
 const verifyJWT = require('./middleware/verifyJWT');
@@ -28,12 +31,12 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // postgres
-try {
-    db.authenticate();
-    console.log('Connected to database');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+// try {
+//     db.authenticate();
+//     console.log('Connected to database');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
 
 // middleware
 app.use(express.static("../client/dist"));
@@ -72,5 +75,10 @@ app.get("/*", (req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));
 })
 
+const db = new Sequelize(process.env.SQL_URI)
+db.authenticate();
+console.log('Connected to database');
 app.listen(PORT, () => {
 console.log(`Server listening on port ${PORT}`);})
+
+    
