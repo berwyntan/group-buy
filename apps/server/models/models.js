@@ -42,7 +42,7 @@ const User = db.define('User', {
     },
   });
   
-  User.sync({alter: true});
+  User.sync();
 
   const Category = db.define('Category', {
   
@@ -110,7 +110,7 @@ const User = db.define('User', {
 
   Category.hasMany(Product);
   Product.belongsTo(Category);
-  Product.sync({ alter: true });
+  Product.sync();
 
   const Order = db.define('Order', {
   
@@ -148,7 +148,7 @@ const User = db.define('User', {
   Order.belongsTo(Product);
   User.hasMany(Order);
   Order.belongsTo(User);
-  Order.sync({ alter: true });
+  Order.sync();
 
   const Cart = db.define('Cart', {
   
@@ -166,7 +166,7 @@ const User = db.define('User', {
   Product.hasMany(Cart);  
   Cart.belongsTo(Product);
   User.hasOne(Cart);
-  Cart.sync({ alter: true })
+  Cart.sync()
 
   const Image = db.define('Image', {
   
@@ -190,6 +190,7 @@ const User = db.define('User', {
   }
   )
 
-  Image.sync({ alter: true })
+  Image.sync()
+  // Image.sync({ alter: true })
 
   module.exports = { User, Category, Product, Order, Cart, Image }
