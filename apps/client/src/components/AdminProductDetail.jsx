@@ -21,7 +21,7 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
   // const publicId = (url) => url.split("/").slice(-1)[0].replace('.jpg', '').replace('.png', '')
   const { accessToken } = useAuthDetails()
   
-  const mutation = useMutation(formData => updateProductById(formData, accessToken), 
+  const mutation = useMutation((formData) => updateProductById(formData, accessToken), 
     {
       onError: (response) => {
         console.log(response)
@@ -39,7 +39,7 @@ const AdminProductDetail = ({ imgUrl, imgUrl1, imgUrl2, imgUrl3, imgUrl4, name, 
       },
     })
 
-  const listingMutation = useMutation(id => updateProductListingById(id, accessToken), 
+  const listingMutation = useMutation((id) => updateProductListingById(id, accessToken), 
     {
       onError: (response) => {
         console.log(response)

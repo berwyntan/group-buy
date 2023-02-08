@@ -59,13 +59,12 @@ export const updateProductById = async (data, accessToken) => {
     }
 }
 
-export const updateProductListingById = async (id, accessToken) => {
+export const updateProductListingById = async (id, accessToken, data) => {
     console.log(id, accessToken)
     try {
-        const response = await axios.put(`/api/product/admin/list/${id}`,  
+        const response = await axios.put(`/api/product/admin/list/${id}`, data, 
         {
             headers: { 
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
             },
             withCredentials: true
