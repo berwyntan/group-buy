@@ -76,8 +76,13 @@ app.get("/*", (req, res) => {
 })
 
 const db = new Sequelize(process.env.SQL_URI)
-db.authenticate();
-console.log('Connected to database');
+// postgres
+try {
+    db.authenticate();
+    console.log('Connected to database');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 app.listen(PORT, () => {
 console.log(`Server listening on port ${PORT}`);})
 
