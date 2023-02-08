@@ -18,7 +18,7 @@ const sendWhatsapp = async (req, res) => {
         from: 'whatsapp:+14155238886',       
         to: `whatsapp:+65${mobile}` 
     }
-    client.messages 
+    await client.messages 
     .create(messageInfo) 
     .then(message => console.log(message.sid)) 
     .done();
@@ -52,7 +52,7 @@ const sendOTP = async (req, res) => {
         from: 'whatsapp:+14155238886',       
         to: `whatsapp:+65${mobile}` 
     }
-    client.messages 
+    await client.messages 
     .create(messageInfo) 
     .then(message => console.log(message.sid)) 
     .done();
