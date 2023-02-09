@@ -31,13 +31,16 @@ const sendWhatsapp = async (req, res) => {
 }
 
 const sendOTP = async (req, res) => {
-    const { mobile } = req.body;
+    let { mobile } = req.body;
     
     if (!mobile) return res.status(400).json({ 'message': 'Mobile is required.'});
     if (!validator.isLength(mobile, {min: 8, max: 8})) 
         return res.status(400).json({ 'message': 'Mobile number has 8 numbers only.'});
     if (!validator.isNumeric(mobile, {no_symbols: true})) 
         return res.status(400).json({ 'message': 'Mobile number cannot have symbols.'});
+    if (typeof(mobile) === "number") {
+        mobile = parseInt(mobile);
+    }
 
     // check user exists 
     const foundUser = await User.findOne({where: { mobile: mobile }});
