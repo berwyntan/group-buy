@@ -1,10 +1,12 @@
 import CategoryCard from "../components/CategoryCard";
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { getAllCategories } from "../api/category";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const Categories = () => {
+
+  const queryClient = useQueryClient()
 
   const { isLoading, isError, data, error } = useQuery(
     ['categories'], getAllCategories)
@@ -29,7 +31,7 @@ const Categories = () => {
     )
     
   })
-  
+  queryClient.invalidateQueries('countCart') 
 
   return (
     <>

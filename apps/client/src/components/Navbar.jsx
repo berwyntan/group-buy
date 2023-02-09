@@ -6,7 +6,7 @@ const Navbar = () => {
 
   const { name, id, accessToken }  = useAuthDetails()
   
-  const { isLoading, isError, data, error } = useCountCart(id, accessToken)
+  const { isLoading, isError, data, error } = useCountCart()
 
   if (isLoading) {
     return (

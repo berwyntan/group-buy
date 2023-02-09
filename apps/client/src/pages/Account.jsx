@@ -1,4 +1,5 @@
 import useGroupBuyStore from "../store/store";
+import { useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../api/user"; 
 
@@ -8,6 +9,7 @@ const Account = () => {
   const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
   const role = authDetails.role
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   return (
     <>
@@ -49,6 +51,7 @@ const Account = () => {
             logout()
             setAuthDetails({})
             navigate("/")
+            queryClient.invalidateQueries('countCart') 
           } catch (error) {
             console.log(error)
           }

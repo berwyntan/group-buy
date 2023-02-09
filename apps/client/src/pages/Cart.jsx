@@ -1,5 +1,5 @@
 import { getCartByUserId } from "../api/cart";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import CartCard from "../components/CartCard";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -8,6 +8,7 @@ import useAuthDetails from "../hooks/useAuthDetails";
 const Cart = () => {
 
     const { accessToken, id : userId } = useAuthDetails()
+    const queryClient = useQueryClient()
         
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId, accessToken))
@@ -37,6 +38,7 @@ const Cart = () => {
         />
       )
     })
+  queryClient.invalidateQueries('countCart') 
 
   return (
     <>

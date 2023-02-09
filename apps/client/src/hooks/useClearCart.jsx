@@ -21,6 +21,7 @@ const useClearCart = () => {
         if (response?.status === 200) {          
           useToastSuccess("Checkout complete")  
           queryClient.invalidateQueries('countCart') 
+          queryClient.invalidateQueries('orders')
           navigate("/updateorder")     
           setSuccess(true)              
         } else if (response?.status === 204) {

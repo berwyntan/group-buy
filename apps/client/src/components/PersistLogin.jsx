@@ -1,4 +1,5 @@
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
+import { useQueryClient } from "react-query"
 import useGroupBuyStore from "../store/store"
 import { useEffect } from "react"
 import useVisibleTab from "../hooks/useVisibleTab"
@@ -10,6 +11,7 @@ const PersistLogin = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const visible = useVisibleTab()
+  const queryClient = useQueryClient()
 
   const refreshToken = async () => {
     
@@ -21,6 +23,7 @@ const PersistLogin = () => {
         // console.log(response)
         if (response.data.accessToken) {
           setAuthDetails(response.data)
+          queryClient.invalidateQueries('countCart') 
           if (location.pathname === "/login" || location.pathname === "/signup")
           {
             navigate("/")
