@@ -9,7 +9,8 @@ const Cart = () => {
 
     const { accessToken, id : userId } = useAuthDetails()
     const queryClient = useQueryClient()
-        
+    queryClient.invalidateQueries('countCart') 
+    
     const { isLoading, isError, data, error } = useQuery(
       ['cart'], () => getCartByUserId(userId, accessToken))
   
@@ -38,7 +39,7 @@ const Cart = () => {
         />
       )
     })
-  queryClient.invalidateQueries('countCart') 
+  
 
   return (
     <>

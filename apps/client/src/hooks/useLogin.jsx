@@ -1,10 +1,11 @@
 import useGroupBuyStore from "../store/store";
 import { login } from "../api/user";
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const useLogin = ({ setError }) => {
+    const queryClient = useQueryClient()
     const [ success, setSuccess ] = useState(null)
     const setAuthDetails = useGroupBuyStore((state) => state.setAuthDetails)
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const useLogin = ({ setError }) => {
       onSuccess: (response) => {
         // console.log(response)
         if (response.status === 200) {
+          queryClient.removeQueries('countCart')
           setAuthDetails(response.data);
           navigate("/", {replace: true})
           setSuccess(true)

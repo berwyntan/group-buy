@@ -1,7 +1,7 @@
 # GroupBuy App
 This is my capstone project for General Assembly's Software Engineering Immersive Course.
 
-Slides presentation: [](https://docs.google.com/presentation/d/1j00h6ZbbwH806DxkxzwZWWWAsxfzUrwYsTR1p90pzDM/edit?usp=sharing)
+[Slides presentation](https://docs.google.com/presentation/d/1j00h6ZbbwH806DxkxzwZWWWAsxfzUrwYsTR1p90pzDM/edit?usp=sharing)
 
 ## The Pain Point
 I read that people who organise group buys may spend a lot of time on WhatsApp and Google Forms collecting orders. Besides that, they also have to handle enquiries, logistics, payment and marketing. This app seeks to simplify part of the workflow: taking orders, keeping track of the status every order made (like paid, collected, cancelled) and an interface to send messages to the buyers.

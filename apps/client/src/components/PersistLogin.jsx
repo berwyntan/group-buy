@@ -23,7 +23,7 @@ const PersistLogin = () => {
         // console.log(response)
         if (response.data.accessToken) {
           setAuthDetails(response.data)
-          queryClient.invalidateQueries('countCart') 
+          await queryClient.invalidateQueries('countCart') 
           if (location.pathname === "/login" || location.pathname === "/signup")
           {
             navigate("/")

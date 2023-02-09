@@ -46,12 +46,12 @@ const Account = () => {
         <button className="btn btn-wide my-2 mx-2">Update Password</button>
       </Link>
       <button className="btn btn-wide my-2 mx-2"
-        onClick={() => {
+        onClick={async () => {
           try {
             logout()
             setAuthDetails({})
             navigate("/")
-            queryClient.invalidateQueries('countCart') 
+            await queryClient.invalidateQueries('countCart') 
           } catch (error) {
             console.log(error)
           }

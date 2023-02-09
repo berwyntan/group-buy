@@ -7,11 +7,17 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Categories = () => {
 
   const queryClient = useQueryClient()
+  
 
   const { isLoading, isError, data, error } = useQuery(
-    ['categories'], getAllCategories)
+    ['categories'], getAllCategories, {
+      onSuccess: async () => {
+        
+        await queryClient.invalidateQueries('countCart')
+      }
+    })
 
-  if (isLoading) {
+  if (isLoading) {    
     return <LoadingSpinner />
   }
 
@@ -31,8 +37,8 @@ const Categories = () => {
     )
     
   })
-  queryClient.invalidateQueries('countCart') 
 
+ 
   return (
     <>
       <div className="text-sm breadcrumbs mt-1 mb-3">
