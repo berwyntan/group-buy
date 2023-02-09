@@ -30,14 +30,6 @@ const cloudinaryRouter = require("./routes/cloudinaryRouter");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// postgres
-// try {
-//     db.authenticate();
-//     console.log('Connected to database');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-
 // middleware
 app.use(express.static("../client/dist"));
 

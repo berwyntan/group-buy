@@ -28,7 +28,7 @@ const handlers = [
     return res(ctx.status(200), ctx.json(countProductsByCategory))
   }),
   rest.get('http://localhost:3000/api/product/cat/count/sadcase', async (req, res, ctx) => {
-    return res(ctx.status(400), ctx.json({}))
+    return res(ctx.status(400))
   }),
   rest.get('http://localhost:3000/api/category', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getAllCategory))
